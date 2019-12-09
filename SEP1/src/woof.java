@@ -4,6 +4,8 @@ public class woof
   {
     System.out.println("help");
     System.out.println("new");
+    System.out.println("boo");
+    System.out.println("boo");
   }
 }
 rhfnf
