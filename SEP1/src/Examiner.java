@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 /**
  * A class containing specific details about examiners.
- * @author Ana-Maria
  * @version 0.1
  */
 public class Examiner
