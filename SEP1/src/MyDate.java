@@ -64,7 +64,7 @@ public class MyDate
   }
 
   /**
-   * A constructor to set the Date and time
+   * A method to set the Date and time
    * @param day set the day.
    * @param month set the month.
    * @param year set the year.
