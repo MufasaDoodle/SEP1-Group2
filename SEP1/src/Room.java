@@ -47,6 +47,22 @@ public class Room
   }
 
   /**
+   * Give back the room number
+   * @return String with the room's number
+   */
+  public String getRoomNumber(){
+    return roomNumber;
+  }
+
+  /**
+   * Give back the room size
+   * @return an int with size of the room
+   */
+  public int getRoomSize(){
+    return roomSize;
+  }
+
+  /**
    * Give back true if a room has a projector, or false if it doesn't
    *
    * @return true if a room has a projector
