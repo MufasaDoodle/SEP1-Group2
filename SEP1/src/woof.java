@@ -8,5 +8,3 @@ public class woof
     System.out.println("boo");
   }
 }
-rhfnf
-Ananananananananana

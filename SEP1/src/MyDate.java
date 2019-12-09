@@ -26,7 +26,7 @@ public class MyDate
 
   /**
    * To get the day of exam.
-   * @return int day.
+   * @return the day of the exam.
    */
   public int getDay()
   {
@@ -35,7 +35,7 @@ public class MyDate
 
   /**
    * To get the month.
-   * @return int month.
+   * @return the month of the exam.
    */
 
   public int getMonth()
@@ -45,7 +45,7 @@ public class MyDate
 
   /**
    * To get the year.
-   * @return int year.
+   * @return the year of the exam.
    */
 
   public int getYear()
@@ -55,7 +55,7 @@ public class MyDate
 
   /**
    * To get the time of the exam.
-   * @return String time of the exam.
+   * @return time of the exam.
    */
 
   public String getMyDateTime()
@@ -64,7 +64,7 @@ public class MyDate
   }
 
   /**
-   * A constructor to set the Date and time
+   * A method to set the Date and time
    * @param day set the day.
    * @param month set the month.
    * @param year set the year.
@@ -80,8 +80,8 @@ public class MyDate
   }
 
   /**
-   * To make a copy of the date.
-   * @return a new date.
+   * To make a copy of the date .
+   * @return a copy of date object with same fields.
    */
   public MyDate copy()
   {
@@ -90,7 +90,7 @@ public class MyDate
 
   /**
    * To display the date and time of the exam.
-   * @return the day, month, year and time of the exam.
+   * @return A string with day, month, year and time of the exam.
    */
   public String toString()
   {
