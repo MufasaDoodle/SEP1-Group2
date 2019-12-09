@@ -9,6 +9,7 @@ public class Course
 {
   private String courseName, courseType;
   private int numberOfStudents;
+  //TODO add Room (see astah)
 
   /**
    * A three-argument constructor that initialises a course
