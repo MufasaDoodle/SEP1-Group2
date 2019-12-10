@@ -57,31 +57,22 @@ public class Examiner
     }
 
     /**
-     * Determines the type of the examiner.
+     * Gets the type of the examiner.
      * @return the examiner's type
      */
-    public String getExaminerType()
+    public boolean getExaminerType()
     {
-        if(examinerType == false)
-        {
-            return "Co-examiner";
-        }
-        else return "Examiner";
+        return examinerType;
     }
 
     /**
-     * Determines the availability of the examiner.
+     * Gets the availability of the examiner.
      * @return the examiner's availability
      */
-    public String getExaminerAvailability()
+    public boolean getExaminerAvailability()
     {
-        if(examinerAvailability == false)
-        {
-            return "Not available";
-        }
-        else return "Available";
+        return examinerAvailability;
     }
-//TODO boolean
     /**
      * Adds a Course object to the list of examiner's courses.
      * @param course the course to add to the list

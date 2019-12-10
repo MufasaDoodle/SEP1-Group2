@@ -65,7 +65,7 @@ public class ExaminerList implements Serializable
     int j = 0;
     for (int i = 0; i < examiners.size(); i++)
     {
-      if (examiners.get(i).getExaminerType().equals("Examiner"))
+      if (examiners.get(i).getExaminerType() == true)
       {
         tempArray[j] = examiners.get(i);
         j++;
@@ -86,7 +86,7 @@ public class ExaminerList implements Serializable
     {
       for (int y = 0; y < examiners.size(); y++)
       {
-        if (examiners.get(y).getExaminerType().equals("Co-examiner"))
+        if (examiners.get(y).getExaminerType() == false)
         {
           tempArray[i] = examiners.get(y);
         }
