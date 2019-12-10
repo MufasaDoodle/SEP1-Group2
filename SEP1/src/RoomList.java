@@ -135,6 +135,11 @@ public class RoomList
     Room[] returnArray = new Room[resultRooms.size()];
     return resultRooms.toArray(returnArray);
   }
+//todo add on astah
+  public int getSize()
+  {
+    return rooms.size();
+  }
 
   public Room[] getAllUnavailableRooms(int day, ExamList exams)
   {

@@ -95,6 +95,8 @@ public class ExaminerList implements Serializable
     return examiners.toArray(tempArray);
   }
 
+  //TODO get available and unavailable examiners
+
   /**
    * Creates an Array with all Examiner objects from the ArrayList.
    *

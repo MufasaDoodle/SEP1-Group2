@@ -148,6 +148,11 @@ public class CourseList
     Course[] returnArray = new Course[temp.size()];
     return temp.toArray(returnArray);
   }
+//todo add in astah
+  public int getSize()
+  {
+    return courses.size();
+  }
 
   /**
    * gets an array with all courses marked as written

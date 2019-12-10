@@ -218,6 +218,11 @@ public class ExamList
     Exam[] returnArray = new Exam[temp.size()];
     return temp.toArray(returnArray);
   }
+//todo add in astah
+  public int getSize()
+  {
+    return exams.size();
+  }
 
   /**
    * gets all exams by a given examtype
