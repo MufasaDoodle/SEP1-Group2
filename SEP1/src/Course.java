@@ -9,7 +9,7 @@ public class Course
 {
   private String courseName, courseType;
   private int numberOfStudents;
-  //TODO add Room (see astah)
+  private Room room;
 
   /**
    * A three-argument constructor that initialises a course
@@ -17,9 +17,9 @@ public class Course
    * @param courseType the type of course
    * @param numberOfStudents the number of students in a course
    * */
-  public Course(String courseName, String courseType, int numberOfStudents)
+  public Course(String courseName, String courseType, int numberOfStudents, Room room)
   {
-    set(courseName, courseType, numberOfStudents);
+    set(courseName, courseType, numberOfStudents, room);
   }
 
   /**
@@ -54,11 +54,12 @@ public class Course
    * @param courseType type of course
    * @param numberOfStudents number of students in course
    * */
-  public void set(String courseName, String courseType, int numberOfStudents)
+  public void set(String courseName, String courseType, int numberOfStudents, Room room)
   {
     this.courseName = courseName;
     this.courseType = courseType;
     this.numberOfStudents = numberOfStudents;
+    this.room = room;
   }
 
   /**
@@ -67,7 +68,7 @@ public class Course
    * */
   public Course copy()
   {
-    return new Course(courseName, courseType, numberOfStudents);
+    return new Course(courseName, courseType, numberOfStudents, room);
   }
 
   /**

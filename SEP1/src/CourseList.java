@@ -38,7 +38,7 @@ public class CourseList
   {
     return courses.get(index);
   }
-//TODO if-else
+
   /**
    * gets the course name at given index
    *
@@ -47,7 +47,14 @@ public class CourseList
    */
   public String getCourseName(int index)
   {
-    return courses.get(index).getCourseName();
+    if (index < 0 || index > courses.size())
+    {
+      return "INVALID INDEX";
+    }
+    else
+    {
+      return courses.get(index).getCourseName();
+    }
   }
 
   /**
@@ -138,9 +145,10 @@ public class CourseList
       }
     }
 
-    return (Course[]) courses.toArray();
+    Course[] returnArray = new Course[temp.size()];
+    return temp.toArray(returnArray);
   }
-//TODO return temp
+
   /**
    * gets an array with all courses marked as written
    *
@@ -159,9 +167,10 @@ public class CourseList
       }
     }
 
-    return (Course[]) courses.toArray();
+    Course[] returnArray = new Course[temp.size()];
+    return temp.toArray(returnArray);
   }
-  //TODO return temp
+
   /**
    * get the number of oral courses
    *
