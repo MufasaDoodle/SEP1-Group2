@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * @author Christian Sejer
@@ -13,74 +14,96 @@ public class Exam
   private ArrayList<Course> courses = new ArrayList<>();
   private Room room;
   private ArrayList<Examiner> examiners = new ArrayList<>();
+  private String examType; //TODO add in Astah
 
+  //TODO fix javadocs params (add examType)
   /**
    * A constructor with four args that initialises things
-   * @param date the date of the exam
-   * @param room the room of the exam
+   *
+   * @param date     the date of the exam
+   * @param room     the room of the exam
    * @param duration the duration of the exam
-   * @param course the course of the exam
+   * @param course   the course of the exam
    */
-  public Exam(MyDate date, Room room, int duration, Course course)
+  public Exam(MyDate date, Room room, int duration, Course course, String examType)
   {
     this.date = date;
     this.duration = duration;
     this.room = room;
     this.courses.add(course);
+    this.examType = examType;
   }
+
   /**
    * A constructor with four args that initialises things
-   * @param date the date of the exam
-   * @param room the room of the exam
+   *
+   * @param date     the date of the exam
+   * @param room     the room of the exam
    * @param duration the duration of the exam
-   * @param courses the courses that are part of the exam
+   * @param courses  the courses that are part of the exam
    */
-  public Exam(MyDate date, Room room, int duration, Course[] courses)
+  public Exam(MyDate date, Room room, int duration, Course[] courses, String examType)
   {
     this.date = date;
     this.duration = duration;
     this.room = room;
     this.courses.addAll(Arrays.asList(courses));
+    this.examType = examType;
   }
 
   /**
    * a five arg constructor that initialises relevant fields
-   * @param date the date of the exam
-   * @param room the room of the exam
-   * @param duration the duration of the exam
-   * @param courses the courses that are part of the exam
+   *
+   * @param date      the date of the exam
+   * @param room      the room of the exam
+   * @param duration  the duration of the exam
+   * @param courses   the courses that are part of the exam
    * @param examiners the examiners(Array) that are part of the exam
    */
   public Exam(MyDate date, Room room, int duration, Course[] courses,
-      Examiner[] examiners)
+      Examiner[] examiners, String examType)
   {
     this.date = date;
     this.duration = duration;
     this.room = room;
     this.courses.addAll(Arrays.asList(courses));
     this.examiners.addAll(Arrays.asList(examiners));
+    this.examType = examType;
   }
 
   /**
    * a five arg constructor that initialises relevant fields
-   * @param date the date of the exam
-   * @param room the room of the exam
-   * @param duration the duration of the exam
-   * @param courses the courses that are part of the exam
+   *
+   * @param date      the date of the exam
+   * @param room      the room of the exam
+   * @param duration  the duration of the exam
+   * @param courses   the courses that are part of the exam
    * @param examiners the examiners (arrayList) that are part of the exam
    */
   public Exam(MyDate date, Room room, int duration, Course[] courses,
-      ArrayList<Examiner> examiners)
+      ArrayList<Examiner> examiners, String examType)
   {
     this.date = date;
     this.duration = duration;
     this.room = room;
     this.courses.addAll(Arrays.asList(courses));
     this.examiners = examiners;
+    this.examType = examType;
+  }
+
+  public void setExamType(String examType)
+  {
+    this.examType = examType;
+  }
+
+  public String getExamType()
+  {
+    return examType;
   }
 
   /**
    * gets the duration
+   *
    * @return duration of exam
    */
   public int getDuration()
@@ -90,6 +113,7 @@ public class Exam
 
   /**
    * sets the duration of the exam
+   *
    * @param duration duration to be set
    */
   public void setDuration(int duration)
@@ -99,6 +123,7 @@ public class Exam
 
   /**
    * gets the date of the exam
+   *
    * @return the date of the exam
    */
   public MyDate getDate()
@@ -108,6 +133,7 @@ public class Exam
 
   /**
    * add an examiner to the exam
+   *
    * @param examiner the examiner wished to be added
    */
   public void addExaminer(Examiner examiner)
@@ -121,6 +147,7 @@ public class Exam
 
   /**
    * gets all examiners
+   *
    * @return an array with the examiners
    */
   public Examiner[] getAllExaminers()
@@ -130,6 +157,7 @@ public class Exam
 
   /**
    * remove an examiner by id
+   *
    * @param ID the id of the examiner to be removed
    */
   public void removeExaminer(String ID)
@@ -146,6 +174,7 @@ public class Exam
 
   /**
    * add a room to the exam
+   *
    * @param room the room wished to be added
    */
   public void addRoom(Room room)
@@ -163,6 +192,7 @@ public class Exam
 
   /**
    * get the room
+   *
    * @return the room of the exam
    */
   public Room getRoom()
@@ -172,6 +202,7 @@ public class Exam
 
   /**
    * get all courses as array
+   *
    * @return all courses as an array
    */
   public Course[] getAllCourses()
@@ -181,6 +212,7 @@ public class Exam
 
   /**
    * add a course to the exam
+   *
    * @param course the course wished to be added to the exam
    */
   public void addCourse(Course course)
@@ -190,6 +222,7 @@ public class Exam
 
   /**
    * remove a course from the exam
+   *
    * @param courseName name of course to be removed from list
    */
   public void removeCourse(String courseName)
@@ -204,8 +237,22 @@ public class Exam
     }
   }
 
+  //TODO javadocs and add this in Astah
+  public static Comparator<Exam> examDayNumber = new Comparator<Exam>()
+  {
+    public int compare(Exam e1, Exam e2)
+    {
+      int examNr1 = e1.getDate().getDay();
+      int examNr2 = e2.getDate().getDay();
+
+      /*For ascending order*/
+      return examNr1 - examNr2;
+    }
+  };
+
   /**
    * a tostring method that shows all exam info
+   *
    * @return a string with all the field info
    */
   public String toString()
@@ -222,6 +269,7 @@ public class Exam
 
   /**
    * equals method to check if two exams are at the same time and room
+   *
    * @param obj the object to be compared against
    * @return true or false if it's the same
    */
@@ -234,7 +282,8 @@ public class Exam
 
     Exam other = (Exam) obj;
 
-    if (date.equals(other.getDate()) && room.getRoomNumber().equals(other.getRoom().getRoomNumber()))
+    if (date.equals(other.getDate()) && room.getRoomNumber()
+        .equals(other.getRoom().getRoomNumber()))
     {
       return true;
     }
