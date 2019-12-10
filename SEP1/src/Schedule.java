@@ -8,6 +8,9 @@ public class Schedule
   private ExamList exams;
   private int semester;
   private char _class;
+  private ExamList examList;
+  private CourseList courseList;
+  private ExaminerList examinerList;
 
   /**
    * A constructor initializing the schedule.

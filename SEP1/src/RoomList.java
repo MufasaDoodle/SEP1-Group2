@@ -119,7 +119,25 @@ public class RoomList
         resultRooms.add(rooms.get(i));
       }
     }
-    return (Room[]) resultRooms.toArray();
+
+    Room[] returnArray = new Room[resultRooms.size()];
+    return resultRooms.toArray(returnArray);
+  }
+
+  public Room[] getAllUnavailableRooms()
+  {
+    ArrayList<Room> resultRooms = new ArrayList<>();
+
+    for (int i = 0; i < rooms.size(); i++)
+    {
+      if (!rooms.get(i).getRoomAvailability())
+      {
+        resultRooms.add(rooms.get(i));
+      }
+    }
+
+    Room[] returnArray = new Room[resultRooms.size()];
+    return resultRooms.toArray(returnArray);
   }
 
   /**
@@ -138,7 +156,9 @@ public class RoomList
         resultRooms.add(rooms.get(i));
       }
     }
-    return (Room[]) resultRooms.toArray();
+
+    Room[] returnArray = new Room[resultRooms.size()];
+    return resultRooms.toArray(returnArray);
   }
 
   /**
@@ -157,7 +177,9 @@ public class RoomList
         resultRooms.add(rooms.get(i));
       }
     }
-    return (Room[]) resultRooms.toArray();
+
+    Room[] returnArray = new Room[resultRooms.size()];
+    return resultRooms.toArray(returnArray);
   }
 
   /**
@@ -175,7 +197,9 @@ public class RoomList
         resultRooms.add(rooms.get(i));
       }
     }
-    return (Room[]) resultRooms.toArray();
+
+    Room[] returnArray = new Room[resultRooms.size()];
+    return resultRooms.toArray(returnArray);
   }
 
 }
