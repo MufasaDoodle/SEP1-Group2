@@ -1,7 +1,7 @@
 
 /**
  * Class which holds information about a course
- * @author Christian Sejer
+ * @author Group2
  * @version 0.5
  * */
 
