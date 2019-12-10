@@ -25,7 +25,7 @@ public class Examiner
         this.lastName = lastName;
         this.examinerID = examinerID;
         examinerType = false;
-        examinerAvailability = false;
+        examinerAvailability = true;
         courses = new ArrayList<Course>();
     }
 
@@ -81,7 +81,7 @@ public class Examiner
         }
         else return "Available";
     }
-
+//TODO boolean
     /**
      * Adds a Course object to the list of examiner's courses.
      * @param course the course to add to the list
@@ -152,7 +152,7 @@ public class Examiner
      * Sets the examiner's type.
      * @param examinerType what the examiner's type will be set to
      */
-    public void isExaminer (boolean examinerType)
+    public void setExaminer(boolean examinerType)
     {
         this.examinerType=examinerType;
     }
@@ -161,7 +161,7 @@ public class Examiner
      * Sets the examiner's availability.
      * @param examinerAvailability what the examiner's availability will be set to
      */
-    public void isAvailable(boolean examinerAvailability)
+    public void setAvailable(boolean examinerAvailability)
     {
         this.examinerAvailability = examinerAvailability;
     }

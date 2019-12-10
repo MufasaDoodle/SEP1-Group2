@@ -20,15 +20,17 @@ public class CourseList
 
   /**
    * Gets the number of courses from the courselist
+   *
    * @return
    */
   public int getNumberOfCourses()
   {
-    return courses.size() + 1;
+    return courses.size();
   }
 
   /**
    * gets the course at index param
+   *
    * @param index the index
    * @return the course at given index
    */
@@ -36,9 +38,10 @@ public class CourseList
   {
     return courses.get(index);
   }
-
+//TODO if-else
   /**
    * gets the course name at given index
+   *
    * @param index the index
    * @return the course name at given index
    */
@@ -49,6 +52,7 @@ public class CourseList
 
   /**
    * gets the course type at given index
+   *
    * @param index the index
    * @return returns the course at given index
    */
@@ -59,6 +63,7 @@ public class CourseList
 
   /**
    * get the number of students at given index
+   *
    * @param index index
    * @return the number of students at given index
    */
@@ -69,6 +74,7 @@ public class CourseList
 
   /**
    * Add a course to the list
+   *
    * @param course the course to be added
    */
   public void addCourse(Course course)
@@ -78,6 +84,7 @@ public class CourseList
 
   /**
    * removes a course at given index
+   *
    * @param index the index
    */
   public void removeCourse(int index)
@@ -88,6 +95,7 @@ public class CourseList
 
   /**
    * remove a course with a given name
+   *
    * @param name the name of the course to be removed
    */
   public void removeCourse(String name)
@@ -104,6 +112,7 @@ public class CourseList
 
   /**
    * Gets an array with all the courses from the list
+   *
    * @return an array with courses
    */
   public Course[] getAllCourses()
@@ -113,6 +122,7 @@ public class CourseList
 
   /**
    * gets a course list with all the oral courses
+   *
    * @return array with courses
    */
   public Course[] getAllOralCourses()
@@ -130,9 +140,10 @@ public class CourseList
 
     return (Course[]) courses.toArray();
   }
-
+//TODO return temp
   /**
    * gets an array with all courses marked as written
+   *
    * @return an array with written courses
    */
   public Course[] getAllWrittenCourses()
@@ -150,9 +161,10 @@ public class CourseList
 
     return (Course[]) courses.toArray();
   }
-
+  //TODO return temp
   /**
    * get the number of oral courses
+   *
    * @return an int with oral courses
    */
   public int getNumberOfOralCourses()
@@ -172,6 +184,7 @@ public class CourseList
 
   /**
    * return the number of written courses
+   *
    * @return an int with written courses
    */
   public int getNumberOfWrittenCourses()
@@ -192,6 +205,7 @@ public class CourseList
 
   /**
    * a tostring method that returns every course on different lines
+   *
    * @return
    */
   public String toString()

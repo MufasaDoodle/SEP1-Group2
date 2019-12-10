@@ -94,8 +94,7 @@ public class Course
     Course other = (Course) obj;
 
     if (courseName.equals(other.getCourseName()) && courseType
-        .equals(other.getCourseType()) && numberOfStudents == other
-        .getNumberOfStudents())
+        .equals(other.getCourseType()))
     {
       return true;
     }
