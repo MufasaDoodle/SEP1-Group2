@@ -45,6 +45,7 @@ public class RoomList
 
   /**
    * Gives the room with the specific room number
+   *
    * @param roomNumber String, specify the wanted room number
    * @return the Room with the specific Room Number
    */
@@ -64,6 +65,7 @@ public class RoomList
 
   /**
    * Adds a Room to the list
+   *
    * @param room the room to add to the list
    */
   public void addRoom(Room room)
@@ -73,6 +75,7 @@ public class RoomList
 
   /**
    * Removes a Room by its Index
+   *
    * @param index the index of the room to be removed
    */
   public void removeRoomByIndex(int index)
@@ -82,6 +85,7 @@ public class RoomList
 
   /**
    * Removes a Room by its room number
+   *
    * @param roomNumber the room number of the room to be removed
    */
   public void removeRoomByRoomNumber(String roomNumber)
@@ -97,6 +101,7 @@ public class RoomList
 
   /**
    * Gives all the rooms from the room list
+   *
    * @return all rooms from the room list
    */
   public Room[] getAllRooms()
@@ -106,35 +111,49 @@ public class RoomList
 
   /**
    * Gives all the available rooms from the room list
+   *
    * @return all available rooms
    */
-  public Room[] getAllAvailableRooms()
+  public Room[] getAllAvailableRooms(int day, ExamList exams)
   {
     ArrayList<Room> resultRooms = new ArrayList<>();
 
     for (int i = 0; i < rooms.size(); i++)
     {
-      if (rooms.get(i).getRoomAvailability())
+      for (int j = 0; j < exams.getAllExams().length; j++)
       {
-        resultRooms.add(rooms.get(i));
+        if (exams.getAllExams()[j].getDate().getDay() == day && rooms.get(i)
+            .getRoomAvailability())
+        {
+          resultRooms.add(rooms.get(i));
+        }
       }
     }
 
+    //TODO test this shit when the gui is here. if it doesnt work, try switching
+    // the rooms and exams in the loops
     Room[] returnArray = new Room[resultRooms.size()];
     return resultRooms.toArray(returnArray);
   }
 
-  public Room[] getAllUnavailableRooms()
+  public Room[] getAllUnavailableRooms(int day, ExamList exams)
   {
     ArrayList<Room> resultRooms = new ArrayList<>();
 
     for (int i = 0; i < rooms.size(); i++)
     {
-      if (!rooms.get(i).getRoomAvailability())
+      for (int j = 0; j < exams.getAllExams().length; j++)
       {
-        resultRooms.add(rooms.get(i));
+        if (exams.getAllExams()[j].getDate().getDay() == day && !rooms.get(i)
+            .getRoomAvailability())
+        {
+          resultRooms.add(rooms.get(i));
+        }
       }
     }
+
+    //TODO test this shit when the gui is here. if it doesnt work, try switching
+    // the rooms and exams in the loops
 
     Room[] returnArray = new Room[resultRooms.size()];
     return resultRooms.toArray(returnArray);
@@ -142,6 +161,7 @@ public class RoomList
 
   /**
    * Gives the rooms with bigger size than the given argument
+   *
    * @param size an int, the room size wanted to be bigger
    * @return all the rooms with bigger size than the given argument
    */
@@ -163,6 +183,7 @@ public class RoomList
 
   /**
    * Gives the rooms with smaller size than the given argument
+   *
    * @param size an int, the room size wanted to be smaller
    * @return all the rooms with smaller size than the given argument
    */
@@ -184,6 +205,7 @@ public class RoomList
 
   /**
    * Gives all the rooms with projector
+   *
    * @return all the rooms with projector
    */
   public Room[] getRoomsWithProjector()
