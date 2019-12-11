@@ -20,7 +20,7 @@ public class Schedule
    * @param _class   the classes semester.
    * @param exams    the exam list.
    */
-  //TODO fix params here and in set()
+
   public Schedule(int semester, char _class, ExamList exams, CourseList courses,
       ExaminerList examiners, RoomList rooms)
   {

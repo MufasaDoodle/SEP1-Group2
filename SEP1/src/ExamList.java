@@ -41,7 +41,7 @@ public class ExamList
     }
   }
 
-  //TODO astah and javadocs
+  //TODO javadocs
   public void removeExamByIndex(int index)
   {
     if (index < 0 || index > exams.size())
@@ -141,8 +141,6 @@ public class ExamList
 
     Exam[] returnArray = new Exam[temp.size()];
     return temp.toArray(returnArray);
-
-    //TODO please for the love of god someone check if this works
   }
 
   /**
@@ -243,7 +241,7 @@ public class ExamList
     return temp.toArray(returnArray);
   }
 
-  //todo add in astah
+
   public int getSize()
   {
     return exams.size();

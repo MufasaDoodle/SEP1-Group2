@@ -14,7 +14,7 @@ public class Exam
   private ArrayList<Course> courses = new ArrayList<>();
   private Room room;
   private ArrayList<Examiner> examiners = new ArrayList<>();
-  private String examType; //TODO add in Astah
+  private String examType;
 
   //TODO fix javadocs params (add examType)
   /**
@@ -237,7 +237,7 @@ public class Exam
     }
   }
 
-  //TODO javadocs and add this in Astah
+  //TODO javadocs
   public static Comparator<Exam> examDayNumber = new Comparator<Exam>()
   {
     public int compare(Exam e1, Exam e2)

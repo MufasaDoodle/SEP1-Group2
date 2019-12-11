@@ -133,6 +133,7 @@ public class RoomList
             .getRoomAvailability())
         {
           resultRooms.add(rooms.get(i));
+          break;
         }
       }
     }
@@ -142,7 +143,7 @@ public class RoomList
     Room[] returnArray = new Room[resultRooms.size()];
     return resultRooms.toArray(returnArray);
   }
-//todo add on astah
+
   public int getSize()
   {
     return rooms.size();
@@ -160,12 +161,14 @@ public class RoomList
             .getRoomAvailability())
         {
           resultRooms.add(rooms.get(i));
+          break;
         }
       }
     }
 
     //TODO test this shit when the gui is here. if it doesnt work, try switching
     // the rooms and exams in the loops
+
 
     Room[] returnArray = new Room[resultRooms.size()];
     return resultRooms.toArray(returnArray);
@@ -215,7 +218,7 @@ public class RoomList
     return resultRooms.toArray(returnArray);
   }
 
-  //TODO javadocs and Astah
+  //TODO javadocs
   public void set(Room room, int index)
   {
     rooms.set(index, room);
