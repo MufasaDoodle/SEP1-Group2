@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane layoutY="20.0" prefHeight="580.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+            <Tab text="Exam plan">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane layoutX="26.0" layoutY="49.0" prefWidth="950.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="350.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="30.4" minHeight="10.0" prefHeight="30.4" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="30.4" minHeight="10.0" prefHeight="30.4" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Date">
+                                 <GridPane.margin>
+                                    <Insets left="50.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="Duration" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="150.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="Course" GridPane.columnIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="45.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="Room" GridPane.columnIndex="3">
+                                 <GridPane.margin>
+                                    <Insets left="45.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <ComboBox prefWidth="140.0" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                              </ComboBox>
+                              <ComboBox prefWidth="140.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                              </ComboBox>
+                              <ComboBox prefWidth="140.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                              </ComboBox>
+                              <Label text="Examiner" GridPane.columnIndex="4">
+                                 <GridPane.margin>
+                                    <Insets left="35.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label prefWidth="50.0" text="From:">
+                                       <padding>
+                                          <Insets top="5.0" />
+                                       </padding>
+                                    </Label>
+                                    <TextField prefWidth="120.0">
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                    <Label prefWidth="50.0" text="To:">
+                                       <padding>
+                                          <Insets left="18.0" top="5.0" />
+                                       </padding>
+                                    </Label>
+                                    <TextField prefWidth="120.0">
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <ComboBox prefWidth="140.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                              <Label text="Co-examiner" GridPane.columnIndex="5">
+                                 <GridPane.margin>
+                                    <Insets left="20.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <TextField GridPane.columnIndex="5" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                           </children>
+                        </GridPane>
+                        <TableView layoutX="101.0" layoutY="233.0" prefHeight="246.0" prefWidth="800.0">
+                          <columns>
+                              <TableColumn prefWidth="200.0" text="Date and time" />
+                            <TableColumn prefWidth="200.0" text="Course" />
+                            <TableColumn prefWidth="200.0" text="Room" />
+                              <TableColumn prefWidth="200.0" text="Co-examiner" />
+                              <TableColumn prefWidth="200.0" text="Examiner" />
+                          </columns>
+                        </TableView>
+                        <Button layoutX="474.0" layoutY="139.0" mnemonicParsing="false" text="Save" />
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Course">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="300.0">
+                     <children>
+                        <ScrollPane layoutX="173.0" layoutY="60.0" prefHeight="196.0" prefWidth="654.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                          </content>
+                        </ScrollPane>
+                        <Button layoutX="702.0" layoutY="260.0" mnemonicParsing="false" text="Add" />
+                        <Button layoutX="763.0" layoutY="260.0" mnemonicParsing="false" text="Remove" />
+                        <HBox layoutX="172.0" layoutY="341.0" prefHeight="37.0" prefWidth="259.0">
+                           <children>
+                              <Label prefHeight="18.0" prefWidth="91.0" text="Course name:">
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <TextField />
+                           </children>
+                        </HBox>
+                        <HBox layoutX="611.0" layoutY="341.0" prefHeight="34.0" prefWidth="218.0">
+                           <children>
+                              <Label prefHeight="18.0" prefWidth="66.0" text="Exam info:">
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <ComboBox prefWidth="150.0" />
+                           </children>
+                        </HBox>
+                        <Button layoutX="474.0" layoutY="420.0" mnemonicParsing="false" text="Update" />
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+          <Tab text="Examiner">
+               <content>
+                  <AnchorPane prefHeight="413.0" prefWidth="1000.0">
+                     <children>
+                        <VBox layoutX="28.0" layoutY="87.0" prefHeight="90.0" prefWidth="231.0">
+                           <children>
+                              <RadioButton mnemonicParsing="false" text="All examiners">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="ks" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton mnemonicParsing="false" text="Available examiners" toggleGroup="$ks" />
+                              <RadioButton mnemonicParsing="false" text="Unavailable examiners" toggleGroup="$ks">
+                                 <cursor>
+                                    <Cursor fx:constant="SW_RESIZE" />
+                                 </cursor>
+                              </RadioButton>
+                           </children>
+                        </VBox>
+                        <HBox layoutX="28.0" layoutY="34.0" prefHeight="38.0" prefWidth="175.0">
+                           <children>
+                              <Label prefHeight="38.0" prefWidth="187.0" text="Select day:">
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </Label>
+                              <ComboBox prefHeight="28.0" prefWidth="188.0">
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </ComboBox>
+                           </children>
+                        </HBox>
+                        <GridPane alignment="CENTER" layoutX="27.0" layoutY="211.0" prefHeight="133.0" prefWidth="268.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="288.0" minWidth="0.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="0.0" percentWidth="0.0" prefWidth="200.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                            <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="79.0" vgrow="SOMETIMES" />
+                            <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                              <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label alignment="BASELINE_LEFT" text="Name:">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="ID:" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label alignment="CENTER" text="Course:" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="Availability:" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets top="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                              </TextField>
+                              <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                              </ComboBox>
+                              <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets top="10.0" />
+                                 </GridPane.margin>
+                              </ComboBox>
+                           </children>
+                        </GridPane>
+                        <Button layoutX="86.0" layoutY="380.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="58.0" text="Update" />
+                        <ScrollPane layoutX="500.0" layoutY="34.0" prefHeight="299.0" prefWidth="362.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                          </content>
+                        </ScrollPane>
+                        <Button layoutX="583.0" layoutY="379.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="54.0" text="Add" />
+                        <Button layoutX="721.0" layoutY="379.0" mnemonicParsing="false" prefHeight="32.0" text="Remove" />
+                        <HBox layoutX="288.0" layoutY="93.0" prefHeight="38.0" prefWidth="175.0" />
+                        <HBox layoutX="295.0" layoutY="138.0" prefHeight="38.0" prefWidth="175.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+          <Tab text="Room">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <HBox layoutX="26.0" layoutY="35.0" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label layoutX="28.0" layoutY="34.0" text="Select day:">
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </Label>
+                              <ComboBox prefHeight="28.0" prefWidth="94.0">
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </ComboBox>
+                           </children>
+                        </HBox>
+                        <VBox layoutX="29.0" layoutY="96.0" prefHeight="200.0" prefWidth="194.0">
+                           <children>
+                              <RadioButton mnemonicParsing="false" text="All rooms">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="as" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton mnemonicParsing="false" text="Available rooms" toggleGroup="$as" />
+                              <RadioButton mnemonicParsing="false" text="Unavailable rooms" toggleGroup="$as" />
+                              <RadioButton mnemonicParsing="false" text="Rooms for oral exams" toggleGroup="$as" />
+                              <RadioButton mnemonicParsing="false" text="Rooms for written exams" toggleGroup="$as" />
+                           </children>
+                        </VBox>
+                        <GridPane layoutX="26.0" layoutY="275.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.20001220703125" minWidth="10.0" prefWidth="91.20001220703125" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="108.79998779296875" minWidth="10.0" prefWidth="108.79998779296875" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Room size:" />
+                              <Label text="Room number:" GridPane.rowIndex="1" />
+                              <Label text="Availability:" GridPane.rowIndex="2" />
+                              <TextField GridPane.columnIndex="1" />
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                           </children>
+                        </GridPane>
+                        <Button layoutX="96.0" layoutY="432.0" mnemonicParsing="false" text="Update" />
+                        <HBox layoutX="18.0" layoutY="380.0" prefHeight="34.0" prefWidth="214.0">
+                           <children>
+                              <CheckBox mnemonicParsing="false" text="Projector">
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </CheckBox>
+                              <CheckBox mnemonicParsing="false" text="HDMI">
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </CheckBox>
+                              <CheckBox mnemonicParsing="false" text="VGA" />
+                           </children>
+                        </HBox>
+                        <ScrollPane layoutX="455.0" layoutY="73.0" prefHeight="246.0" prefWidth="436.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                          </content>
+                        </ScrollPane>
+                        <Button layoutX="559.0" layoutY="350.0" mnemonicParsing="false" text="Add" />
+                        <Button layoutX="721.0" layoutY="350.0" mnemonicParsing="false" text="Remove" />
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</Pane>
