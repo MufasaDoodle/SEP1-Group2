@@ -115,6 +115,11 @@ public class ExaminerList implements Serializable
     }
     return examiner;
   }
+
+  /**
+   * Removes an Examiner object with the given ID
+   * @param examinerID the ID of the Examiner object that is to be removed
+   */
   public void removeExaminerByID(String examinerID)
   {
     for(int i=0; i<examiners.size(); i++)
