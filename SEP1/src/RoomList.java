@@ -133,6 +133,7 @@ public class RoomList
             .getRoomAvailability())
         {
           resultRooms.add(rooms.get(i));
+          break;
         }
       }
     }
@@ -160,12 +161,14 @@ public class RoomList
             .getRoomAvailability())
         {
           resultRooms.add(rooms.get(i));
+          break;
         }
       }
     }
 
     //TODO test this shit when the gui is here. if it doesnt work, try switching
     // the rooms and exams in the loops
+
 
     Room[] returnArray = new Room[resultRooms.size()];
     return resultRooms.toArray(returnArray);
