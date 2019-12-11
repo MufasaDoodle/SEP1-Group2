@@ -100,7 +100,7 @@ public class CourseList
     //TODO check examinerList if it has an examiner with with the name
   }
 
-  //TODO javadocs and Astah
+  //TODO javadocs
   public void set(Course course, int index)
   {
     courses.set(index, course);
@@ -123,7 +123,7 @@ public class CourseList
     //TODO check examinerList if it has an examiner with with the name
   }
 
-  //TODO astah & javadocs
+  //TODO javadocs
   public void removeCourseByIndex(int index)
   {
     if (index < 0 || index > courses.size())
@@ -167,7 +167,7 @@ public class CourseList
     Course[] returnArray = new Course[temp.size()];
     return temp.toArray(returnArray);
   }
-//todo add in astah
+
   public int getSize()
   {
     return courses.size();

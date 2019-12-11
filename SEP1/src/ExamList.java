@@ -41,7 +41,7 @@ public class ExamList
     }
   }
 
-  //TODO astah and javadocs
+  //TODO javadocs
   public void removeExamByIndex(int index)
   {
     if (index < 0 || index > exams.size())
@@ -243,7 +243,7 @@ public class ExamList
     return temp.toArray(returnArray);
   }
 
-  //todo add in astah
+
   public int getSize()
   {
     return exams.size();

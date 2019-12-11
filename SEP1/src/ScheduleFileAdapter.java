@@ -43,7 +43,7 @@ public class ScheduleFileAdapter
     return examiners;
   }
 
-  //todo fix in astah
+
   public Examiner getExaminerById(String Id)
   {
     ExaminerList result = null;
@@ -96,7 +96,7 @@ public class ScheduleFileAdapter
     return returnExaminer;
   }
 
-  //todo fix in astah
+
   public Examiner getExaminerByCourse(String course)
   {
     Examiner examiner = null;

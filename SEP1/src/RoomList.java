@@ -142,7 +142,7 @@ public class RoomList
     Room[] returnArray = new Room[resultRooms.size()];
     return resultRooms.toArray(returnArray);
   }
-//todo add on astah
+
   public int getSize()
   {
     return rooms.size();
@@ -215,7 +215,7 @@ public class RoomList
     return resultRooms.toArray(returnArray);
   }
 
-  //TODO javadocs and Astah
+  //TODO javadocs
   public void set(Room room, int index)
   {
     rooms.set(index, room);
