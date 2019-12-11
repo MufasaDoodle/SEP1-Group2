@@ -141,8 +141,6 @@ public class ExamList
 
     Exam[] returnArray = new Exam[temp.size()];
     return temp.toArray(returnArray);
-
-    //TODO please for the love of god someone check if this works
   }
 
   /**
