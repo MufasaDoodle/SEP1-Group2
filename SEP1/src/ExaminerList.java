@@ -55,54 +55,11 @@ public class ExaminerList implements Serializable
   }
 
   /**
-   * Creates an Array with all examiners from the ArrayList
-   *
-   * @return an Array with all examiners
-   */
-  public Examiner[] getAllExaminers()
-  {
-    Examiner[] tempArray = new Examiner[examiners.size()];
-    int j = 0;
-    for (int i = 0; i < examiners.size(); i++)
-    {
-      if (examiners.get(i).getExaminerType() == true)
-      {
-        tempArray[j] = examiners.get(i);
-        j++;
-      }
-    }
-    return examiners.toArray(tempArray);
-  }
-
-  /**
-   * Creates an Array with all co-examiners from the ArrayList.
-   *
-   * @return an Array with all co-examiners
-   */
-  public Examiner[] getAllCoExaminers()
-  {
-    Examiner[] tempArray = new Examiner[examiners.size()];
-    for (int i = 0; i < examiners.size(); i++)
-    {
-      for (int y = 0; y < examiners.size(); y++)
-      {
-        if (examiners.get(y).getExaminerType() == false)
-        {
-          tempArray[i] = examiners.get(y);
-        }
-      }
-    }
-    return examiners.toArray(tempArray);
-  }
-
-  //TODO get available and unavailable examiners
-
-  /**
    * Creates an Array with all Examiner objects from the ArrayList.
    *
    * @return an Array with all Examiner objects
    */
-  public Examiner[] getEveryone()
+  public Examiner[] getAllExaminers()
   {
     Examiner[] tempArray = new Examiner[examiners.size()];
     return examiners.toArray(tempArray);
