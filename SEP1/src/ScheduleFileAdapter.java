@@ -225,7 +225,202 @@ public class ScheduleFileAdapter
     return exams;
   }
 
-  //TODO the rest of the things here
+  public ExamList getAllExamsInOrder()
+  {
+    ExamList exams = new ExamList();
+    Exam[] tempArray;
+
+    try
+    {
+      ExamList result = (ExamList) mfio.readObjectFromFile(examFile);
+      tempArray = result.getAllExamsInOrder();
+      exams = (ExamList) Arrays.asList(tempArray);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+    return exams;
+  }
+
+  public ExamList getAllExamsOnDay(int day)
+  {
+    ExamList exams = new ExamList();
+    Exam[] tempArray;
+
+    try
+    {
+      ExamList result = (ExamList) mfio.readObjectFromFile(examFile);
+      tempArray = result.getAllExamsOnDay(day);
+      exams = (ExamList) Arrays.asList(tempArray);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+    return exams;
+  }
+
+  public ExamList getAllExamsByExaminer(String examinerID)
+  {
+    ExamList exams = new ExamList();
+    Exam[] tempArray;
+
+    try
+    {
+      ExamList result = (ExamList) mfio.readObjectFromFile(examFile);
+      tempArray = result.getAllExamsByExaminer(examinerID);
+      exams = (ExamList) Arrays.asList(tempArray);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+    return exams;
+  }
+
+  public ExamList getAllExamsByRoom(String roomNumber)
+  {
+    ExamList exams = new ExamList();
+    Exam[] tempArray;
+
+    try
+    {
+      ExamList result = (ExamList) mfio.readObjectFromFile(examFile);
+      tempArray = result.getAllExamsByRoom(roomNumber);
+      exams = (ExamList) Arrays.asList(tempArray);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+    return exams;
+  }
+
+  public ExamList getAllExamsByCourse(String courseName)
+  {
+    ExamList exams = new ExamList();
+    Exam[] tempArray;
+
+    try
+    {
+      ExamList result = (ExamList) mfio.readObjectFromFile(examFile);
+      tempArray = result.getAllExamsByCourse(courseName);
+      exams = (ExamList) Arrays.asList(tempArray);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+    return exams;
+  }
+
+  public ExamList getAllExamsByType(String examType)
+  {
+    ExamList exams = new ExamList();
+    Exam[] tempArray;
+
+    try
+    {
+      ExamList result = (ExamList) mfio.readObjectFromFile(examFile);
+      tempArray = result.getAllExamsByType(examType);
+      exams = (ExamList) Arrays.asList(tempArray);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+    return exams;
+  }
+
+  public int getExamDuration(String courseName)
+  {
+    ExamList exams = new ExamList();
+    int returnInt = 0;
+
+    try
+    {
+      ExamList result = (ExamList) mfio.readObjectFromFile(examFile);
+      returnInt = result.getExamDuration(courseName);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+    return returnInt;
+  }
+
+  public void saveExams(ExamList examList)
+  {
+    try
+    {
+      mfio.writeToFile(examFile, examList);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error writing to file");
+    }
+  }
 
   public RoomList getRooms()
   {
@@ -784,49 +979,307 @@ public class ScheduleFileAdapter
 
   public void removeExaminerById(String ID)
   {
-    //TODO implement this
-    saveExaminers(); //to save, right????
+    ExaminerList result = null;
+    try
+    {
+      result = (ExaminerList) mfio.readObjectFromFile(examinerFile);
+      result.removeExaminerByID(ID);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+
+    saveExaminers(result); //to save, right????
   }
 
   public void removeRoomByNumber(String roomNumber)
   {
-    //TODO implement this
-    saveRooms(); //to save, right????
+    RoomList result = null;
+    try
+    {
+      result = (RoomList) mfio.readObjectFromFile(examinerFile);
+      result.removeRoomByRoomNumber(roomNumber);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+    saveRooms(result); //to save, right????
   }
 
   public void removeCourseByName(String courseName)
   {
-    //TODO implement this
-    saveCourses(); //to save, right????
+    CourseList result = null;
+    try
+    {
+      result = (CourseList) mfio.readObjectFromFile(examinerFile);
+      result.removeCourse(courseName);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+    saveCourses(result); //to save, right????
   }
 
-  public void addExaminer()
+  public void removeExamByIndex(int index)
   {
-    //TODO implement this, not sure what to do for parameters
+    ExamList result = null;
+    try
+    {
+      result = (ExamList) mfio.readObjectFromFile(examinerFile);
+      result.removeExamByIndex(index);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+
+    saveExams(result); //to save, right????
   }
 
-  public void addRoom()
+  public void removeExaminerByIndex(int index)
   {
-    //TODO implement this, not sure what to do for parameters
+    ExaminerList result = null;
+    try
+    {
+      result = (ExaminerList) mfio.readObjectFromFile(examinerFile);
+      result.removeExaminerByIndex(index);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+
+    saveExaminers(result); //to save, right????
   }
 
-  public void addCourse()
+  public void removeRoomByIndex(int index)
   {
-    //TODO implement this, not sure what to do for parameters
+    RoomList result = null;
+    try
+    {
+      result = (RoomList) mfio.readObjectFromFile(examinerFile);
+      result.removeRoomByIndex(index);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+
+    saveRooms(result); //to save, right????
   }
 
-  public void changeExaminerInfo()
+  public void removeCourseByIndex(int index)
   {
-    //TODO implement this, not sure what to do for parameters
+    CourseList result = null;
+    try
+    {
+      result = (CourseList) mfio.readObjectFromFile(examinerFile);
+      result.removeCourse(index);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+
+    saveCourses(result); //to save, right????
   }
 
-  public void changeRoomInfo()
+  public void addExaminer(Examiner examiner)
   {
-    //TODO implement this, not sure what to do for parameters
+    ExaminerList result = null;
+    try
+    {
+      result = (ExaminerList) mfio.readObjectFromFile(examinerFile);
+      result.addExaminer(examiner);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+
+    saveExaminers(result); //to save, right????
   }
 
-  public void changeCourseInfo()
+  public void addRoom(Room room)
   {
-    //TODO implement this, not sure what to do for parameters
+    RoomList result = null;
+    try
+    {
+      result = (RoomList) mfio.readObjectFromFile(examinerFile);
+      result.addRoom(room);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+    saveRooms(result); //to save, right????
+  }
+
+  public void addCourse(Course course)
+  {
+    CourseList result = null;
+    try
+    {
+      result = (CourseList) mfio.readObjectFromFile(examinerFile);
+      result.addCourse(course);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+    saveCourses(result); //to save, right????
+  }
+
+  public void changeExaminerInfo(Examiner examiner, int index)
+  {
+    ExaminerList result = null;
+    try
+    {
+      result = (ExaminerList) mfio.readObjectFromFile(examinerFile);
+      result.set(examiner, index);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+
+    saveExaminers(result); //to save, right????
+  }
+
+  public void changeRoomInfo(Room room, int index)
+  {
+    RoomList result = null;
+    try
+    {
+      result = (RoomList) mfio.readObjectFromFile(examinerFile);
+      result.set(room, index);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+    saveRooms(result); //to save, right????
+  }
+
+  public void changeCourseInfo(Course course, int index)
+  {
+    CourseList result = null;
+    try
+    {
+      result = (CourseList) mfio.readObjectFromFile(examinerFile);
+      result.set(course, index);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+    saveCourses(result); //to save, right????
   }
 }

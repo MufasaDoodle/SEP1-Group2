@@ -80,7 +80,14 @@ public class RoomList
    */
   public void removeRoomByIndex(int index)
   {
-    rooms.remove(index);
+      if (index < 0 || index > rooms.size())
+      {
+        //do nothing boi
+      }
+      else
+      {
+        rooms.remove(index);
+      }
   }
 
   /**
@@ -206,6 +213,12 @@ public class RoomList
 
     Room[] returnArray = new Room[resultRooms.size()];
     return resultRooms.toArray(returnArray);
+  }
+
+  //TODO javadocs and Astah
+  public void set(Room room, int index)
+  {
+    rooms.set(index, room);
   }
 
   /**

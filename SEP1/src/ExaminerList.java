@@ -115,6 +115,8 @@ public class ExaminerList implements Serializable
     }
     return examiner;
   }
+
+  //TODO javadocs
   public void removeExaminerByID(String examinerID)
   {
     for(int i=0; i<examiners.size(); i++)
@@ -125,6 +127,19 @@ public class ExaminerList implements Serializable
       }
     }
   }
+
+  public void removeExaminerByIndex(int index)
+  {
+    if (index < 0 || index > examiners.size())
+    {
+      //do nothing boi
+    }
+    else
+    {
+      examiners.remove(index);
+    }
+  }
+
   /**
    * Gets how many Examiner objects are in the list.
    *

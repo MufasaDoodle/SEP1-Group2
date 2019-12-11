@@ -19,6 +19,7 @@ public class ExamList
 
   /**
    * Adds an exam to the list
+   *
    * @param exam the exam to be added
    */
   public void addExam(Exam exam)
@@ -29,6 +30,7 @@ public class ExamList
 
   /**
    * removes an exam from the list
+   *
    * @param exam to be removed
    */
   public void removeExam(Exam exam)
@@ -39,8 +41,22 @@ public class ExamList
     }
   }
 
+  //TODO astah and javadocs
+  public void removeExamByIndex(int index)
+  {
+    if (index < 0 || index > exams.size())
+    {
+      //do nothing boi
+    }
+    else
+    {
+      exams.remove(index);
+    }
+  }
+
   /**
    * Remove an exam from the list by course name
+   *
    * @param name the String name of the course to be removed
    */
   public void removeExamByCourseName(String name)
@@ -60,6 +76,7 @@ public class ExamList
 
   /**
    * removes an exam by examiner ID
+   *
    * @param examinerID String ID to be removed
    */
   public void removeExamByExaminerID(String examinerID)
@@ -80,6 +97,7 @@ public class ExamList
 
   /**
    * removes all exams on a given day
+   *
    * @param day the day to be removed
    */
   public void removeAllExamsByDay(int day)
@@ -96,6 +114,7 @@ public class ExamList
 
   /**
    * gets all the exams from the list
+   *
    * @return array of all exams
    */
   public Exam[] getAllExams()
@@ -110,6 +129,7 @@ public class ExamList
 
   /**
    * get all exams in order of day
+   *
    * @return array of exams by day
    */
   public Exam[] getAllExamsInOrder()
@@ -127,6 +147,7 @@ public class ExamList
 
   /**
    * gets all exams on a given day
+   *
    * @param day the day of the exams
    * @return array of all the exams on that day
    */
@@ -148,6 +169,7 @@ public class ExamList
 
   /**
    * gets all the exams by examiner
+   *
    * @param examinerID of the exams to be added
    * @return array with exams of given examiner ID
    */
@@ -174,6 +196,7 @@ public class ExamList
 
   /**
    * gets all the exams with a given roomnumber
+   *
    * @param roomNumber roomnumber to find exams in
    * @return array of rooms in given roomnumber
    */
@@ -195,6 +218,7 @@ public class ExamList
 
   /**
    * gets all exams with a given course name
+   *
    * @param courseName course name to be searched with
    * @return array with all exams with given course name
    */
@@ -218,7 +242,8 @@ public class ExamList
     Exam[] returnArray = new Exam[temp.size()];
     return temp.toArray(returnArray);
   }
-//todo add in astah
+
+  //todo add in astah
   public int getSize()
   {
     return exams.size();
@@ -226,6 +251,7 @@ public class ExamList
 
   /**
    * gets all exams by a given examtype
+   *
    * @param examType String of exam type
    * @return array with all exams with given type
    */
@@ -245,8 +271,27 @@ public class ExamList
     return temp.toArray(returnArray);
   }
 
+  public int getExamDuration(String course)
+  {
+    int returnInt = 0;
+
+    for (int i = 0; i < exams.size(); i++)
+    {
+      Course[] temp = exams.get(i).getAllCourses();
+      for (int j = 0; j < temp.length; j++)
+      {
+        if (temp[j].getCourseName().equals(course))
+        {
+          returnInt = exams.get(i).getDuration();
+        }
+      }
+    }
+    return returnInt;
+  }
+
   /**
    * to string method that prints all exams on separate lines
+   *
    * @return
    */
   public String toString()

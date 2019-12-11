@@ -100,6 +100,12 @@ public class CourseList
     //TODO check examinerList if it has an examiner with with the name
   }
 
+  //TODO javadocs and Astah
+  public void set(Course course, int index)
+  {
+    courses.set(index, course);
+  }
+
   /**
    * remove a course with a given name
    *
@@ -115,6 +121,19 @@ public class CourseList
       }
     }
     //TODO check examinerList if it has an examiner with with the name
+  }
+
+  //TODO astah & javadocs
+  public void removeCourseByIndex(int index)
+  {
+    if (index < 0 || index > courses.size())
+    {
+      //do nothing boi
+    }
+    else
+    {
+      courses.remove(index);
+    }
   }
 
   /**
