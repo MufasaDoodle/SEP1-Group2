@@ -115,7 +115,16 @@ public class ExaminerList implements Serializable
     }
     return examiner;
   }
-
+  public void removeExaminerByID(String examinerID)
+  {
+    for(int i=0; i<examiners.size(); i++)
+    {
+      if(examiners.get(i).getExaminerID().equals(examinerID))
+      {
+        examiners.remove(examiners.get(i));
+      }
+    }
+  }
   /**
    * Gets how many Examiner objects are in the list.
    *
