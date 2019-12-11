@@ -9,7 +9,6 @@ public class Examiner
     private String firstName;
     private String lastName;
     private String examinerID;
-    private boolean examinerType;
     private boolean examinerAvailability;
     private ArrayList<Course> courses;
 
@@ -24,7 +23,6 @@ public class Examiner
         this.firstName = firstName;
         this.lastName = lastName;
         this.examinerID = examinerID;
-        examinerType = false;
         examinerAvailability = true;
         courses = new ArrayList<Course>();
     }
@@ -54,15 +52,6 @@ public class Examiner
     public String getExaminerID()
     {
         return examinerID;
-    }
-
-    /**
-     * Gets the type of the examiner.
-     * @return the examiner's type
-     */
-    public boolean getExaminerType()
-    {
-        return examinerType;
     }
 
     /**
@@ -137,15 +126,6 @@ public class Examiner
      */
     public void setExaminerID(String examinerID) {
         this.examinerID = examinerID;
-    }
-
-    /**
-     * Sets the examiner's type.
-     * @param examinerType what the examiner's type will be set to
-     */
-    public void setExaminer(boolean examinerType)
-    {
-        this.examinerType=examinerType;
     }
 
     /**
