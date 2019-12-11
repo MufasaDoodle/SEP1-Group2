@@ -1,7 +1,6 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-
 import javax.swing.*;
 
 public class Controller
@@ -64,6 +63,11 @@ public class Controller
       roomDay.getItems().add(i);
     }
     roomDay.getSelectionModel().selectFirst();
+    roomAvailability.getItems().add("Available");
+    roomAvailability.getItems().add("Unavailable");
+    roomAvailability.getSelectionModel().selectFirst();
+
+
 
   }
 
