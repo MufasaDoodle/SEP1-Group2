@@ -634,7 +634,7 @@ public class ScheduleFileAdapter
     return rooms;
   }
 
-  public RoomList getAllRoomsWithProjector(int size)
+  public RoomList getAllRoomsWithProjector()
   {
 
     RoomList rooms = null;
