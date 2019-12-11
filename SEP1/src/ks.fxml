@@ -306,7 +306,6 @@
                               <RadioButton mnemonicParsing="false" text="Available rooms" toggleGroup="$as" />
                               <RadioButton mnemonicParsing="false" text="Unavailable rooms" toggleGroup="$as" />
                               <RadioButton mnemonicParsing="false" text="Rooms for oral exams" toggleGroup="$as" />
-                              <RadioButton mnemonicParsing="false" text="Rooms for written exams" toggleGroup="$as" />
                            </children>
                         </VBox>
                         <GridPane layoutX="26.0" layoutY="275.0">
