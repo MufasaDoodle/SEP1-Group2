@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * A class containing all the rooms
  */
-public class RoomList
+public class RoomList implements Serializable
 {
   private ArrayList<Room> rooms;
 
@@ -70,6 +71,7 @@ public class RoomList
    */
   public void addRoom(Room room)
   {
+    System.out.println(room);
     rooms.add(room);
   }
 
@@ -243,6 +245,14 @@ public class RoomList
 
     Room[] returnArray = new Room[resultRooms.size()];
     return resultRooms.toArray(returnArray);
+  }
+
+  public String toString(){
+    String str = "";
+    for (int i = 0; i < rooms.size(); i++){
+      str += rooms.get(i).toString() + "\n";
+    }
+    return str;
   }
 
 }

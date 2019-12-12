@@ -1,3 +1,4 @@
+import java.io.Serializable;
 
 /**
  * Class which holds information about a course
@@ -5,7 +6,7 @@
  * @version 0.5
  * */
 
-public class Course
+public class Course implements Serializable
 {
   private String courseName, courseType;
   private int numberOfStudents;
@@ -21,6 +22,15 @@ public class Course
   {
     set(courseName, courseType, numberOfStudents, room);
   }
+
+  public Course(String courseName, String courseType, int numberOfStudents)
+  {
+    this.courseName = courseName;
+    this.courseType = courseType;
+    this.numberOfStudents = numberOfStudents;
+  }
+
+  public void setCourseType(){}
 
   /**
    * Gets the course type

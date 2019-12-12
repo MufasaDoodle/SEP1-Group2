@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -5,7 +6,7 @@ import java.util.Collections;
  * @version 1.0
  * Contains an arraylist of all the exams
  */
-public class ExamList
+public class ExamList implements Serializable
 {
   private ArrayList<Exam> exams;
 

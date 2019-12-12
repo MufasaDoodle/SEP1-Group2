@@ -1,7 +1,9 @@
+import java.io.Serializable;
+
 /**
  * A class containing the specific details about a room
  */
-public class Room
+public class Room implements Serializable
 {
   private int roomSize;
   private String roomNumber;

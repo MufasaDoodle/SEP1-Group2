@@ -522,7 +522,7 @@ public class ScheduleFileAdapter
 
   public RoomList getAllAvailableRooms(int day)
   {
-    RoomList rooms = null;
+    RoomList rooms = new RoomList();
     Room[] tempArray;
 
     try
@@ -531,6 +531,7 @@ public class ScheduleFileAdapter
       ExamList exams = (ExamList) mfio.readObjectFromFile(examFile);
       tempArray = result.getAllAvailableRooms(day, exams);
       rooms = (RoomList) Arrays.asList(tempArray);
+      System.out.println(rooms.toString());
     }
     catch (FileNotFoundException e)
     {
@@ -708,8 +709,8 @@ public class ScheduleFileAdapter
 
     try
     {
-      RoomList result = (RoomList) mfio.readObjectFromFile(courseFile);
-      returnInt = result.getNumberOfRooms();
+      CourseList result = (CourseList) mfio.readObjectFromFile(courseFile);
+      returnInt = result.getNumberOfCourses();
     }
     catch (FileNotFoundException e)
     {
@@ -1006,7 +1007,7 @@ public class ScheduleFileAdapter
     RoomList result = null;
     try
     {
-      result = (RoomList) mfio.readObjectFromFile(examinerFile);
+      result = (RoomList) mfio.readObjectFromFile(roomFile);
       result.removeRoomByRoomNumber(roomNumber);
     }
     catch (FileNotFoundException e)
@@ -1029,7 +1030,7 @@ public class ScheduleFileAdapter
     CourseList result = null;
     try
     {
-      result = (CourseList) mfio.readObjectFromFile(examinerFile);
+      result = (CourseList) mfio.readObjectFromFile(courseFile);
       result.removeCourse(courseName);
     }
     catch (FileNotFoundException e)
@@ -1052,7 +1053,7 @@ public class ScheduleFileAdapter
     ExamList result = null;
     try
     {
-      result = (ExamList) mfio.readObjectFromFile(examinerFile);
+      result = (ExamList) mfio.readObjectFromFile(examFile);
       result.removeExamByIndex(index);
     }
     catch (FileNotFoundException e)
@@ -1100,7 +1101,7 @@ public class ScheduleFileAdapter
     RoomList result = null;
     try
     {
-      result = (RoomList) mfio.readObjectFromFile(examinerFile);
+      result = (RoomList) mfio.readObjectFromFile(roomFile);
       result.removeRoomByIndex(index);
     }
     catch (FileNotFoundException e)
@@ -1124,7 +1125,7 @@ public class ScheduleFileAdapter
     CourseList result = null;
     try
     {
-      result = (CourseList) mfio.readObjectFromFile(examinerFile);
+      result = (CourseList) mfio.readObjectFromFile(courseFile);
       result.removeCourse(index);
     }
     catch (FileNotFoundException e)
@@ -1169,7 +1170,7 @@ public class ScheduleFileAdapter
 
   public void addRoom(Room room)
   {
-    RoomList result = null;
+    RoomList result = new RoomList();
     try
     {
       result = (RoomList) mfio.readObjectFromFile(roomFile);
@@ -1192,10 +1193,13 @@ public class ScheduleFileAdapter
 
   public void addCourse(Course course)
   {
-    CourseList result = null;
+    CourseList result =new CourseList();
     try
     {
-      result = (CourseList) mfio.readObjectFromFile(examinerFile);
+      result = (CourseList) mfio.readObjectFromFile(courseFile);
+
+      if(result==null)
+        result =new CourseList();
       result.addCourse(course);
     }
     catch (FileNotFoundException e)
@@ -1262,10 +1266,10 @@ public class ScheduleFileAdapter
 
   public void changeCourseInfo(Course course, int index)
   {
-    CourseList result = null;
+    CourseList result = new CourseList();
     try
     {
-      result = (CourseList) mfio.readObjectFromFile(examinerFile);
+      result = (CourseList) mfio.readObjectFromFile(courseFile);
       result.set(course, index);
     }
     catch (FileNotFoundException e)

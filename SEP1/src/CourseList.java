@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -6,7 +7,7 @@ import java.util.ArrayList;
  * Used to store an arrayList of courses
  */
 
-public class CourseList
+public class CourseList implements Serializable
 {
   private ArrayList<Course> courses;
 

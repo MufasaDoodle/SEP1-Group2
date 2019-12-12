@@ -1,10 +1,11 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * A class containing specific details about examiners.
  * @version 0.1
  */
-public class Examiner
+public class Examiner implements Serializable
 {
     private String firstName;
     private String lastName;

@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -7,7 +8,7 @@ import java.util.Comparator;
  * @version 1.0
  * This class stores info about an exam
  */
-public class Exam
+public class Exam implements Serializable
 {
   private int duration;
   private MyDate date;
