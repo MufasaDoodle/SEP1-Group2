@@ -29,6 +29,19 @@ public class Examiner implements Serializable
     }
 
     /**
+     *Two-argument constructor.
+     * @param firstName the examiner's first name
+     * @param examinerID the examiner's ID
+     */
+    public Examiner(String firstName, String examinerID)
+    {
+        this.firstName = firstName;
+        this.examinerID = examinerID;
+        examinerAvailability = true;
+        courses = new ArrayList<Course>();
+    }
+
+    /**
      * Gets the examiner's first name.
      * @return the examiner's first name
      */

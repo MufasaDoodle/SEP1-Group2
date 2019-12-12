@@ -23,7 +23,7 @@ public class Controller
   @FXML private CheckBox roomHDMI;
   @FXML private CheckBox roomVGA;
   @FXML private Button roomUpdate;
-  @FXML private ListView roomList;
+  @FXML private ListView<Room> roomList;
   @FXML private Button roomAdd;
   @FXML private Button roomRemove;
 
@@ -33,7 +33,7 @@ public class Controller
   @FXML private RadioButton examinerUnavailableExaminers;
   @FXML private TextField examinerName;
   @FXML private TextField examinerID;
-  @FXML private ComboBox<Course> examinerCourse;
+  @FXML private ComboBox<String> examinerCourse;
   @FXML private ComboBox<String> examinerAvailability;
   @FXML private Button examinerUpdate;
   @FXML private ListView examinerList;
@@ -75,9 +75,19 @@ public class Controller
     roomAvailability.getItems().add("Available");
     roomAvailability.getItems().add("Unavailable");
     roomAvailability.getSelectionModel().selectFirst();
+    examinerAvailability.getItems().add("Available");
+    examinerAvailability.getItems().add("Unavailable");
+    examinerAvailability.getSelectionModel().selectFirst();
     courseExamInfo.getItems().add("Written");
     courseExamInfo.getItems().add("Oral");
     courseExamInfo.getSelectionModel().selectFirst();
+
+    CourseList courses1 = adapter.getAllCourses();
+    for (int i = 0; i < courses1.getSize(); i++)
+    {
+      examinerCourse.getItems().add(courses1.getCourse(i).getCourseName());
+    }
+    examinerCourse.getSelectionModel().selectFirst();
 
     CourseList courses = new CourseList();
     courses = adapter.getAllCourses();
@@ -88,6 +98,8 @@ public class Controller
 
     courseList.getSelectionModel().selectedItemProperty()
         .addListener((new MyListListener()));
+    roomList.getSelectionModel().selectedItemProperty()
+        .addListener((new MyListListenerRoom()));
   }
 
   public void handleRoom(ActionEvent e)
@@ -146,23 +158,89 @@ public class Controller
         if (roomProjector.isSelected())
         {
           room.setProjector(true);
+          if (roomHDMI.isSelected())
+          {
+            room.setHDMI(true);
+          }
+          if (roomVGA.isSelected())
+          {
+            room.setVGA(true);
+          }
         }
-        else if (roomHDMI.isSelected())
+        if (!(roomProjector.isSelected()) && (roomHDMI.isSelected() || roomVGA
+            .isSelected()))
         {
-          room.setHDMI(true);
-        }
-        else if (roomVGA.isSelected())
-        {
-          room.setVGA(true);
+          JOptionPane.showMessageDialog(null,
+              "You forgot to choose projector, please update the added room!",
+              "Error", JOptionPane.WARNING_MESSAGE);
         }
 
         adapter.addRoom(room);
+        roomList.getItems().add(room);
       }
+
       else
       {
         JOptionPane.showMessageDialog(null, "Fill in all fields!", "Error",
             JOptionPane.WARNING_MESSAGE);
       }
+    }
+
+    if (e.getSource() == roomUpdate)
+    {
+      roomRoomSize.setText(roomRoomSize.getText());
+      roomRoomNumber.setText(roomRoomNumber.getText());
+      roomAvailability.getSelectionModel().getSelectedItem();
+
+      boolean projector = false;
+      boolean HDMI = false;
+      boolean VGA = false;
+      if (roomProjector.isSelected())
+      {
+        projector = true;
+        if (roomHDMI.isSelected())
+        {
+          HDMI = true;
+        }
+        else if (roomVGA.isSelected())
+        {
+          VGA = true;
+        }
+      }
+
+      boolean availability;
+      if (roomAvailability.getSelectionModel().getSelectedItem()
+          .equals("Available"))
+      {
+        availability = true;
+      }
+      else
+      {
+        availability = false;
+      }
+
+      Room room = new Room(Integer.parseInt(roomRoomSize.getText()),
+          roomRoomNumber.getText(), projector, HDMI, VGA, availability);
+
+      adapter.changeRoomInfo(room,
+          roomList.getSelectionModel().getSelectedIndex());
+      roomList.getItems().clear();
+      RoomList rooms = new RoomList();
+      rooms = adapter.getRooms();
+      for (int i = 0; i < rooms.getSize(); i++)
+      {
+        roomList.getItems().add(rooms.getRoom(i));
+      }
+      roomRoomSize.setText("");
+      roomRoomNumber.setText("");
+    }
+
+    if (e.getSource() == roomRemove)
+    {
+      adapter
+          .removeRoomByIndex(roomList.getSelectionModel().getSelectedIndex());
+      roomList.getItems()
+          .remove(roomList.getSelectionModel().getSelectedIndex());
     }
   }
 
@@ -180,6 +258,27 @@ public class Controller
     {
       //get un examiners  by day
     }
+
+    if (e.getSource() == courseAdd)
+    {
+      if (!(examinerName.getText().equals("")) && !(examinerID.getText()
+          .equals("")))
+      {
+        Examiner examiner = new Examiner(examinerName.getText(), examinerID.getText());
+        examiner.addCourse();
+        
+        adapter.addCourse(course);
+        courseList.getItems().add(course);
+        courseName.setText("");
+        courseNumberOfStudents.setText("");
+      }
+      else
+      {
+        JOptionPane.showMessageDialog(null, "Fill in all fields!", "Error",
+            JOptionPane.WARNING_MESSAGE);
+      }
+    }
+
   }
 
   public void handleCourse(ActionEvent e)
@@ -233,14 +332,13 @@ public class Controller
       courseList.getItems().clear();
       CourseList courses = new CourseList();
       courses = adapter.getAllCourses();
-      for (int i = 0; i < courses.getSize() ; i++)
+      for (int i = 0; i < courses.getSize(); i++)
       {
         courseList.getItems().add(courses.getCourse(i));
       }
       courseName.setText("");
       courseNumberOfStudents.setText("");
     }
-
   }
 
   private class MyListListener implements ChangeListener<Course>
@@ -258,4 +356,32 @@ public class Controller
       }
     }
   }
+
+  private class MyListListenerRoom implements ChangeListener<Room>
+  {
+    public void changed(ObservableValue<? extends Room> rooms, Room oldRoom,
+        Room newRoom)
+    {
+      Room temp = roomList.getSelectionModel().getSelectedItem();
+
+      if (temp != null)
+      {
+        roomRoomSize.setText(temp.getRoomSize() + "");
+        roomRoomNumber.setText(temp.getRoomNumber());
+
+        RoomList roomRooms = adapter.getRooms();
+        int index = roomList.getSelectionModel().getSelectedIndex();
+
+        if (roomRooms.getRoom(index).getRoomAvailability())
+        {
+          roomAvailability.getSelectionModel().selectFirst();
+        }
+        else
+        {
+          roomAvailability.getSelectionModel().selectLast();
+        }
+      }
+    }
+  }
+
 }

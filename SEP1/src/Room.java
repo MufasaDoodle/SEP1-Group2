@@ -48,6 +48,17 @@ public class Room implements Serializable
     roomAvailability = true;
   }
 
+  public Room(int roomSize, String roomNumber, boolean hasProjector,
+      boolean hasHDMI, boolean hasVGA, boolean roomAvailability)
+  {
+    this.roomSize = roomSize;
+    this.roomNumber = roomNumber;
+    this.hasProjector = hasProjector;
+    this.hasHDMI = hasHDMI;
+    this.hasVGA = hasVGA;
+    this.roomAvailability = roomAvailability;
+  }
+
   /**
    * Give back the room number
    * @return String with the room's number

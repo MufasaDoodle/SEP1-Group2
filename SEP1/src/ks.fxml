@@ -336,7 +336,7 @@
                               <ComboBox fx:id="roomAvailability" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
-                        <Button fx:id="roomUpdate" layoutX="96.0" layoutY="432.0" mnemonicParsing="false" text="Update" />
+                        <Button fx:id="roomUpdate" layoutX="96.0" layoutY="432.0" mnemonicParsing="false" onAction="#handleRoom" text="Update" />
                         <HBox layoutX="18.0" layoutY="380.0" prefHeight="34.0" prefWidth="214.0">
                            <children>
                               <CheckBox fx:id="roomProjector" mnemonicParsing="false" text="Projector">
@@ -353,7 +353,7 @@
                            </children>
                         </HBox>
                         <Button fx:id="roomAdd" layoutX="559.0" layoutY="350.0" mnemonicParsing="false" onAction="#handleRoom" text="Add" />
-                        <Button fx:id="roomRemove" layoutX="721.0" layoutY="350.0" mnemonicParsing="false" text="Remove" />
+                        <Button fx:id="roomRemove" layoutX="721.0" layoutY="350.0" mnemonicParsing="false" onAction="#handleRoom" text="Remove" />
                         <ListView fx:id="roomList" layoutX="472.0" layoutY="37.0" prefHeight="286.0" prefWidth="418.0" />
                      </children></AnchorPane>
                </content>

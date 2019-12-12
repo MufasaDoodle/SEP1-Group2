@@ -1243,7 +1243,7 @@ public class ScheduleFileAdapter
 
   public void changeRoomInfo(Room room, int index)
   {
-    RoomList result = null;
+    RoomList result = new RoomList();
     try
     {
       result = (RoomList) mfio.readObjectFromFile(roomFile);
