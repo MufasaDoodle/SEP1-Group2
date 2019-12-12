@@ -129,6 +129,20 @@ public class RoomList implements Serializable
 
     for (int i = 0; i < rooms.size(); i++)
     {
+      resultRooms.add(rooms.get(i));
+    }
+
+    for (int i = 0; i < exams.getSize(); i++)
+    {
+      if(exams.getAllExams()[i].getDate().getDay()==day)
+      {
+        resultRooms.remove(exams.getAllExams()[i].getRoom());
+      }
+    }
+
+    /*
+    for (int i = 0; i < rooms.size(); i++)
+    {
       for (int j = 0; j < exams.getAllExams().length; j++)
       {
         if (exams.getAllExams()[j].getDate().getDay() == day && rooms.get(i)
@@ -139,7 +153,7 @@ public class RoomList implements Serializable
         }
       }
     }
-
+*/
     //TODO test this shit when the gui is here. if it doesnt work, try switching
     // the rooms and exams in the loops
     Room[] returnArray = new Room[resultRooms.size()];
@@ -157,6 +171,18 @@ public class RoomList implements Serializable
 
     for (int i = 0; i < rooms.size(); i++)
     {
+      resultRooms.add(rooms.get(i));
+    }
+
+    Room[] available = getAllAvailableRooms(day, exams);
+
+    for (int i = 0; i < available.length; i++)
+    {
+      resultRooms.remove(available[i]);
+    }
+    /*
+    for (int i = 0; i < rooms.size(); i++)
+    {
       for (int j = 0; j < exams.getAllExams().length; j++)
       {
         if (exams.getAllExams()[j].getDate().getDay() == day && !rooms.get(i)
@@ -166,7 +192,7 @@ public class RoomList implements Serializable
           break;
         }
       }
-    }
+    }*/
 
     //TODO test this shit when the gui is here. if it doesnt work, try switching
     // the rooms and exams in the loops
