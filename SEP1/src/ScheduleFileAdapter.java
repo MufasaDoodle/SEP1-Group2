@@ -70,14 +70,14 @@ public class ScheduleFileAdapter
     return returnExaminer;
   }
 
-  public Examiner getExaminerByName(String firstName, String lastName)
+  public Examiner getExaminerByName(String fullName)
   {
     ExaminerList result = null;
     Examiner returnExaminer = null;
     try
     {
       result = (ExaminerList) mfio.readObjectFromFile(examinerFile);
-      returnExaminer = result.getByName(firstName, lastName);
+      returnExaminer = result.getByName(fullName);
 
     }
     catch (FileNotFoundException e)
@@ -1146,10 +1146,12 @@ public class ScheduleFileAdapter
 
   public void addExaminer(Examiner examiner)
   {
-    ExaminerList result = null;
+    ExaminerList result = new ExaminerList();
     try
     {
       result = (ExaminerList) mfio.readObjectFromFile(examinerFile);
+      if(result==null)
+        result =new ExaminerList();
       result.addExaminer(examiner);
     }
     catch (FileNotFoundException e)
@@ -1219,7 +1221,7 @@ public class ScheduleFileAdapter
 
   public void changeExaminerInfo(Examiner examiner, int index)
   {
-    ExaminerList result = null;
+    ExaminerList result = new ExaminerList();
     try
     {
       result = (ExaminerList) mfio.readObjectFromFile(examinerFile);

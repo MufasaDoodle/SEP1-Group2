@@ -79,17 +79,15 @@ public class ExaminerList implements Serializable
   /**
    * Gets an Examiner object with either the given first name or the last name from the list.
    *
-   * @param firstName the first name of the Examiner object
-   * @param lastName  the last name of the Examiner object
+   * @param fullName the first name of the Examiner object
    * @return the Examiner object with either the given first name or the last name if one exists, else null
    */
-  public Examiner getByName(String firstName, String lastName)
+  public Examiner getByName(String fullName)
   {
     Examiner examiner = null;
     for (int i = 0; i < examiners.size(); i++)
     {
-      if (examiners.get(i).getFirstName().equals(firstName) && examiners.get(i)
-          .getLastName().equals(lastName))
+      if (examiners.get(i).getFullName().equals(fullName))
       {
         examiner = examiners.get(i);
       }

@@ -7,26 +7,10 @@ import java.util.ArrayList;
  */
 public class Examiner implements Serializable
 {
-    private String firstName;
-    private String lastName;
+    private String fullName;
     private String examinerID;
     private boolean examinerAvailability;
     private ArrayList<Course> courses;
-
-    /**
-     *Three-argument constructor.
-     * @param firstName the examiner's first name
-     * @param lastName the examiner's last name
-     * @param examinerID the examiner's ID
-     */
-    public Examiner(String firstName, String lastName, String examinerID)
-    {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.examinerID = examinerID;
-        examinerAvailability = true;
-        courses = new ArrayList<Course>();
-    }
 
     /**
      *Two-argument constructor.
@@ -35,28 +19,19 @@ public class Examiner implements Serializable
      */
     public Examiner(String firstName, String examinerID)
     {
-        this.firstName = firstName;
+        this.fullName = firstName;
         this.examinerID = examinerID;
         examinerAvailability = true;
-        courses = new ArrayList<Course>();
+        courses = new ArrayList<>();
     }
 
     /**
      * Gets the examiner's first name.
      * @return the examiner's first name
      */
-    public String getFirstName()
+    public String getFullName()
     {
-        return firstName;
-    }
-
-    /**
-     * Gets the examiner's last name.
-     * @return the examiner's last name
-     */
-    public String getLastName()
-    {
-        return lastName;
+        return fullName;
     }
 
     /**
@@ -118,20 +93,13 @@ public class Examiner implements Serializable
         return courses.toArray(tempArray);
     }
 
-    /**
-     * Sets the examiner's first name.
-     * @param firstName what the examiner's first name will be set to
-     */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
 
     /**
      * Sets the examiner's last name.
-     * @param lastName what the examiner's last name will be set to
+     * @param fullName what the examiner's last name will be set to
      */
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     /**
@@ -157,7 +125,7 @@ public class Examiner implements Serializable
      */
     public Examiner copy()
     {
-        return new Examiner(firstName, lastName, examinerID);
+        return new Examiner(fullName, examinerID);
     }
 
     /**
@@ -166,7 +134,12 @@ public class Examiner implements Serializable
      */
     public String toString()
     {
-        return "Name: " + firstName + " " + lastName + ". ID: " + examinerID;
+        String str="Name: " + fullName + ". ID: " + examinerID+ ". Courses: ";
+        for (int i = 0; i < courses.size(); i++)
+        {
+            str+=courses.get(i).getCourseName() + ", ";
+        }
+        return str + " Availability: " + getExaminerAvailability();
     }
 
     /**
@@ -181,6 +154,6 @@ public class Examiner implements Serializable
             return false;
         }
         Examiner other = (Examiner) obj;
-        return firstName.equals(other.firstName) && lastName.equals(other.lastName) && examinerID.equals(examinerID);
+        return fullName.equals(other.fullName)  && examinerID.equals(other.examinerID);
     }
 }

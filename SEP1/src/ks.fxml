@@ -279,10 +279,11 @@
                               </ComboBox>
                            </children>
                         </GridPane>
-                        <Button fx:id="examinerUpdate" layoutX="86.0" layoutY="380.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="58.0" text="Update" />
-                        <Button fx:id="examinerAdd" layoutX="583.0" layoutY="379.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="54.0" text="Add" />
-                        <Button fx:id="examinerRemove" layoutX="721.0" layoutY="379.0" mnemonicParsing="false" prefHeight="32.0" text="Remove" />
+                        <Button fx:id="examinerUpdate" layoutX="86.0" layoutY="380.0" mnemonicParsing="false" onAction="#handleExaminer" prefHeight="30.0" prefWidth="58.0" text="Update" />
+                        <Button fx:id="examinerAdd" layoutX="583.0" layoutY="379.0" mnemonicParsing="false" onAction="#handleExaminer" prefHeight="32.0" prefWidth="54.0" text="Add" />
+                        <Button fx:id="examinerRemove" layoutX="721.0" layoutY="379.0" mnemonicParsing="false" onAction="#handleExaminer" prefHeight="32.0" text="Remove" />
                         <ListView fx:id="examinerList" layoutX="460.0" layoutY="49.0" prefHeight="307.0" prefWidth="458.0" />
+                        <Button fx:id="examinerAddMoreCourse" layoutX="295.0" layoutY="278.0" mnemonicParsing="false" onAction="#handleExaminer" text="Add more course" />
                      </children>
                   </AnchorPane>
                </content>

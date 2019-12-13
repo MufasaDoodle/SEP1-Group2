@@ -33,12 +33,13 @@ public class Controller
   @FXML private RadioButton examinerUnavailableExaminers;
   @FXML private TextField examinerName;
   @FXML private TextField examinerID;
-  @FXML private ComboBox<String> examinerCourse;
+  @FXML private ComboBox<Course> examinerCourse;
   @FXML private ComboBox<String> examinerAvailability;
   @FXML private Button examinerUpdate;
-  @FXML private ListView examinerList;
+  @FXML private ListView<Examiner> examinerList;
   @FXML private Button examinerAdd;
   @FXML private Button examinerRemove;
+  @FXML private Button examinerAddMoreCourse;
 
   @FXML private ListView<Course> courseList;
   @FXML private Button courseAdd;
@@ -85,7 +86,7 @@ public class Controller
     CourseList courses1 = adapter.getAllCourses();
     for (int i = 0; i < courses1.getSize(); i++)
     {
-      examinerCourse.getItems().add(courses1.getCourse(i).getCourseName());
+      examinerCourse.getItems().add(courses1.getCourse(i));
     }
     examinerCourse.getSelectionModel().selectFirst();
 
@@ -96,10 +97,19 @@ public class Controller
       courseList.getItems().add(courses.getCourse(i));
     }
 
+    ExaminerList examiners = new ExaminerList();
+    examiners = adapter.getAllExaminers();
+    for (int i = 0; i < examiners.getSize(); i++)
+    {
+      examinerList.getItems().add(examiners.getExaminer(i));
+    }
+
     courseList.getSelectionModel().selectedItemProperty()
         .addListener((new MyListListener()));
     roomList.getSelectionModel().selectedItemProperty()
         .addListener((new MyListListenerRoom()));
+    examinerList.getSelectionModel().selectedItemProperty()
+        .addListener(new MyListListenerExaminer());
   }
 
   public void handleRoom(ActionEvent e)
@@ -259,24 +269,93 @@ public class Controller
       //get un examiners  by day
     }
 
-    if (e.getSource() == courseAdd)
+    if (e.getSource() == examinerAdd)
     {
       if (!(examinerName.getText().equals("")) && !(examinerID.getText()
           .equals("")))
       {
-        Examiner examiner = new Examiner(examinerName.getText(), examinerID.getText());
-        examiner.addCourse();
-        
-        adapter.addCourse(course);
-        courseList.getItems().add(course);
-        courseName.setText("");
-        courseNumberOfStudents.setText("");
+        Examiner examiner = new Examiner(examinerName.getText(),
+            examinerID.getText());
+        examiner
+            .addCourse(examinerCourse.getSelectionModel().getSelectedItem());
+
+        adapter.addExaminer(examiner);
+        examinerList.getItems().add(examiner);
+        examinerName.setText("");
+        examinerID.setText("");
       }
       else
       {
         JOptionPane.showMessageDialog(null, "Fill in all fields!", "Error",
             JOptionPane.WARNING_MESSAGE);
       }
+    }
+
+    if (e.getSource() == examinerRemove)
+    {
+      adapter.removeExaminerByIndex(
+          examinerList.getSelectionModel().getSelectedIndex());
+      examinerList.getItems()
+          .remove(examinerList.getSelectionModel().getSelectedIndex());
+    }
+
+    if (e.getSource() == examinerUpdate)
+    {
+      examinerName.setText(examinerName.getText());
+      examinerID.setText(examinerID.getText());
+
+      Examiner examiner = examinerList.getSelectionModel().getSelectedItem();
+
+      if (examinerAvailability.getSelectionModel().getSelectedItem()
+          .equals("Available"))
+      {
+        examiner.setAvailable(true);
+      }
+      else
+      {
+        examiner.setAvailable(false);
+      }
+
+       /*examiner.addCourse(examinerCourse.getSelectionModel().getSelectedItem());*/
+
+
+
+      adapter.changeExaminerInfo(examiner,
+          examinerList.getSelectionModel().getSelectedIndex());
+      examinerList.getItems().clear();
+      ExaminerList examiners = new ExaminerList();
+      examiners = adapter.getAllExaminers();
+      for (int i = 0; i < examiners.getSize(); i++)
+      {
+        examinerList.getItems().add(examiners.getExaminer(i));
+      }
+      examinerName.setText("");
+      examinerID.setText("");
+      examinerCourse.getSelectionModel().selectFirst();
+      examinerAvailability.getSelectionModel().selectFirst();
+    }
+
+    if (e.getSource() == examinerAddMoreCourse)
+    {
+      Examiner selectedExaminer = examinerList.getSelectionModel()
+          .getSelectedItem();
+
+      selectedExaminer.addCourse(examinerCourse.getSelectionModel().getSelectedItem());
+      if(examinerCourse.getSelectionModel().getSelectedItem().equals(selectedExaminer))
+      {
+        JOptionPane.showMessageDialog(null, "Fill in all fields!", "Error",
+            JOptionPane.WARNING_MESSAGE);
+      }
+
+      examinerList.getItems().add(selectedExaminer);
+      examinerList.getItems().remove(examinerList.getSelectionModel().getSelectedIndex());
+      adapter.removeExaminerByIndex(examinerList.getSelectionModel().getSelectedIndex());
+      adapter.addExaminer(selectedExaminer);
+
+      examinerName.setText("");
+      examinerID.setText("");
+      examinerCourse.getSelectionModel().selectFirst();
+      examinerAvailability.getSelectionModel().selectFirst();
     }
 
   }
@@ -295,6 +374,13 @@ public class Controller
         courseList.getItems().add(course);
         courseName.setText("");
         courseNumberOfStudents.setText("");
+        examinerCourse.getItems().clear();
+        CourseList courses1 = adapter.getAllCourses();
+        for (int i = 0; i < courses1.getSize(); i++)
+        {
+          examinerCourse.getItems().add(courses1.getCourse(i));
+        }
+        examinerCourse.getSelectionModel().selectFirst();
       }
       else
       {
@@ -309,6 +395,14 @@ public class Controller
           courseList.getSelectionModel().getSelectedIndex());
       courseList.getItems()
           .remove(courseList.getSelectionModel().getSelectedIndex());
+
+      examinerCourse.getItems().clear();
+      CourseList courses1 = adapter.getAllCourses();
+      for (int i = 0; i < courses1.getSize(); i++)
+      {
+        examinerCourse.getItems().add(courses1.getCourse(i));
+      }
+      examinerCourse.getSelectionModel().selectFirst();
     }
 
     if (e.getSource() == courseList.getSelectionModel().getSelectedItem())
@@ -380,6 +474,24 @@ public class Controller
         {
           roomAvailability.getSelectionModel().selectLast();
         }
+      }
+    }
+  }
+
+  private class MyListListenerExaminer implements ChangeListener<Examiner>
+  {
+    public void changed(ObservableValue<? extends Examiner> examiners,
+        Examiner oldExaminer, Examiner newExaminer)
+    {
+      Examiner temp = examinerList.getSelectionModel().getSelectedItem();
+      int index = examinerList.getSelectionModel().getSelectedIndex();
+
+      if (temp != null)
+      {
+        examinerName.setText(temp.getFullName());
+        examinerID.setText(temp.getExaminerID());
+        examinerCourse.getSelectionModel().select(temp.getCourse(index));
+        examinerAvailability.getSelectionModel().getSelectedItem();
       }
     }
   }
