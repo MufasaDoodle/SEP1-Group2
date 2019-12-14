@@ -95,6 +95,52 @@ public class ExaminerList implements Serializable
     return examiner;
   }
 
+  //TODO astah
+  public Examiner[] getAllAvailableExaminers(int day, ExamList exams)
+  {
+    ArrayList<Examiner> examinerResult = new ArrayList<>();
+
+    for (int i = 0; i < examiners.size(); i++)
+    {
+      examinerResult.add(examiners.get(i));
+    }
+
+    for (int i = 0; i < exams.getSize(); i++)
+    {
+      if(exams.getAllExams()[i].getDate().getDay()==day)
+      {
+        for (int j = 0; j < exams.getAllExams()[i].getAllExaminers().length; j++)
+        {
+          examinerResult.remove(exams.getAllExams()[i].getAllExaminers()[j]);
+        }
+      }
+    }
+
+    Examiner[] returnArray = new Examiner[examinerResult.size()];
+    return examinerResult.toArray(returnArray);
+  }
+
+  //TODO astah
+  public Examiner[] getAllUnavailableExaminers(int day, ExamList exams)
+  {
+    ArrayList<Examiner> examinerResult = new ArrayList<>();
+
+    for (int i = 0; i < examiners.size(); i++)
+    {
+      examinerResult.add(examiners.get(i));
+    }
+
+    Examiner[] available = getAllAvailableExaminers(day, exams);
+
+    for (int i = 0; i < available.length; i++)
+    {
+      examinerResult.remove(available[i]);
+    }
+
+    Examiner[] returnArray = new Examiner[examinerResult.size()];
+    return examinerResult.toArray(returnArray);
+  }
+
   /**
    * Gets an Examiner object with the given ID from the list.
    *

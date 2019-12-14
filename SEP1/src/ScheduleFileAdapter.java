@@ -186,6 +186,64 @@ public class ScheduleFileAdapter
     return returnExaminer;
   }
 
+  //TODO astah
+  public ExaminerList getAllAvailableExaminers(int day)
+  {
+    ExaminerList examiners = new ExaminerList();
+    Examiner[] tempArray;
+
+    try
+    {
+      ExaminerList result = (ExaminerList) mfio.readObjectFromFile(examinerFile);
+      ExamList exams = (ExamList) mfio.readObjectFromFile(examFile);
+      tempArray = result.getAllAvailableExaminers(day, exams);
+      examiners = (ExaminerList) Arrays.asList(tempArray);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+
+    return examiners;
+  }
+
+  //TODO astah
+  public ExaminerList getAllUnavailableExaminers(int day)
+  {
+    ExaminerList examiners = null;
+    Examiner[] tempArray;
+
+    try
+    {
+      ExaminerList result = (ExaminerList) mfio.readObjectFromFile(examinerFile);
+      ExamList exams = (ExamList) mfio.readObjectFromFile(examFile);
+      tempArray = result.getAllUnavailableExaminers(day, exams);
+      examiners = (ExaminerList) Arrays.asList(tempArray);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+
+    return examiners;
+  }
+
   public void saveExaminers(ExaminerList examinerList)
   {
     try
