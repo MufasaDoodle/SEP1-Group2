@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * A class containing the specific details about a room
@@ -11,6 +12,7 @@ public class Room implements Serializable
   private boolean hasProjector;
   private boolean hasHDMI;
   private boolean hasVGA;
+  private ArrayList<Integer> reservedDays;
 
   /**
    * Two-argument constructor initializing the room with room's size and room's number.
@@ -26,6 +28,7 @@ public class Room implements Serializable
     hasHDMI = false;
     hasVGA = false;
     roomAvailability = true;
+    reservedDays = new ArrayList<>();
   }
 
   /**
@@ -61,17 +64,21 @@ public class Room implements Serializable
 
   /**
    * Give back the room number
+   *
    * @return String with the room's number
    */
-  public String getRoomNumber(){
+  public String getRoomNumber()
+  {
     return roomNumber;
   }
 
   /**
    * Give back the room size
+   *
    * @return an int with size of the room
    */
-  public int getRoomSize(){
+  public int getRoomSize()
+  {
     return roomSize;
   }
 
@@ -115,6 +122,11 @@ public class Room implements Serializable
     return roomAvailability;
   }
 
+  public ArrayList<Integer> getReservedDays()
+  {
+    return reservedDays;
+  }
+
   /**
    * Replaces the room with its new size and number
    *
@@ -125,6 +137,35 @@ public class Room implements Serializable
   {
     this.roomSize = roomSize;
     this.roomNumber = roomNumber;
+  }
+
+  //TODO astah
+  public void addReservation(Integer day)
+  {
+    if (day != null)
+    {
+      for (int i = 0; i < reservedDays.size(); i++)
+      {
+        if (!reservedDays.get(i).equals(day))
+        {
+          reservedDays.add(day);
+        }
+      }
+    }
+  }
+
+  public void removeReservation(Integer day)
+  {
+    if (day != null)
+    {
+      for (int i = 0; i < reservedDays.size(); i++)
+      {
+        if (reservedDays.get(i).equals(day))
+        {
+          reservedDays.remove(day);
+        }
+      }
+    }
   }
 
   /**
@@ -186,6 +227,7 @@ public class Room implements Serializable
 
   /**
    * It shows all the details of a room
+   *
    * @return a String with all the details of the room
    */
   public String toString()

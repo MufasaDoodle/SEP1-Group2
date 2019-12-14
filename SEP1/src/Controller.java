@@ -520,6 +520,7 @@ public class Controller
 
       adapter.addExam(exam);
       examList.getItems().add(exam);
+      adapter.setReservation(room, day);
 
     }
 
@@ -529,6 +530,8 @@ public class Controller
           .removeExamByIndex(examList.getSelectionModel().getSelectedIndex());
       examList.getItems()
           .remove(examList.getSelectionModel().getSelectedIndex());
+
+      //todo need to remove the reserved day from the room when you remove an exam
     }
   }
 
