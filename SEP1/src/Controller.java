@@ -198,8 +198,8 @@ public class Controller
 
     if (e.getSource() == roomUpdate)
     {
-      roomRoomSize.setText(roomRoomSize.getText());
-      roomRoomNumber.setText(roomRoomNumber.getText());
+      /*roomRoomSize.setText(roomRoomSize.getText());
+      roomRoomNumber.setText(roomRoomNumber.getText());*/
       roomAvailability.getSelectionModel().getSelectedItem();
 
       boolean projector = false;
@@ -301,26 +301,23 @@ public class Controller
 
     if (e.getSource() == examinerUpdate)
     {
-      examinerName.setText(examinerName.getText());
-      examinerID.setText(examinerID.getText());
+      Examiner selectedExaminer = examinerList.getSelectionModel()
+          .getSelectedItem();
 
-      Examiner examiner = examinerList.getSelectionModel().getSelectedItem();
+      selectedExaminer.setFullName(examinerName.getText());
+      selectedExaminer.setExaminerID(examinerID.getText());
 
       if (examinerAvailability.getSelectionModel().getSelectedItem()
           .equals("Available"))
       {
-        examiner.setAvailable(true);
+        selectedExaminer.setAvailable(true);
       }
       else
       {
-        examiner.setAvailable(false);
+        selectedExaminer.setAvailable(false);
       }
 
-       /*examiner.addCourse(examinerCourse.getSelectionModel().getSelectedItem());*/
-
-
-
-      adapter.changeExaminerInfo(examiner,
+      adapter.changeExaminerInfo(selectedExaminer,
           examinerList.getSelectionModel().getSelectedIndex());
       examinerList.getItems().clear();
       ExaminerList examiners = new ExaminerList();
@@ -340,16 +337,20 @@ public class Controller
       Examiner selectedExaminer = examinerList.getSelectionModel()
           .getSelectedItem();
 
-      selectedExaminer.addCourse(examinerCourse.getSelectionModel().getSelectedItem());
-      if(examinerCourse.getSelectionModel().getSelectedItem().equals(selectedExaminer))
+      selectedExaminer
+          .addCourse(examinerCourse.getSelectionModel().getSelectedItem());
+      if (examinerCourse.getSelectionModel().getSelectedItem()
+          .equals(selectedExaminer))
       {
         JOptionPane.showMessageDialog(null, "Fill in all fields!", "Error",
             JOptionPane.WARNING_MESSAGE);
       }
 
       examinerList.getItems().add(selectedExaminer);
-      examinerList.getItems().remove(examinerList.getSelectionModel().getSelectedIndex());
-      adapter.removeExaminerByIndex(examinerList.getSelectionModel().getSelectedIndex());
+      examinerList.getItems()
+          .remove(examinerList.getSelectionModel().getSelectedIndex());
+      adapter.removeExaminerByIndex(
+          examinerList.getSelectionModel().getSelectedIndex());
       adapter.addExaminer(selectedExaminer);
 
       examinerName.setText("");
@@ -491,7 +492,16 @@ public class Controller
         examinerName.setText(temp.getFullName());
         examinerID.setText(temp.getExaminerID());
         examinerCourse.getSelectionModel().select(temp.getCourse(index));
-        examinerAvailability.getSelectionModel().getSelectedItem();
+        if (examinerList.getSelectionModel().getSelectedItem()
+            .getExaminerAvailability())
+        {
+          examinerAvailability.getSelectionModel().selectFirst();
+        }
+        else
+        {
+          examinerAvailability.getSelectionModel().selectLast();
+        }
+
       }
     }
   }
