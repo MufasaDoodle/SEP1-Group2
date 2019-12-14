@@ -159,9 +159,7 @@ public class Controller
     if (e.getSource() == roomAdd)
     {
       if (!(roomRoomSize.getText().equals("")) && !(roomRoomNumber.getText()
-          .equals("")) && (
-          (roomProjector.isSelected() && (roomHDMI.isSelected() || roomVGA
-              .isSelected())) || !(roomProjector.isSelected())))
+          .equals("")))
       {
         Room room = new Room(Integer.parseInt(roomRoomSize.getText()),
             roomRoomNumber.getText());
@@ -208,14 +206,14 @@ public class Controller
       if (roomProjector.isSelected())
       {
         projector = true;
-        if (roomHDMI.isSelected())
-        {
-          HDMI = true;
-        }
-        else if (roomVGA.isSelected())
-        {
-          VGA = true;
-        }
+      }
+      if (roomHDMI.isSelected())
+      {
+        HDMI = true;
+      }
+      if (roomVGA.isSelected())
+      {
+        VGA = true;
       }
 
       boolean availability;
@@ -475,6 +473,23 @@ public class Controller
         {
           roomAvailability.getSelectionModel().selectLast();
         }
+
+        roomVGA.setSelected(false);
+        roomHDMI.setSelected(false);
+        roomProjector.setSelected(false);
+
+        if (roomList.getSelectionModel().getSelectedItem().hasProjector())
+        {
+          roomProjector.fire();
+        }
+        if (roomList.getSelectionModel().getSelectedItem().hasHDMI())
+        {
+          roomHDMI.fire();
+        }
+        if (roomList.getSelectionModel().getSelectedItem().hasVGA())
+        {
+          roomVGA.fire();
+        }
       }
     }
   }
@@ -485,13 +500,13 @@ public class Controller
         Examiner oldExaminer, Examiner newExaminer)
     {
       Examiner temp = examinerList.getSelectionModel().getSelectedItem();
-      int index = examinerList.getSelectionModel().getSelectedIndex();
 
       if (temp != null)
       {
         examinerName.setText(temp.getFullName());
         examinerID.setText(temp.getExaminerID());
-        examinerCourse.getSelectionModel().select(temp.getCourse(index));
+        examinerCourse.getSelectionModel().select(temp.getCourse(0));
+
         if (examinerList.getSelectionModel().getSelectedItem()
             .getExaminerAvailability())
         {
