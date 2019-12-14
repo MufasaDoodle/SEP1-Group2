@@ -87,8 +87,8 @@ public class Course implements Serializable
    */
   public String toString()
   {
-    return "Course name: " + courseName + ", course type: " + courseType
-        + ", number of students: " + numberOfStudents;
+    return  courseName + " (" + courseType
+        + ") " + numberOfStudents;
   }
 
   /**

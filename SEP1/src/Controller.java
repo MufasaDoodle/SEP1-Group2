@@ -481,6 +481,14 @@ public class Controller
       examList.getItems().add(exam);
 
     }
+
+    if (e.getSource() == examRemove)
+    {
+      adapter.removeExamByIndex(
+          examList.getSelectionModel().getSelectedIndex());
+      examList.getItems()
+          .remove(examList.getSelectionModel().getSelectedIndex());
+    }
   }
 
   private class MyListListener implements ChangeListener<Course>

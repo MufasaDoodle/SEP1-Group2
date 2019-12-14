@@ -227,18 +227,48 @@ public class Exam implements Serializable
    */
   public String toString()
   {
-    if (examiners == null)
+    if (coExaminer == null)
     {
-
-      return "Course(s): " + courses.toString() + ", Date: " + date + ", room: "
-          + room.toString() + ", duration: " + duration + ", examiner(s): "
-          + examiners.toString();
+      if (courses.get(0).getCourseType().equals("Written"))
+      {
+        return "January: " + date + "     " + duration + "                   "
+            + courses.get(0).getCourseName() + "(" + courses.get(0)
+            .getCourseType() + ")" + "                                 "
+            + room.getRoomNumber() + "                                               " + examiners.get(0)
+            .getFullName() + "                      ";
+      }
+      else
+      {
+        return "January: " + date + "     " + duration + "                   "
+            + courses.get(0).getCourseName() + "(" + courses.get(0)
+            .getCourseType() + ")"
+            + "                                       " + room
+            .getRoomNumber() + "                                               " + examiners.get(0)
+            .getFullName() + "                      ";
+      }
 
     }
-    return date + "         " + duration + "        " + courses.get(0)
-        .getCourseName() + "(" + courses.get(0).getCourseType() + ")"
-        + "       " + room.getRoomNumber() + "       " + examiners.get(0)
-        .getFullName() + "      " + coExaminer;
+    else
+    {
+      if (courses.get(0).getCourseType().equals("Written"))
+      {
+        return "January: " + date + "     " + duration + "                   "
+            + courses.get(0).getCourseName() + "(" + courses.get(0)
+            .getCourseType() + ")" + "                                 "
+            + room.getRoomNumber() + "                                               " + examiners.get(0)
+            .getFullName() + "                                            " + coExaminer;
+      }
+      else
+      {
+        return "January: " + date + "     " + duration + "                   "
+            + courses.get(0).getCourseName() + "(" + courses.get(0)
+            .getCourseType() + ")"
+            + "                                       " + room
+            .getRoomNumber() + "                                               " + examiners.get(0)
+            .getFullName() + "                                            " + coExaminer;
+      }
+    }
+
   }
 
   /**
