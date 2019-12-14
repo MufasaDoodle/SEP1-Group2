@@ -242,7 +242,6 @@ public class ExamList implements Serializable
     return temp.toArray(returnArray);
   }
 
-
   public int getSize()
   {
     return exams.size();

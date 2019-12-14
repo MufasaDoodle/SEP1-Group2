@@ -18,6 +18,7 @@ public class Exam implements Serializable
   private String examType;
 
   //TODO fix javadocs params (add examType)
+
   /**
    * A constructor with four args that initialises things
    *
@@ -26,7 +27,8 @@ public class Exam implements Serializable
    * @param duration the duration of the exam
    * @param course   the course of the exam
    */
-  public Exam(MyDate date, Room room, int duration, Course course, String examType)
+  public Exam(MyDate date, Room room, int duration, Course course,
+      String examType)
   {
     this.date = date;
     this.duration = duration;
@@ -43,7 +45,8 @@ public class Exam implements Serializable
    * @param duration the duration of the exam
    * @param courses  the courses that are part of the exam
    */
-  public Exam(MyDate date, Room room, int duration, Course[] courses, String examType)
+  public Exam(MyDate date, Room room, int duration, Course[] courses,
+      String examType)
   {
     this.date = date;
     this.duration = duration;
@@ -144,6 +147,19 @@ public class Exam implements Serializable
     //TODO check if examiner already has an exam on same date
     // one way to do this, is to have an examList, that the schedule checks
     // through and see if two exams has the same date and same examiner
+  }
+
+  public void addExaminerByID(String ID, ExaminerList examinerList)
+  {
+    Examiner[] examinerArray = examinerList.getAllExaminers();
+
+    for (int i = 0; i < examinerArray.length; i++)
+    {
+      if (examinerArray[i].getExaminerID().equals(ID))
+      {
+        examiners.add(examinerList.getByID(ID));
+      }
+    }
   }
 
   /**
