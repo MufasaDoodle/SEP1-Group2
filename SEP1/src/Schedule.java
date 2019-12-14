@@ -70,16 +70,20 @@ public class Schedule
   }
 
   //TODO javadocs here
-  public Room[] getAvailableRooms(int day)
+  /*public Room[] getAvailableRooms(int day)
   {
     return roomList.getAllAvailableRooms(day, exams);
   }
 
+   */
+
   //TODO javadocs here
-  public Room[] getUnavailableRooms(int day)
+  /*public Room[] getUnavailableRooms(int day)
   {
     return roomList.getAllUnavailableRooms(day, exams);
   }
+
+   */
   /**
    * Sets all the fields for schedule.
    *

@@ -85,7 +85,6 @@ public class Controller
     courseExamInfo.getItems().add("Oral");
     courseExamInfo.getSelectionModel().selectFirst();
 
-
     CourseList courses1 = adapter.getAllCourses();
     for (int i = 0; i < courses1.getSize(); i++)
     {
@@ -159,6 +158,7 @@ public class Controller
       roomList.getItems().clear();
       RoomList rooms = adapter.getAllUnavailableRooms(
           roomDay.getSelectionModel().getSelectedItem());
+
       for (int i = 0; i < rooms.getSize(); i++)
       {
         roomList.getItems().add(rooms.getRoom(i));
@@ -468,14 +468,12 @@ public class Controller
 
       if (examCoExaminer.getText().equals(""))
       {
-         exam = new Exam(day, duration, course, room, examiner);
+        exam = new Exam(day, duration, course, room, examiner);
       }
       else
       {
-         exam = new Exam(day, duration, course, room, examiner, coExaminer);
+        exam = new Exam(day, duration, course, room, examiner, coExaminer);
       }
-
-
 
       adapter.addExam(exam);
       examList.getItems().add(exam);
@@ -484,8 +482,8 @@ public class Controller
 
     if (e.getSource() == examRemove)
     {
-      adapter.removeExamByIndex(
-          examList.getSelectionModel().getSelectedIndex());
+      adapter
+          .removeExamByIndex(examList.getSelectionModel().getSelectedIndex());
       examList.getItems()
           .remove(examList.getSelectionModel().getSelectedIndex());
     }
@@ -552,30 +550,30 @@ public class Controller
   }
 
   private class MyListListenerExaminer implements ChangeListener<Examiner>
-{
-  public void changed(ObservableValue<? extends Examiner> examiners,
-      Examiner oldExaminer, Examiner newExaminer)
   {
-    Examiner temp = examinerList.getSelectionModel().getSelectedItem();
-
-    if (temp != null)
+    public void changed(ObservableValue<? extends Examiner> examiners,
+        Examiner oldExaminer, Examiner newExaminer)
     {
-      examinerName.setText(temp.getFullName());
-      examinerID.setText(temp.getExaminerID());
-      examinerCourse.getSelectionModel().select(temp.getCourse(0));
+      Examiner temp = examinerList.getSelectionModel().getSelectedItem();
 
-      if (examinerList.getSelectionModel().getSelectedItem()
-          .getExaminerAvailability())
+      if (temp != null)
       {
-        examinerAvailability.getSelectionModel().selectFirst();
-      }
-      else
-      {
-        examinerAvailability.getSelectionModel().selectLast();
-      }
+        examinerName.setText(temp.getFullName());
+        examinerID.setText(temp.getExaminerID());
+        examinerCourse.getSelectionModel().select(temp.getCourse(0));
 
+        if (examinerList.getSelectionModel().getSelectedItem()
+            .getExaminerAvailability())
+        {
+          examinerAvailability.getSelectionModel().selectFirst();
+        }
+        else
+        {
+          examinerAvailability.getSelectionModel().selectLast();
+        }
+
+      }
     }
   }
-}
 
 }

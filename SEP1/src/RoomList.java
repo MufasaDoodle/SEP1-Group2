@@ -115,7 +115,11 @@ public class RoomList implements Serializable
    */
   public Room[] getAllRooms()
   {
-    return (Room[]) rooms.toArray();
+    ArrayList<Room> temp = new ArrayList<>();
+    temp = rooms;
+    Room[] returnArray = temp.toArray(new Room[temp.size()]);
+
+    return returnArray;
   }
 
   /**
@@ -123,7 +127,7 @@ public class RoomList implements Serializable
    *
    * @return all available rooms
    */
-  public Room[] getAllAvailableRooms(int day, ExamList exams)
+  public RoomList getAllAvailableRooms(int day, ExamList exams)
   {
     ArrayList<Room> resultRooms = new ArrayList<>();
 
@@ -140,24 +144,17 @@ public class RoomList implements Serializable
       }
     }
 
-    /*
-    for (int i = 0; i < rooms.size(); i++)
+    RoomList returnList = new RoomList();
+
+    for (int i = 0; i < resultRooms.size(); i++)
     {
-      for (int j = 0; j < exams.getAllExams().length; j++)
-      {
-        if (exams.getAllExams()[j].getDate().getDay() == day && rooms.get(i)
-            .getRoomAvailability())
-        {
-          resultRooms.add(rooms.get(i));
-          break;
-        }
-      }
+      returnList.addRoom(resultRooms.get(i));
     }
-*/
-    //TODO test this shit when the gui is here. if it doesnt work, try switching
-    // the rooms and exams in the loops
-    Room[] returnArray = new Room[resultRooms.size()];
-    return resultRooms.toArray(returnArray);
+
+    return returnList;
+
+    //Room[] returnArray = new Room[resultRooms.size()];
+    //return resultRooms.toArray(returnArray);
   }
 
   public int getSize()
@@ -165,7 +162,7 @@ public class RoomList implements Serializable
     return rooms.size();
   }
 
-  public Room[] getAllUnavailableRooms(int day, ExamList exams)
+  public RoomList getAllUnavailableRooms(int day, ExamList exams)
   {
     ArrayList<Room> resultRooms = new ArrayList<>();
 
@@ -174,32 +171,24 @@ public class RoomList implements Serializable
       resultRooms.add(rooms.get(i));
     }
 
-    Room[] available = getAllAvailableRooms(day, exams);
+    RoomList available = getAllAvailableRooms(day, exams);
 
-    for (int i = 0; i < available.length; i++)
+    for (int i = 0; i < available.getAllRooms().length; i++)
     {
-      resultRooms.remove(available[i]);
+      resultRooms.remove(available.getAllRooms()[i]);
     }
-    /*
-    for (int i = 0; i < rooms.size(); i++)
+
+    RoomList returnList = new RoomList();
+
+    for (int i = 0; i < resultRooms.size(); i++)
     {
-      for (int j = 0; j < exams.getAllExams().length; j++)
-      {
-        if (exams.getAllExams()[j].getDate().getDay() == day && !rooms.get(i)
-            .getRoomAvailability())
-        {
-          resultRooms.add(rooms.get(i));
-          break;
-        }
-      }
-    }*/
+      returnList.addRoom(resultRooms.get(i));
+    }
 
-    //TODO test this shit when the gui is here. if it doesnt work, try switching
-    // the rooms and exams in the loops
+    return returnList;
 
-
-    Room[] returnArray = new Room[resultRooms.size()];
-    return resultRooms.toArray(returnArray);
+    //Room[] returnArray = new Room[resultRooms.size()];
+    //return resultRooms.toArray(returnArray);
   }
 
   /**
