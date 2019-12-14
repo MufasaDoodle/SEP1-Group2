@@ -107,7 +107,7 @@ public class ExaminerList implements Serializable
 
     for (int i = 0; i < exams.getSize(); i++)
     {
-      if(exams.getAllExams()[i].getDate().getDay()==day)
+      if(exams.getAllExams()[i].getDate()==day)
       {
         for (int j = 0; j < exams.getAllExams()[i].getAllExaminers().length; j++)
         {

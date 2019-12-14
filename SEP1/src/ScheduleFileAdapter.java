@@ -283,7 +283,7 @@ public class ScheduleFileAdapter
     return exams;
   }
 
-  public ExamList getAllExamsInOrder()
+  /*public ExamList getAllExamsInOrder()
   {
     ExamList exams = new ExamList();
     Exam[] tempArray;
@@ -308,7 +308,7 @@ public class ScheduleFileAdapter
     }
     return exams;
   }
-
+*/
   public ExamList getAllExamsOnDay(int day)
   {
     ExamList exams = new ExamList();
@@ -413,7 +413,7 @@ public class ScheduleFileAdapter
     return exams;
   }
 
-  public ExamList getAllExamsByType(String examType)
+ /* public ExamList getAllExamsByType(String examType)
   {
     ExamList exams = new ExamList();
     Exam[] tempArray;
@@ -438,8 +438,8 @@ public class ScheduleFileAdapter
     }
     return exams;
   }
-
-  public int getExamDuration(String courseName)
+*/
+  /*public int getExamDuration(String courseName)
   {
     ExamList exams = new ExamList();
     int returnInt = 0;
@@ -463,7 +463,7 @@ public class ScheduleFileAdapter
     }
     return returnInt;
   }
-
+*/
   public void saveExams(ExamList examList)
   {
     try
@@ -502,6 +502,8 @@ public class ScheduleFileAdapter
     }
     return rooms;
   }
+
+
 
   public Room getRoomByNumber(String roomNumber)
   {
@@ -1249,6 +1251,29 @@ public class ScheduleFileAdapter
       System.out.println("Class Not Found");
     }
     saveRooms(result); //to save, right????
+  }
+
+  public void addExam(Exam exam)
+  {
+    ExamList result = new ExamList();
+    try
+    {
+      result = (ExamList) mfio.readObjectFromFile(examFile);
+      result.addExam(exam);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+    saveExams(result); //to save, right????
   }
 
   public void addCourse(Course course)

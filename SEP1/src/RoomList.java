@@ -134,7 +134,7 @@ public class RoomList implements Serializable
 
     for (int i = 0; i < exams.getSize(); i++)
     {
-      if(exams.getAllExams()[i].getDate().getDay()==day)
+      if(exams.getAllExams()[i].getDate()==day)
       {
         resultRooms.remove(exams.getAllExams()[i].getRoom());
       }

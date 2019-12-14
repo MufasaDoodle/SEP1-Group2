@@ -1,7 +1,5 @@
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 
 /**
  * @author Christian Sejer
@@ -10,60 +8,42 @@ import java.util.Comparator;
  */
 public class Exam implements Serializable
 {
-  private int duration;
-  private MyDate date;
+  private int date;
+  private String duration;
   private ArrayList<Course> courses = new ArrayList<>();
   private Room room;
   private ArrayList<Examiner> examiners = new ArrayList<>();
-  private String examType;
+  private String coExaminer;
 
   //TODO fix javadocs params (add examType)
 
-  /**
-   * A constructor with four args that initialises things
-   *
-   * @param date     the date of the exam
-   * @param room     the room of the exam
-   * @param duration the duration of the exam
-   * @param course   the course of the exam
-   */
-  public Exam(MyDate date, Room room, int duration, Course course,
-      String examType)
+  public Exam(int date, String duration, Course course, Room room,
+      Examiner examiner, String coExaminer)
   {
     this.date = date;
     this.duration = duration;
-    this.room = room;
+    courses = new ArrayList<>();
     this.courses.add(course);
-    this.examType = examType;
+    this.room = room;
+    examiners = new ArrayList<>();
+    this.examiners.add(examiner);
+    this.coExaminer = coExaminer;
   }
 
-  /**
-   * A constructor with four args that initialises things
-   *
-   * @param date     the date of the exam
-   * @param room     the room of the exam
-   * @param duration the duration of the exam
-   * @param courses  the courses that are part of the exam
-   */
-  public Exam(MyDate date, Room room, int duration, Course[] courses,
-      String examType)
+  public Exam(int date, String duration, Course course, Room room,
+      Examiner examiner)
   {
     this.date = date;
     this.duration = duration;
+    courses = new ArrayList<>();
+    this.courses.add(course);
     this.room = room;
-    this.courses.addAll(Arrays.asList(courses));
-    this.examType = examType;
+    examiners = new ArrayList<>();
+    this.examiners.add(examiner);
   }
-
+/*
   /**
-   * a five arg constructor that initialises relevant fields
-   *
-   * @param date      the date of the exam
-   * @param room      the room of the exam
-   * @param duration  the duration of the exam
-   * @param courses   the courses that are part of the exam
-   * @param examiners the examiners(Array) that are part of the exam
-   */
+
   public Exam(MyDate date, Room room, int duration, Course[] courses,
       Examiner[] examiners, String examType)
   {
@@ -75,15 +55,7 @@ public class Exam implements Serializable
     this.examType = examType;
   }
 
-  /**
-   * a five arg constructor that initialises relevant fields
-   *
-   * @param date      the date of the exam
-   * @param room      the room of the exam
-   * @param duration  the duration of the exam
-   * @param courses   the courses that are part of the exam
-   * @param examiners the examiners (arrayList) that are part of the exam
-   */
+
   public Exam(MyDate date, Room room, int duration, Course[] courses,
       ArrayList<Examiner> examiners, String examType)
   {
@@ -94,33 +66,14 @@ public class Exam implements Serializable
     this.examiners = examiners;
     this.examType = examType;
   }
-
-  public void setExamType(String examType)
-  {
-    this.examType = examType;
-  }
-
-  public String getExamType()
-  {
-    return examType;
-  }
-
-  /**
-   * gets the duration
-   *
-   * @return duration of exam
-   */
-  public int getDuration()
-  {
-    return duration;
-  }
+  */
 
   /**
    * sets the duration of the exam
    *
    * @param duration duration to be set
    */
-  public void setDuration(int duration)
+  public void setDuration(String duration)
   {
     this.duration = duration;
   }
@@ -130,7 +83,7 @@ public class Exam implements Serializable
    *
    * @return the date of the exam
    */
-  public MyDate getDate()
+  public int getDate()
   {
     return date;
   }
@@ -255,17 +208,17 @@ public class Exam implements Serializable
   }
 
   //TODO javadocs
-  public static Comparator<Exam> examDayNumber = new Comparator<Exam>()
+  /*public static Comparator<Exam> examDayNumber = new Comparator<Exam>()
   {
     public int compare(Exam e1, Exam e2)
     {
       int examNr1 = e1.getDate().getDay();
       int examNr2 = e2.getDate().getDay();
 
-      /*For ascending order*/
+      For ascending order
       return examNr1 - examNr2;
     }
-  };
+  };*/
 
   /**
    * a tostring method that shows all exam info
@@ -276,12 +229,16 @@ public class Exam implements Serializable
   {
     if (examiners == null)
     {
-      return "Course(s): " + courses.toString() + ", Date: " + date.toString()
-          + ", room: " + room.toString() + ", duration: " + duration;
+
+      return "Course(s): " + courses.toString() + ", Date: " + date + ", room: "
+          + room.toString() + ", duration: " + duration + ", examiner(s): "
+          + examiners.toString();
+
     }
-    return "Course(s): " + courses.toString() + ", Date: " + date.toString()
-        + ", room: " + room.toString() + ", duration: " + duration
-        + ", examiner(s): " + examiners.toString();
+    return date + "         " + duration + "        " + courses.get(0)
+        .getCourseName() + "(" + courses.get(0).getCourseType() + ")"
+        + "       " + room.getRoomNumber() + "       " + examiners.get(0)
+        .getFullName() + "      " + coExaminer;
   }
 
   /**
@@ -299,7 +256,7 @@ public class Exam implements Serializable
 
     Exam other = (Exam) obj;
 
-    if (date.equals(other.getDate()) && room.getRoomNumber()
+    if (date == other.date && room.getRoomNumber()
         .equals(other.getRoom().getRoomNumber()))
     {
       return true;

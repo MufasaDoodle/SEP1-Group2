@@ -105,7 +105,7 @@ public class ExamList implements Serializable
   {
     for (int i = 0; i < exams.size(); i++)
     {
-      if (exams.get(i).getDate().getDay() == day)
+      if (exams.get(i).getDate() == day)
       {
         exams.remove(i);
         //removes all exams with that day
@@ -133,7 +133,7 @@ public class ExamList implements Serializable
    *
    * @return array of exams by day
    */
-  public Exam[] getAllExamsInOrder()
+  /*public Exam[] getAllExamsInOrder()
   {
     ArrayList<Exam> temp = new ArrayList<>();
     temp.addAll(exams);
@@ -143,7 +143,7 @@ public class ExamList implements Serializable
     Exam[] returnArray = new Exam[temp.size()];
     return temp.toArray(returnArray);
   }
-
+*/
   /**
    * gets all exams on a given day
    *
@@ -156,7 +156,7 @@ public class ExamList implements Serializable
 
     for (int i = 0; i < exams.size(); i++)
     {
-      if (exams.get(i).getDate().getDay() == day)
+      if (exams.get(i).getDate() == day)
       {
         temp.add(exams.get(i));
       }
@@ -164,6 +164,18 @@ public class ExamList implements Serializable
 
     Exam[] returnArray = new Exam[temp.size()];
     return temp.toArray(returnArray);
+  }
+
+  public Exam getExam(int index)
+  {
+    if (index < exams.size())
+    {
+      return exams.get(index);
+    }
+    else
+    {
+      return null;
+    }
   }
 
   /**
@@ -253,7 +265,7 @@ public class ExamList implements Serializable
    * @param examType String of exam type
    * @return array with all exams with given type
    */
-  public Exam[] getAllExamsByType(String examType)
+  /*public Exam[] getAllExamsByType(String examType)
   {
     ArrayList<Exam> temp = new ArrayList<>();
 
@@ -267,9 +279,9 @@ public class ExamList implements Serializable
 
     Exam[] returnArray = new Exam[temp.size()];
     return temp.toArray(returnArray);
-  }
+  }*/
 
-  public int getExamDuration(String course)
+  /*public int getExamDuration(String course)
   {
     int returnInt = 0;
 
@@ -285,7 +297,7 @@ public class ExamList implements Serializable
       }
     }
     return returnInt;
-  }
+  }*/
 
   /**
    * to string method that prints all exams on separate lines
