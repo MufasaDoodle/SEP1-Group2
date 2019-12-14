@@ -587,7 +587,7 @@ public class ScheduleFileAdapter
     {
       RoomList result = (RoomList) mfio.readObjectFromFile(roomFile);
       ExamList exams = (ExamList) mfio.readObjectFromFile(examFile);
-      rooms = result.getAllAvailableRooms(day, result);
+      rooms = result.getAllAvailableRooms(day, exams);
       //tempArray = result.getAllAvailableRooms(day, exams);
       //rooms = (RoomList) Arrays.asList(tempArray);
       //System.out.println(rooms.toString());
@@ -617,7 +617,7 @@ public class ScheduleFileAdapter
     {
       RoomList result = (RoomList) mfio.readObjectFromFile(roomFile);
       ExamList exams = (ExamList) mfio.readObjectFromFile(examFile);
-      rooms = result.getAllUnavailableRooms(day, result);
+      rooms = result.getAllUnavailableRooms(day, exams);
       //tempArray = result.getAllUnavailableRooms(day, exams);
       //rooms = (RoomList) Arrays.asList(tempArray);
     }
@@ -635,76 +635,6 @@ public class ScheduleFileAdapter
     }
 
     return rooms;
-  }
-
-  //todo astah
-  public void setReservation(Room room, Integer day)
-  {
-    RoomList rooms = new RoomList();
-
-    try
-    {
-      RoomList result = (RoomList) mfio.readObjectFromFile(roomFile);
-      rooms = result;
-      if ((!(day < 1)) && (!(day > 31)))
-      {
-        for (int i = 0; i < rooms.getSize(); i++)
-        {
-          if (rooms.getRoom(i).equals(room))
-          {
-            rooms.getRoom(i).addReservation(day);
-          }
-        }
-      }
-    }
-    catch (FileNotFoundException e)
-    {
-      System.out.println("File not found");
-    }
-    catch (IOException e)
-    {
-      System.out.println("IO Error reading file");
-    }
-    catch (ClassNotFoundException e)
-    {
-      System.out.println("Class Not Found");
-    }
-    saveRooms(rooms);
-  }
-
-  //todo astah
-  public void removeReservation(Room room, Integer day)
-  {
-    RoomList rooms = new RoomList();
-
-    try
-    {
-      RoomList result = (RoomList) mfio.readObjectFromFile(roomFile);
-      rooms = result;
-      if ((!(day < 1)) && (!(day > 31)))
-      {
-        for (int i = 0; i < rooms.getSize(); i++)
-        {
-          if (rooms.getRoom(i).equals(room))
-          {
-            rooms.getRoom(i).removeReservation(day);
-          }
-        }
-      }
-    }
-    catch (FileNotFoundException e)
-    {
-      System.out.println("File not found");
-    }
-    catch (IOException e)
-    {
-      System.out.println("IO Error reading file");
-    }
-    catch (ClassNotFoundException e)
-    {
-      System.out.println("Class Not Found");
-    }
-    saveRooms(rooms);
   }
 
   public RoomList getAllRoomsBiggerThan(int size)
