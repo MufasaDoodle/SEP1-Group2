@@ -50,8 +50,7 @@ public class Controller
   @FXML private Button courseUpdate;
 
   @FXML private ComboBox<Integer> examDate;
-  @FXML private TextField examFrom;
-  @FXML private TextField examTo;
+  @FXML private TextField examDuration;
   @FXML private ComboBox<Course> examCourse;
   @FXML private ComboBox<Room> examRoom;
   @FXML private ComboBox<Examiner> examExaminer;
@@ -556,7 +555,7 @@ public class Controller
     if (e.getSource() == examSave)
     {
       int day = examDate.getSelectionModel().getSelectedItem();
-      String duration = examFrom.getText() + " - " + examTo.getText();
+      String duration = examDuration.getText();
       Course course = examCourse.getSelectionModel().getSelectedItem();
       Room room = examRoom.getSelectionModel().getSelectedItem();
       Examiner examiner = examExaminer.getSelectionModel().getSelectedItem();

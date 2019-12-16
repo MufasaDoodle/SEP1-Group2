@@ -1,6 +1,6 @@
 import java.io.Serializable;
 import java.util.ArrayList;
-
+//TODO javadocs
 /**
  * A class containing specific details about examiners.
  * @version 0.1
@@ -9,56 +9,35 @@ public class Examiner implements Serializable
 {
     private String fullName;
     private String examinerID;
-    private boolean examinerAvailability;
     private ArrayList<Course> courses;
     private ArrayList<Integer> reservedDays;
 
     /**
      *Two-argument constructor.
-     * @param firstName the examiner's first name
+     * @param fullName the examiner's first name
      * @param examinerID the examiner's ID
      */
-    public Examiner(String firstName, String examinerID)
+    public Examiner(String fullName, String examinerID)
     {
-        this.fullName = firstName;
+        this.fullName = fullName;
         this.examinerID = examinerID;
-        examinerAvailability = true;
         courses = new ArrayList<>();
         reservedDays = new ArrayList<>();
     }
 
-    //todo astah
     public ArrayList<Integer> getReservedDays()
     {
         return reservedDays;
     }
 
-    //todo astah
     public void addReservation(Integer day)
     {
         reservedDays.add(day);
-        if (reservedDays.size() > 0)
-        {
-            System.out.println(reservedDays.toString());
-        }
-        else
-        {
-            System.out.println("No reservations");
-        }
     }
 
-    //todo astah
     public void removeReservation(Integer day)
     {
         reservedDays.remove(day);
-        if (reservedDays.size() > 0)
-        {
-            System.out.println(reservedDays.toString());
-        }
-        else
-        {
-            System.out.println("No reservations");
-        }
     }
 
     /**
@@ -79,14 +58,6 @@ public class Examiner implements Serializable
         return examinerID;
     }
 
-    /**
-     * Gets the availability of the examiner.
-     * @return the examiner's availability
-     */
-    public boolean getExaminerAvailability()
-    {
-        return examinerAvailability;
-    }
     /**
      * Adds a Course object to the list of examiner's courses.
      * @param course the course to add to the list
@@ -147,24 +118,6 @@ public class Examiner implements Serializable
     }
 
     /**
-     * Sets the examiner's availability.
-     * @param examinerAvailability what the examiner's availability will be set to
-     */
-    public void setAvailable(boolean examinerAvailability)
-    {
-        this.examinerAvailability = examinerAvailability;
-    }
-
-    /**
-     * Creates a copy of the Examiner object.
-     * @return a copy of the Examiner object
-     */
-    public Examiner copy()
-    {
-        return new Examiner(fullName, examinerID);
-    }
-
-    /**
      * Returns a string representation of the examiner.
      * @return a string representation of the examiner
      */
@@ -175,7 +128,7 @@ public class Examiner implements Serializable
         {
             str+=courses.get(i).getCourseName() + ", ";
         }
-        return str + " Availability: " + getExaminerAvailability();
+        return str;
     }
 
     /**

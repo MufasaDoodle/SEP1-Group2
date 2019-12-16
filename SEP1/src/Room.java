@@ -8,7 +8,6 @@ public class Room implements Serializable
 {
   private int roomSize;
   private String roomNumber;
-  private boolean roomAvailability;
   private boolean hasProjector;
   private boolean hasHDMI;
   private boolean hasVGA;
@@ -27,7 +26,6 @@ public class Room implements Serializable
     hasProjector = false;
     hasHDMI = false;
     hasVGA = false;
-    roomAvailability = true;
     reservedDays = new ArrayList<>();
   }
 
@@ -48,19 +46,6 @@ public class Room implements Serializable
     this.hasProjector = hasProjector;
     this.hasHDMI = hasHDMI;
     this.hasVGA = hasVGA;
-    roomAvailability = true;
-    reservedDays = new ArrayList<>();
-  }
-
-  public Room(int roomSize, String roomNumber, boolean hasProjector,
-      boolean hasHDMI, boolean hasVGA, boolean roomAvailability)
-  {
-    this.roomSize = roomSize;
-    this.roomNumber = roomNumber;
-    this.hasProjector = hasProjector;
-    this.hasHDMI = hasHDMI;
-    this.hasVGA = hasVGA;
-    this.roomAvailability = roomAvailability;
     reservedDays = new ArrayList<>();
   }
 
@@ -104,40 +89,6 @@ public class Room implements Serializable
     return hasHDMI;
   }
 
-  //todo astah
-  public ArrayList<Integer> getReservedDays()
-  {
-    return reservedDays;
-  }
-
-  //todo astah
-  public void addReservation(Integer day)
-  {
-    reservedDays.add(day);
-    if (reservedDays.size() > 0)
-    {
-      System.out.println(reservedDays.toString());
-    }
-    else
-    {
-      System.out.println("No reservations");
-    }
-  }
-
-  //todo astah
-  public void removeReservation(Integer day)
-  {
-    reservedDays.remove(day);
-    if (reservedDays.size() > 0)
-    {
-      System.out.println(reservedDays.toString());
-    }
-    else
-    {
-      System.out.println("No reservations");
-    }
-  }
-
   /**
    * Give back true if a room has a VGA cable, or false if it doesn't
    *
@@ -148,14 +99,22 @@ public class Room implements Serializable
     return hasVGA;
   }
 
-  /**
-   * Give back true if the room is available, or false if it is not
-   *
-   * @return true if the room is available
-   */
-  public boolean getRoomAvailability()
+  //todo javadocs
+  public ArrayList<Integer> getReservedDays()
   {
-    return roomAvailability;
+    return reservedDays;
+  }
+
+  //todo javadocs
+  public void addReservation(Integer day)
+  {
+    reservedDays.add(day);
+  }
+
+  //todo javadocs
+  public void removeReservation(Integer day)
+  {
+    reservedDays.remove(day);
   }
 
   /**
@@ -201,16 +160,6 @@ public class Room implements Serializable
   }
 
   /**
-   * Set that the room is available or not
-   *
-   * @param roomAvailability it is a boolean, if it is true the room is available
-   */
-  public void setRoomAvailability(boolean roomAvailability)
-  {
-    this.roomAvailability = roomAvailability;
-  }
-
-  /**
    * Compare two rooms equality by their room number
    *
    * @param obj the Room you want to be compared against
@@ -235,7 +184,7 @@ public class Room implements Serializable
   public String toString()
   {
     return "Room size: " + roomSize + "\n" + "Room number: " + roomNumber + "\n"
-        + "Room availability: " + roomAvailability + "\n" + "Projector: "
+        + "\n" + "Projector: "
         + hasProjector + "\n" + "HDMI: " + hasHDMI + "\n" + "VGA: " + hasVGA;
   }
 
