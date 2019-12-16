@@ -123,7 +123,7 @@ public class Examiner implements Serializable
      */
     public String toString()
     {
-        String str="Name: " + fullName + ". ID: " + examinerID+ ". Courses: ";
+        String str="Name: " + fullName + ",  ID: " + examinerID+ ",  Courses: ";
         for (int i = 0; i < courses.size(); i++)
         {
             str+=courses.get(i).getCourseName() + ", ";

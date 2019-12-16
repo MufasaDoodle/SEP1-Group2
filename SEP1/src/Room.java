@@ -183,9 +183,9 @@ public class Room implements Serializable
    */
   public String toString()
   {
-    return "Room size: " + roomSize + "\n" + "Room number: " + roomNumber + "\n"
-        + "\n" + "Projector: "
-        + hasProjector + "\n" + "HDMI: " + hasHDMI + "\n" + "VGA: " + hasVGA;
+    return  "Room number: " + roomNumber + "    " + "Room size: " + roomSize + "\n"
+         + "Projector: "
+        + hasProjector + "   " + "HDMI: " + hasHDMI + "   " + "VGA: " + hasVGA;
   }
 
 }
