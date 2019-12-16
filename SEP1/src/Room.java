@@ -1,5 +1,6 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import javax.xml.*;
 
 /**
  * A class containing the specific details about a room

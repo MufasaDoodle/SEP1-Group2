@@ -3,6 +3,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import parser.ParserException;
 
 /**
  * Class which operates the GUI
@@ -79,6 +80,11 @@ public class Controller
     examinerDay.getSelectionModel().selectFirst();
     examDate.getSelectionModel().selectFirst();
     courseExamInfo.getItems().add("Written");
+
+
+
+
+
     courseExamInfo.getItems().add("Oral");
     courseExamInfo.getSelectionModel().selectFirst();
 
@@ -541,8 +547,7 @@ public class Controller
    * This method handles with the exam tab
    * @param e an ActionEvent that can modify the details on the exam tab
    */
-  public void handleExam(ActionEvent e)
-  {
+  public void handleExam(ActionEvent e) throws ParserException {
     if (e.getSource() == examSave)
     {
       int day = examDate.getSelectionModel().getSelectedItem();
@@ -567,6 +572,14 @@ public class Controller
 
       adapter.addExam(exam);
       examList.getItems().add(exam);
+        System.out.println("ss");
+        System.out.println(adapter.getAllExams());
+
+
+
+
+
+      adapter.exportToXml(adapter.getAllExams());
     }
 
     if (e.getSource() == examRemove)
