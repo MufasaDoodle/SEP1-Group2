@@ -11,6 +11,7 @@ public class Examiner implements Serializable
     private String examinerID;
     private boolean examinerAvailability;
     private ArrayList<Course> courses;
+    private ArrayList<Integer> reservedDays;
 
     /**
      *Two-argument constructor.
@@ -23,6 +24,41 @@ public class Examiner implements Serializable
         this.examinerID = examinerID;
         examinerAvailability = true;
         courses = new ArrayList<>();
+        reservedDays = new ArrayList<>();
+    }
+
+    //todo astah
+    public ArrayList<Integer> getReservedDays()
+    {
+        return reservedDays;
+    }
+
+    //todo astah
+    public void addReservation(Integer day)
+    {
+        reservedDays.add(day);
+        if (reservedDays.size() > 0)
+        {
+            System.out.println(reservedDays.toString());
+        }
+        else
+        {
+            System.out.println("No reservations");
+        }
+    }
+
+    //todo astah
+    public void removeReservation(Integer day)
+    {
+        reservedDays.remove(day);
+        if (reservedDays.size() > 0)
+        {
+            System.out.println(reservedDays.toString());
+        }
+        else
+        {
+            System.out.println("No reservations");
+        }
     }
 
     /**

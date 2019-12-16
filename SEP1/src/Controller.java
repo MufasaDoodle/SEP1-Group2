@@ -59,6 +59,7 @@ public class Controller
   @FXML private Button examSave;
   @FXML private ListView<Exam> examList;
   @FXML private Button examRemove;
+  @FXML private Button updateListsButton;
 
   public void initialize()
   {
@@ -101,7 +102,7 @@ public class Controller
     }
 
     ExaminerList examiners = new ExaminerList();
-    examiners = adapter.getAllExaminers();
+    examiners = adapter.getAllAvailableExaminers(examDate.getSelectionModel().getSelectedItem());
     for (int i = 0; i < examiners.getSize(); i++)
     {
       examinerList.getItems().add(examiners.getExaminer(i));
@@ -109,7 +110,8 @@ public class Controller
     }
 
     RoomList rooms = new RoomList();
-    rooms = adapter.getRooms();
+    rooms = adapter
+        .getAllAvailableRooms(examDate.getSelectionModel().getSelectedItem());
     for (int i = 0; i < rooms.getSize(); i++)
     {
       examRoom.getItems().add(rooms.getRoom(i));
@@ -147,7 +149,6 @@ public class Controller
       roomList.getItems().clear();
       RoomList rooms = adapter
           .getAllAvailableRooms(roomDay.getSelectionModel().getSelectedItem());
-      System.out.println(rooms.toString());
       for (int i = 0; i < rooms.getSize(); i++)
       {
         roomList.getItems().add(rooms.getRoom(i));
@@ -242,9 +243,8 @@ public class Controller
         VGA = true;
       }
 
-
-      boolean availability = roomAvailability.getSelectionModel().getSelectedItem()
-          .equals("Available");
+      boolean availability = roomAvailability.getSelectionModel()
+          .getSelectedItem().equals("Available");
 
       Room room = new Room(Integer.parseInt(roomRoomSize.getText()),
           roomRoomNumber.getText(), projector, HDMI, VGA, availability);
@@ -266,17 +266,35 @@ public class Controller
 
     if (e.getSource() == roomRemove)
     {
-      adapter
-          .removeRoomByIndex(roomList.getSelectionModel().getSelectedIndex());
-      roomList.getItems()
-          .remove(roomList.getSelectionModel().getSelectedIndex());
+      ExamList temp = adapter.getAllExams();
+      boolean isSafe = true;
 
-      examRoom.getItems().clear();
-      RoomList rooms = adapter.getRooms();
-      for (int i = 0; i < rooms.getSize(); i++)
+      for (int i = 0; i < temp.getSize(); i++)
       {
-        examRoom.getItems().add(rooms.getRoom(i));
+        if (temp.getExam(i).getRoom().getRoomNumber().equals(
+            roomList.getSelectionModel().getSelectedItem().getRoomNumber()))
+        {
+          JOptionPane.showMessageDialog(null,
+              "You cannot remove a room that is assigned to an exam!", "Error",
+              JOptionPane.WARNING_MESSAGE);
+          isSafe = false;
+        }
       }
+      if (isSafe)
+      {
+        adapter
+            .removeRoomByIndex(roomList.getSelectionModel().getSelectedIndex());
+        roomList.getItems()
+            .remove(roomList.getSelectionModel().getSelectedIndex());
+
+        examRoom.getItems().clear();
+        RoomList rooms = adapter.getRooms();
+        for (int j = 0; j < rooms.getSize(); j++)
+        {
+          examRoom.getItems().add(rooms.getRoom(j));
+        }
+      }
+
     }
   }
 
@@ -284,15 +302,32 @@ public class Controller
   {
     if (e.getSource() == examinerAllExaminers)
     {
-      adapter.getAllExaminers();
+      examinerList.getItems().clear();
+      ExaminerList examiners = adapter.getAllExaminers();
+      for (int i = 0; i < examiners.getSize(); i++)
+      {
+        examinerList.getItems().add(examiners.getExaminer(i));
+      }
     }
     if (e.getSource() == examinerAvailableExaminers)
     {
-      //get examiners by day
+      examinerList.getItems().clear();
+      ExaminerList examiners = adapter
+          .getAllAvailableExaminers(examinerDay.getSelectionModel().getSelectedItem());
+      for (int i = 0; i < examiners.getSize(); i++)
+      {
+        examinerList.getItems().add(examiners.getExaminer(i));
+      }
     }
     if (e.getSource() == examinerUnavailableExaminers)
     {
-      //get un examiners  by day
+      examinerList.getItems().clear();
+      ExaminerList examiners = adapter
+          .getAllUnavailableExaminers(examinerDay.getSelectionModel().getSelectedItem());
+      for (int i = 0; i < examiners.getSize(); i++)
+      {
+        examinerList.getItems().add(examiners.getExaminer(i));
+      }
     }
 
     if (e.getSource() == examinerAdd)
@@ -327,16 +362,36 @@ public class Controller
 
     if (e.getSource() == examinerRemove)
     {
-      adapter.removeExaminerByIndex(
-          examinerList.getSelectionModel().getSelectedIndex());
-      examinerList.getItems()
-          .remove(examinerList.getSelectionModel().getSelectedIndex());
+      ExamList temp = adapter.getAllExams();
+      boolean isSafe = true;
 
-      examExaminer.getItems().clear();
-      ExaminerList examiners = adapter.getAllExaminers();
-      for (int i = 0; i < examiners.getSize(); i++)
+      for (int i = 0; i < temp.getSize(); i++)
       {
-        examExaminer.getItems().add(examiners.getExaminer(i));
+        for (int j = 0; j < temp.getExam(i).getAllExaminers().length; j++)
+        {
+          if (temp.getExam(i).getAllExaminers()[j].getExaminerID().equals(
+              examinerList.getSelectionModel().getSelectedItem().getExaminerID()))
+          {
+            JOptionPane.showMessageDialog(null,
+                "You cannot remove an examiner that is assigned to an exam!", "Error",
+                JOptionPane.WARNING_MESSAGE);
+            isSafe = false;
+          }
+        }
+      }
+      if (isSafe)
+      {
+        adapter.removeExaminerByIndex(
+            examinerList.getSelectionModel().getSelectedIndex());
+        examinerList.getItems()
+            .remove(examinerList.getSelectionModel().getSelectedIndex());
+
+        examExaminer.getItems().clear();
+        ExaminerList examiners = adapter.getAllExaminers();
+        for (int i = 0; i < examiners.getSize(); i++)
+        {
+          examExaminer.getItems().add(examiners.getExaminer(i));
+        }
       }
     }
 
@@ -361,7 +416,7 @@ public class Controller
       adapter.changeExaminerInfo(selectedExaminer,
           examinerList.getSelectionModel().getSelectedIndex());
       examinerList.getItems().clear();
-       examExaminer.getItems().clear();
+      examExaminer.getItems().clear();
       ExaminerList examiners = adapter.getAllExaminers();
       for (int i = 0; i < examiners.getSize(); i++)
       {
@@ -508,6 +563,8 @@ public class Controller
       String coExaminer = examCoExaminer.getText();
 
       Exam exam;
+      adapter.setRoomReservation(day, room.getRoomNumber());
+      adapter.setExaminerReservation(day, examiner.getExaminerID());
 
       if (examCoExaminer.getText().equals(""))
       {
@@ -525,10 +582,39 @@ public class Controller
 
     if (e.getSource() == examRemove)
     {
+      Exam exam = examList.getSelectionModel().getSelectedItem();
+      int day = exam.getDate();
+
+      adapter.removeRoomReservation(day, exam.getRoom().getRoomNumber());
+      for (int i = 0; i < exam.getAllExaminers().length; i++)
+      {
+        adapter.removeExaminerReservation(day, exam.getAllExaminers()[i].getExaminerID());
+      }
+
       adapter
           .removeExamByIndex(examList.getSelectionModel().getSelectedIndex());
       examList.getItems()
           .remove(examList.getSelectionModel().getSelectedIndex());
+    }
+
+    if (e.getSource() == updateListsButton)
+    {
+      examRoom.getItems().clear();
+      RoomList rooms = new RoomList();
+      rooms = adapter
+          .getAllAvailableRooms(examDate.getSelectionModel().getSelectedItem());
+      for (int i = 0; i < rooms.getSize(); i++)
+      {
+        examRoom.getItems().add(rooms.getRoom(i));
+      }
+
+      examExaminer.getItems().clear();
+      ExaminerList examiners = new ExaminerList();
+      examiners = adapter.getAllAvailableExaminers(examDate.getSelectionModel().getSelectedItem());
+      for (int i = 0; i < examiners.getSize(); i++)
+      {
+        examExaminer.getItems().add(examiners.getExaminer(i));
+      }
     }
   }
 

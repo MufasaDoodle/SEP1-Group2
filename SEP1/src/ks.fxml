@@ -42,11 +42,7 @@
                             <RowConstraints maxHeight="30.4" minHeight="10.0" prefHeight="30.4" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label text="Date">
-                                 <GridPane.margin>
-                                    <Insets left="15.0" />
-                                 </GridPane.margin>
-                              </Label>
+                              <Button fx:id="updateListsButton" mnemonicParsing="false" onAction="#handleExam" text="Update" />
                               <Label text="Duration" GridPane.columnIndex="1">
                                  <GridPane.margin>
                                     <Insets left="135.0" />
@@ -201,13 +197,13 @@
                      <children>
                         <VBox layoutX="28.0" layoutY="87.0" prefHeight="90.0" prefWidth="231.0">
                            <children>
-                              <RadioButton fx:id="examinerAllExaminers" mnemonicParsing="false" text="All examiners">
+                              <RadioButton fx:id="examinerAllExaminers" mnemonicParsing="false" onAction="#handleExaminer" text="All examiners">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="ks" />
                                  </toggleGroup>
                               </RadioButton>
-                              <RadioButton fx:id="examinerAvailableExaminers" mnemonicParsing="false" text="Available examiners" toggleGroup="$ks" />
-                              <RadioButton fx:id="examinerUnavailableExaminers" mnemonicParsing="false" text="Unavailable examiners" toggleGroup="$ks">
+                              <RadioButton fx:id="examinerAvailableExaminers" mnemonicParsing="false" onAction="#handleExaminer" text="Available examiners" toggleGroup="$ks" />
+                              <RadioButton fx:id="examinerUnavailableExaminers" mnemonicParsing="false" onAction="#handleExaminer" text="Unavailable examiners" toggleGroup="$ks">
                                  <cursor>
                                     <Cursor fx:constant="SW_RESIZE" />
                                  </cursor>
