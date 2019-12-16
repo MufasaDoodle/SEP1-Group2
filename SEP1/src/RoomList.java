@@ -71,7 +71,6 @@ public class RoomList implements Serializable
    */
   public void addRoom(Room room)
   {
-    System.out.println(room);
     rooms.add(room);
   }
 
@@ -122,73 +121,9 @@ public class RoomList implements Serializable
     return returnArray;
   }
 
-  /**
-   * Gives all the available rooms from the room list
-   *
-   * @return all available rooms
-   */
-  public RoomList getAllAvailableRooms(int day, ExamList exams)
-  {
-    ArrayList<Room> resultRooms = new ArrayList<>();
-
-    for (int i = 0; i < rooms.size(); i++)
-    {
-      resultRooms.add(rooms.get(i));
-    }
-
-    for (int i = 0; i < exams.getSize(); i++)
-    {
-      if(exams.getAllExams()[i].getDate()==day)
-      {
-        resultRooms.remove(exams.getAllExams()[i].getRoom());
-      }
-    }
-
-    RoomList returnList = new RoomList();
-
-    for (int i = 0; i < resultRooms.size(); i++)
-    {
-      returnList.addRoom(resultRooms.get(i));
-    }
-
-    return returnList;
-
-    //Room[] returnArray = new Room[resultRooms.size()];
-    //return resultRooms.toArray(returnArray);
-  }
-
   public int getSize()
   {
     return rooms.size();
-  }
-
-  public RoomList getAllUnavailableRooms(int day, ExamList exams)
-  {
-    ArrayList<Room> resultRooms = new ArrayList<>();
-
-    for (int i = 0; i < rooms.size(); i++)
-    {
-      resultRooms.add(rooms.get(i));
-    }
-
-    RoomList available = getAllAvailableRooms(day, exams);
-
-    for (int i = 0; i < available.getAllRooms().length; i++)
-    {
-      resultRooms.remove(available.getAllRooms()[i]);
-    }
-
-    RoomList returnList = new RoomList();
-
-    for (int i = 0; i < resultRooms.size(); i++)
-    {
-      returnList.addRoom(resultRooms.get(i));
-    }
-
-    return returnList;
-
-    //Room[] returnArray = new Room[resultRooms.size()];
-    //return resultRooms.toArray(returnArray);
   }
 
   /**
