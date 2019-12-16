@@ -15,10 +15,8 @@ public class Controller
   @FXML private RadioButton roomAllRooms;
   @FXML private RadioButton roomAvailableRooms;
   @FXML private RadioButton roomUnavailableRooms;
-  @FXML private RadioButton roomOralRooms;
   @FXML private TextField roomRoomSize;
   @FXML private TextField roomRoomNumber;
-  @FXML private ComboBox<String> roomAvailability;
   @FXML private CheckBox roomProjector;
   @FXML private CheckBox roomHDMI;
   @FXML private CheckBox roomVGA;
@@ -34,7 +32,6 @@ public class Controller
   @FXML private TextField examinerName;
   @FXML private TextField examinerID;
   @FXML private ComboBox<Course> examinerCourse;
-  @FXML private ComboBox<String> examinerAvailability;
   @FXML private Button examinerUpdate;
   @FXML private ListView<Examiner> examinerList;
   @FXML private Button examinerAdd;
@@ -75,12 +72,6 @@ public class Controller
     roomDay.getSelectionModel().selectFirst();
     examinerDay.getSelectionModel().selectFirst();
     examDate.getSelectionModel().selectFirst();
-    roomAvailability.getItems().add("Available");
-    roomAvailability.getItems().add("Unavailable");
-    roomAvailability.getSelectionModel().selectFirst();
-    examinerAvailability.getItems().add("Available");
-    examinerAvailability.getItems().add("Unavailable");
-    examinerAvailability.getSelectionModel().selectFirst();
     courseExamInfo.getItems().add("Written");
     courseExamInfo.getItems().add("Oral");
     courseExamInfo.getSelectionModel().selectFirst();
@@ -93,31 +84,27 @@ public class Controller
     }
     examinerCourse.getSelectionModel().selectFirst();
 
-    CourseList courses = new CourseList();
-    courses = adapter.getAllCourses();
+    CourseList courses = adapter.getAllCourses();
     for (int i = 0; i < courses.getSize(); i++)
     {
       courseList.getItems().add(courses.getCourse(i));
     }
 
-    ExaminerList examiners = new ExaminerList();
-    examiners = adapter.getAllAvailableExaminers(examDate.getSelectionModel().getSelectedItem());
+    ExaminerList examiners = adapter.getAllAvailableExaminers(examDate.getSelectionModel().getSelectedItem());
     for (int i = 0; i < examiners.getSize(); i++)
     {
       examinerList.getItems().add(examiners.getExaminer(i));
       examExaminer.getItems().add(examiners.getExaminer(i));
     }
 
-    RoomList rooms = new RoomList();
-    rooms = adapter
+    RoomList rooms = adapter
         .getAllAvailableRooms(examDate.getSelectionModel().getSelectedItem());
     for (int i = 0; i < rooms.getSize(); i++)
     {
       examRoom.getItems().add(rooms.getRoom(i));
     }
 
-    ExamList exams = new ExamList();
-    exams = adapter.getAllExams();
+    ExamList exams = adapter.getAllExams();
     for (int i = 0; i < exams.getSize(); i++)
     {
       examList.getItems().add(exams.getExam(i));
@@ -163,16 +150,6 @@ public class Controller
       {
         roomList.getItems().add(rooms.getRoom(i));
       }
-    }
-    if (e.getSource() == roomOralRooms)
-    {
-      roomList.getItems().clear();
-      RoomList rooms = adapter.getAllRoomsWithProjector();
-      for (int i = 0; i < rooms.getSize(); i++)
-      {
-        roomList.getItems().add(rooms.getRoom(i));
-      }
-
     }
 
     if (e.getSource() == roomAdd)
@@ -222,9 +199,7 @@ public class Controller
 
     if (e.getSource() == roomUpdate)
     {
-      /*roomRoomSize.setText(roomRoomSize.getText());
-      roomRoomNumber.setText(roomRoomNumber.getText());*/
-      roomAvailability.getSelectionModel().getSelectedItem();
+
 
       boolean projector = false;
       boolean HDMI = false;
@@ -242,18 +217,15 @@ public class Controller
         VGA = true;
       }
 
-      boolean availability = roomAvailability.getSelectionModel()
-          .getSelectedItem().equals("Available");
 
       Room room = new Room(Integer.parseInt(roomRoomSize.getText()),
-          roomRoomNumber.getText(), projector, HDMI, VGA, availability);
+          roomRoomNumber.getText(), projector, HDMI, VGA);
 
       adapter.changeRoomInfo(room,
           roomList.getSelectionModel().getSelectedIndex());
       roomList.getItems().clear();
       examRoom.getItems().clear();
-      RoomList rooms = new RoomList();
-      rooms = adapter.getRooms();
+      RoomList rooms = adapter.getRooms();
       for (int i = 0; i < rooms.getSize(); i++)
       {
         roomList.getItems().add(rooms.getRoom(i));
@@ -402,15 +374,7 @@ public class Controller
       selectedExaminer.setFullName(examinerName.getText());
       selectedExaminer.setExaminerID(examinerID.getText());
 
-      if (examinerAvailability.getSelectionModel().getSelectedItem()
-          .equals("Available"))
-      {
-        selectedExaminer.setAvailable(true);
-      }
-      else
-      {
-        selectedExaminer.setAvailable(false);
-      }
+
 
       adapter.changeExaminerInfo(selectedExaminer,
           examinerList.getSelectionModel().getSelectedIndex());
@@ -425,7 +389,6 @@ public class Controller
       examinerName.setText("");
       examinerID.setText("");
       examinerCourse.getSelectionModel().selectFirst();
-      examinerAvailability.getSelectionModel().selectFirst();
     }
 
     if (e.getSource() == examinerAddMoreCourse)
@@ -459,7 +422,6 @@ public class Controller
       examinerName.setText("");
       examinerID.setText("");
       examinerCourse.getSelectionModel().selectFirst();
-      examinerAvailability.getSelectionModel().selectFirst();
     }
 
   }
@@ -648,14 +610,7 @@ public class Controller
         RoomList roomRooms = adapter.getRooms();
         int index = roomList.getSelectionModel().getSelectedIndex();
 
-        if (roomRooms.getRoom(index).getRoomAvailability())
-        {
-          roomAvailability.getSelectionModel().selectFirst();
-        }
-        else
-        {
-          roomAvailability.getSelectionModel().selectLast();
-        }
+
 
         roomVGA.setSelected(false);
         roomHDMI.setSelected(false);
@@ -690,15 +645,7 @@ public class Controller
         examinerID.setText(temp.getExaminerID());
         examinerCourse.getSelectionModel().select(temp.getCourse(0));
 
-        if (examinerList.getSelectionModel().getSelectedItem()
-            .getExaminerAvailability())
-        {
-          examinerAvailability.getSelectionModel().selectFirst();
-        }
-        else
-        {
-          examinerAvailability.getSelectionModel().selectLast();
-        }
+
 
       }
     }
