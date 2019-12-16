@@ -30,8 +30,6 @@ public class Course implements Serializable
     this.numberOfStudents = numberOfStudents;
   }
 
-  public void setCourseType(){}
-
   /**
    * Gets the course type
    * @return String with type of course

@@ -146,6 +146,7 @@ public class Controller
       RoomList rooms = adapter.getAllUnavailableRooms(
           roomDay.getSelectionModel().getSelectedItem());
 
+
       for (int i = 0; i < rooms.getSize(); i++)
       {
         roomList.getItems().add(rooms.getRoom(i));

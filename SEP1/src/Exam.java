@@ -41,32 +41,6 @@ public class Exam implements Serializable
     examiners = new ArrayList<>();
     this.examiners.add(examiner);
   }
-/*
-  /**
-
-  public Exam(MyDate date, Room room, int duration, Course[] courses,
-      Examiner[] examiners, String examType)
-  {
-    this.date = date;
-    this.duration = duration;
-    this.room = room;
-    this.courses.addAll(Arrays.asList(courses));
-    this.examiners.addAll(Arrays.asList(examiners));
-    this.examType = examType;
-  }
-
-
-  public Exam(MyDate date, Room room, int duration, Course[] courses,
-      ArrayList<Examiner> examiners, String examType)
-  {
-    this.date = date;
-    this.duration = duration;
-    this.room = room;
-    this.courses.addAll(Arrays.asList(courses));
-    this.examiners = examiners;
-    this.examType = examType;
-  }
-  */
 
   /**
    * sets the duration of the exam
@@ -210,18 +184,7 @@ public class Exam implements Serializable
     }
   }
 
-  //TODO javadocs
-  /*public static Comparator<Exam> examDayNumber = new Comparator<Exam>()
-  {
-    public int compare(Exam e1, Exam e2)
-    {
-      int examNr1 = e1.getDate().getDay();
-      int examNr2 = e2.getDate().getDay();
 
-      For ascending order
-      return examNr1 - examNr2;
-    }
-  };*/
 
   /**
    * a tostring method that shows all exam info
