@@ -1,6 +1,8 @@
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
+import java.io.File.*;
 
 public class ScheduleFileAdapter
 {
@@ -192,11 +194,16 @@ public class ScheduleFileAdapter
 
     try
     {
-      ExaminerList result = (ExaminerList) mfio
-          .readObjectFromFile(examinerFile);
-      ExamList exams = (ExamList) mfio.readObjectFromFile(examFile);
-      tempArray = result.getAllAvailableExaminers(day, exams);
-      examiners = (ExaminerList) Arrays.asList(tempArray);
+      ExaminerList result = (ExaminerList) mfio.readObjectFromFile(examinerFile);
+      tempArray = result.getAllExaminers();
+
+      for (int i = 0; i < tempArray.length; i++)
+      {
+        if (!(tempArray[i].getReservedDays().contains(day)))
+        {
+          examiners.addExaminer(tempArray[i]);
+        }
+      }
     }
     catch (FileNotFoundException e)
     {
@@ -214,19 +221,20 @@ public class ScheduleFileAdapter
     return examiners;
   }
 
-  //TODO astah
-  public ExaminerList getAllUnavailableExaminers(int day)
+  public ExaminerList getAllUnavailableExaminers(Integer day)
   {
-    ExaminerList examiners = null;
+    ExaminerList examiners = new ExaminerList();
     Examiner[] tempArray;
 
     try
     {
-      ExaminerList result = (ExaminerList) mfio
-          .readObjectFromFile(examinerFile);
-      ExamList exams = (ExamList) mfio.readObjectFromFile(examFile);
-      tempArray = result.getAllUnavailableExaminers(day, exams);
-      examiners = (ExaminerList) Arrays.asList(tempArray);
+      examiners = (ExaminerList) mfio.readObjectFromFile(examinerFile);
+
+      ExaminerList temp = getAllAvailableExaminers(day);
+      for (int i = 0; i < temp.getAllExaminers().length; i++)
+      {
+        examiners.removeExaminerByID(temp.getAllExaminers()[i].getExaminerID());
+      }
     }
     catch (FileNotFoundException e)
     {
@@ -586,11 +594,15 @@ public class ScheduleFileAdapter
     try
     {
       RoomList result = (RoomList) mfio.readObjectFromFile(roomFile);
-      ExamList exams = (ExamList) mfio.readObjectFromFile(examFile);
-      rooms = result.getAllAvailableRooms(day, exams);
-      //tempArray = result.getAllAvailableRooms(day, exams);
-      //rooms = (RoomList) Arrays.asList(tempArray);
-      //System.out.println(rooms.toString());
+      tempArray = result.getAllRooms();
+
+      for (int i = 0; i < tempArray.length; i++)
+      {
+        if (!(tempArray[i].getReservedDays().contains(day)))
+        {
+          rooms.addRoom(tempArray[i]);
+        }
+      }
     }
     catch (FileNotFoundException e)
     {
@@ -608,18 +620,20 @@ public class ScheduleFileAdapter
     return rooms;
   }
 
-  public RoomList getAllUnavailableRooms(int day)
+  public RoomList getAllUnavailableRooms(Integer day)
   {
-    RoomList rooms = null;
+    RoomList rooms = new RoomList();
     Room[] tempArray;
 
     try
     {
-      RoomList result = (RoomList) mfio.readObjectFromFile(roomFile);
-      ExamList exams = (ExamList) mfio.readObjectFromFile(examFile);
-      rooms = result.getAllUnavailableRooms(day, exams);
-      //tempArray = result.getAllUnavailableRooms(day, exams);
-      //rooms = (RoomList) Arrays.asList(tempArray);
+      rooms = (RoomList) mfio.readObjectFromFile(roomFile);
+
+      RoomList temp = getAllAvailableRooms(day);
+      for (int i = 0; i < temp.getAllRooms().length; i++)
+      {
+        rooms.removeRoomByRoomNumber(temp.getAllRooms()[i].getRoomNumber());
+      }
     }
     catch (FileNotFoundException e)
     {
@@ -635,6 +649,161 @@ public class ScheduleFileAdapter
     }
 
     return rooms;
+  }
+  //todo astah
+  public void setRoomReservation(Integer day, String ID)
+  {
+    try
+    {
+      RoomList result = (RoomList) mfio.readObjectFromFile(roomFile);
+      Room[] rooms = result.getAllRooms();
+
+      if (!(day < 1) && !(day > 31))
+      {
+        for (int i = 0; i < rooms.length; i++)
+        {
+          if (rooms[i].getRoomNumber().equals(ID))
+          {
+            rooms[i].addReservation(day);
+            result.set(rooms[i], i);
+            saveRooms(result);
+            break;
+          }
+        }
+      }
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+  }
+
+  //todo astah
+  public void removeRoomReservation(Integer day, String ID)
+  {
+    try
+    {
+      RoomList result = (RoomList) mfio.readObjectFromFile(roomFile);
+      Room[] rooms = result.getAllRooms();
+
+      if (!(day < 1) && !(day > 31))
+      {
+        for (int i = 0; i < rooms.length; i++)
+        {
+          if (rooms[i].getRoomNumber().equals(ID))
+          {
+            for (int j = 0; j < rooms[i].getReservedDays().size(); j++)
+            {
+              if (rooms[i].getReservedDays().get(j).equals(day))
+              {
+                rooms[i].removeReservation(day);
+                result.set(rooms[i], i);
+                saveRooms(result);
+                break;
+              }
+            }
+          }
+        }
+      }
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+  }
+
+  //todo astah
+  public void setExaminerReservation(Integer day, String ID)
+  {
+    try
+    {
+      ExaminerList result = (ExaminerList) mfio.readObjectFromFile(examinerFile);
+      Examiner[] examiners = result.getAllExaminers();
+
+      if (!(day < 1) && !(day > 31))
+      {
+        for (int i = 0; i < examiners.length; i++)
+        {
+          if (examiners[i].getExaminerID().equals(ID))
+          {
+            examiners[i].addReservation(day);
+            result.set(examiners[i], i);
+            saveExaminers(result);
+            break;
+          }
+        }
+      }
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+  }
+
+  //todo astah
+  public void removeExaminerReservation(Integer day, String ID)
+  {
+    try
+    {
+      ExaminerList result = (ExaminerList) mfio.readObjectFromFile(examinerFile);
+      Examiner[] examiners = result.getAllExaminers();
+
+      if (!(day < 1) && !(day > 31))
+      {
+        for (int i = 0; i < examiners.length; i++)
+        {
+          if (examiners[i].getExaminerID().equals(ID))
+          {
+            for (int j = 0; j < examiners[i].getReservedDays().size(); j++)
+            {
+              if (examiners[i].getReservedDays().get(j).equals(day))
+              {
+                examiners[i].removeReservation(day);
+                result.set(examiners[i], i);
+                saveExaminers(result);
+                break;
+              }
+            }
+          }
+        }
+      }
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
   }
 
   public RoomList getAllRoomsBiggerThan(int size)
@@ -1209,10 +1378,16 @@ public class ScheduleFileAdapter
     ExaminerList result = new ExaminerList();
     try
     {
-      result = (ExaminerList) mfio.readObjectFromFile(examinerFile);
-      if (result == null)
-        result = new ExaminerList();
-      result.addExaminer(examiner);
+      File file = new File("ExaminerList.bin");
+      if (file.length() == 0)
+      {
+        result.addExaminer(examiner);
+      }
+      else
+      {
+        result = (ExaminerList) mfio.readObjectFromFile(examinerFile);
+        result.addExaminer(examiner);
+      }
     }
     catch (FileNotFoundException e)
     {
@@ -1235,8 +1410,16 @@ public class ScheduleFileAdapter
     RoomList result = new RoomList();
     try
     {
-      result = (RoomList) mfio.readObjectFromFile(roomFile);
-      result.addRoom(room);
+      File file = new File("RoomList.bin");
+      if (file.length() == 0)
+      {
+        result.addRoom(room);
+      }
+      else
+      {
+        result = (RoomList) mfio.readObjectFromFile(roomFile);
+        result.addRoom(room);
+      }
     }
     catch (FileNotFoundException e)
     {
@@ -1245,6 +1428,7 @@ public class ScheduleFileAdapter
     catch (IOException e)
     {
       System.out.println("IO Error reading file");
+      e.printStackTrace();
     }
     catch (ClassNotFoundException e)
     {
@@ -1258,8 +1442,17 @@ public class ScheduleFileAdapter
     ExamList result = new ExamList();
     try
     {
-      result = (ExamList) mfio.readObjectFromFile(examFile);
-      result.addExam(exam);
+      File file = new File("ExamList.bin");
+
+      if (file.length() == 0)
+      {
+        result.addExam(exam);
+      }
+      else
+      {
+        result = (ExamList) mfio.readObjectFromFile(examFile);
+        result.addExam(exam);
+      }
     }
     catch (FileNotFoundException e)
     {
@@ -1281,11 +1474,16 @@ public class ScheduleFileAdapter
     CourseList result = new CourseList();
     try
     {
-      result = (CourseList) mfio.readObjectFromFile(courseFile);
-
-      if (result == null)
-        result = new CourseList();
-      result.addCourse(course);
+      File file = new File("CourseList.bin");
+      if (file.length() == 0)
+      {
+        result.addCourse(course);
+      }
+      else
+      {
+        result = (CourseList) mfio.readObjectFromFile(courseFile);
+        result.addCourse(course);
+      }
     }
     catch (FileNotFoundException e)
     {

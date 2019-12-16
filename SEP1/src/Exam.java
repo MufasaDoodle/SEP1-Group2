@@ -122,7 +122,10 @@ public class Exam implements Serializable
    */
   public Examiner[] getAllExaminers()
   {
-    return (Examiner[]) examiners.toArray();
+    Examiner[] returnArray = new Examiner[examiners.size()];
+    returnArray = examiners.toArray(returnArray);
+
+    return returnArray;
   }
 
   /**
