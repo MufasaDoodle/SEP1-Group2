@@ -174,9 +174,11 @@ public class Controller
         if (!(roomProjector.isSelected()) && (roomHDMI.isSelected() || roomVGA
             .isSelected()))
         {
-          JOptionPane.showMessageDialog(null,
-              "You forgot to choose projector, please update the added room!",
-              "Error", JOptionPane.WARNING_MESSAGE);
+          Alert alert = new Alert(Alert.AlertType.ERROR);
+          alert.setTitle("Error");
+          alert.setHeaderText("Error");
+          alert.setContentText("You forgot to choose projector, please update the added room!");
+          alert.show();
         }
 
         adapter.addRoom(room);
@@ -192,8 +194,10 @@ public class Controller
 
       else
       {
-        JOptionPane.showMessageDialog(null, "Fill in all fields!", "Error",
-            JOptionPane.WARNING_MESSAGE);
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning");
+        alert.setContentText("Please fill in all the fields");
+        alert.show();
       }
     }
 
@@ -245,9 +249,11 @@ public class Controller
         if (temp.getExam(i).getRoom().getRoomNumber().equals(
             roomList.getSelectionModel().getSelectedItem().getRoomNumber()))
         {
-          JOptionPane.showMessageDialog(null,
-              "You cannot remove a room that is assigned to an exam!", "Error",
-              JOptionPane.WARNING_MESSAGE);
+          Alert alert = new Alert(Alert.AlertType.ERROR);
+          alert.setTitle("Error");
+          alert.setHeaderText("Error");
+          alert.setContentText("You can not remove a room that is assigned to an exam!");
+          alert.show();
           isSafe = false;
         }
       }
@@ -326,8 +332,11 @@ public class Controller
       }
       else
       {
-        JOptionPane.showMessageDialog(null, "Fill in all fields!", "Error",
-            JOptionPane.WARNING_MESSAGE);
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning");
+        alert.setHeaderText("Warning");
+        alert.setContentText("Fill in all fields!");
+        alert.show();
       }
     }
 
@@ -343,9 +352,11 @@ public class Controller
           if (temp.getExam(i).getAllExaminers()[j].getExaminerID().equals(
               examinerList.getSelectionModel().getSelectedItem().getExaminerID()))
           {
-            JOptionPane.showMessageDialog(null,
-                "You cannot remove an examiner that is assigned to an exam!", "Error",
-                JOptionPane.WARNING_MESSAGE);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error");
+            alert.setContentText("You can not remove an examiner that is assigned to an exam!");
+            alert.show();
             isSafe = false;
           }
         }
@@ -401,8 +412,12 @@ public class Controller
       if (examinerCourse.getSelectionModel().getSelectedItem()
           .equals(selectedExaminer))
       {
-        JOptionPane.showMessageDialog(null, "Fill in all fields!", "Error",
-            JOptionPane.WARNING_MESSAGE);
+
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning");
+        alert.setHeaderText("Warning");
+        alert.setContentText("Fill in all fields!");
+        alert.show();
       }
 
       examinerList.getItems().add(selectedExaminer);
@@ -452,8 +467,12 @@ public class Controller
       }
       else
       {
-        JOptionPane.showMessageDialog(null, "Fill in all fields!", "Error",
-            JOptionPane.WARNING_MESSAGE);
+
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning");
+        alert.setHeaderText("Warning");
+        alert.setContentText("Fill in all fields!");
+        alert.show();
       }
     }
 
