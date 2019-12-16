@@ -4,8 +4,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import javax.swing.*;
-
+/**
+ * Class which operates the GUI
+ * @author Group2
+ * @version 1.0
+ */
 public class Controller
 {
 
@@ -57,6 +60,9 @@ public class Controller
   @FXML private Button examRemove;
   @FXML private Button updateListsButton;
 
+  /**
+   * When you run the GUI, this method executes automatically
+   */
   public void initialize()
   {
     adapter = new ScheduleFileAdapter("ExamList.bin", "RoomList.bin",
@@ -118,6 +124,10 @@ public class Controller
         .addListener(new MyListListenerExaminer());
   }
 
+  /**
+   * This method handles with the room tab
+   * @param e an ActionEvent that can modify the details on the room tab
+   */
   public void handleRoom(ActionEvent e)
   {
     if (e.getSource() == roomAllRooms)
@@ -145,7 +155,6 @@ public class Controller
       roomList.getItems().clear();
       RoomList rooms = adapter.getAllUnavailableRooms(
           roomDay.getSelectionModel().getSelectedItem());
-
 
       for (int i = 0; i < rooms.getSize(); i++)
       {
@@ -204,8 +213,6 @@ public class Controller
 
     if (e.getSource() == roomUpdate)
     {
-
-
       boolean projector = false;
       boolean HDMI = false;
       boolean VGA = false;
@@ -221,7 +228,6 @@ public class Controller
       {
         VGA = true;
       }
-
 
       Room room = new Room(Integer.parseInt(roomRoomSize.getText()),
           roomRoomNumber.getText(), projector, HDMI, VGA);
@@ -272,10 +278,12 @@ public class Controller
           examRoom.getItems().add(rooms.getRoom(j));
         }
       }
-
     }
   }
-
+  /**
+   * This method handles with the examiner tab
+   * @param e an ActionEvent that can modify the details on the examiner tab
+   */
   public void handleExaminer(ActionEvent e)
   {
     if (e.getSource() == examinerAllExaminers)
@@ -386,8 +394,6 @@ public class Controller
       selectedExaminer.setFullName(examinerName.getText());
       selectedExaminer.setExaminerID(examinerID.getText());
 
-
-
       adapter.changeExaminerInfo(selectedExaminer,
           examinerList.getSelectionModel().getSelectedIndex());
       examinerList.getItems().clear();
@@ -420,7 +426,6 @@ public class Controller
         alert.setContentText("Fill in all fields!");
         alert.show();
       }
-
       examinerList.getItems().add(selectedExaminer);
       examinerList.getItems()
           .remove(examinerList.getSelectionModel().getSelectedIndex());
@@ -434,14 +439,16 @@ public class Controller
       {
         examExaminer.getItems().add(examiners.getExaminer(i));
       }
-
       examinerName.setText("");
       examinerID.setText("");
       examinerCourse.getSelectionModel().selectFirst();
     }
 
   }
-
+  /**
+   * This method handles with the course tab
+   * @param e an ActionEvent that can modify the details on the course tab
+   */
   public void handleCourse(ActionEvent e)
   {
     if (e.getSource() == courseAdd)
@@ -468,7 +475,6 @@ public class Controller
       }
       else
       {
-
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Warning");
         alert.setHeaderText("Warning");
@@ -531,7 +537,10 @@ public class Controller
       courseNumberOfStudents.setText("");
     }
   }
-
+  /**
+   * This method handles with the exam tab
+   * @param e an ActionEvent that can modify the details on the exam tab
+   */
   public void handleExam(ActionEvent e)
   {
     if (e.getSource() == examSave)
@@ -558,7 +567,6 @@ public class Controller
 
       adapter.addExam(exam);
       examList.getItems().add(exam);
-
     }
 
     if (e.getSource() == examRemove)
@@ -581,8 +589,7 @@ public class Controller
     if (e.getSource() == updateListsButton)
     {
       examRoom.getItems().clear();
-      RoomList rooms = new RoomList();
-      rooms = adapter
+      RoomList rooms = adapter
           .getAllAvailableRooms(examDate.getSelectionModel().getSelectedItem());
       for (int i = 0; i < rooms.getSize(); i++)
       {
@@ -590,8 +597,7 @@ public class Controller
       }
 
       examExaminer.getItems().clear();
-      ExaminerList examiners = new ExaminerList();
-      examiners = adapter.getAllAvailableExaminers(examDate.getSelectionModel().getSelectedItem());
+      ExaminerList examiners = adapter.getAllAvailableExaminers(examDate.getSelectionModel().getSelectedItem());
       for (int i = 0; i < examiners.getSize(); i++)
       {
         examExaminer.getItems().add(examiners.getExaminer(i));
@@ -599,6 +605,9 @@ public class Controller
     }
   }
 
+  /**
+   * Show the specific details about a course when you choose one of them from the list
+   */
   private class MyListListener implements ChangeListener<Course>
   {
     public void changed(ObservableValue<? extends Course> courses,
@@ -614,7 +623,9 @@ public class Controller
       }
     }
   }
-
+  /**
+   * Show the specific details about a room when you choose one of them from the list
+   */
   private class MyListListenerRoom implements ChangeListener<Room>
   {
     public void changed(ObservableValue<? extends Room> rooms, Room oldRoom,
@@ -626,11 +637,6 @@ public class Controller
       {
         roomRoomSize.setText(temp.getRoomSize() + "");
         roomRoomNumber.setText(temp.getRoomNumber());
-
-        RoomList roomRooms = adapter.getRooms();
-        int index = roomList.getSelectionModel().getSelectedIndex();
-
-
 
         roomVGA.setSelected(false);
         roomHDMI.setSelected(false);
@@ -651,7 +657,9 @@ public class Controller
       }
     }
   }
-
+  /**
+   * Show the specific details about a examiner when you choose one of them from the list
+   */
   private class MyListListenerExaminer implements ChangeListener<Examiner>
   {
     public void changed(ObservableValue<? extends Examiner> examiners,
@@ -664,9 +672,6 @@ public class Controller
         examinerName.setText(temp.getFullName());
         examinerID.setText(temp.getExaminerID());
         examinerCourse.getSelectionModel().select(temp.getCourse(0));
-
-
-
       }
     }
   }

@@ -1,9 +1,9 @@
 import java.io.Serializable;
 import java.util.ArrayList;
-//TODO javadocs
 /**
  * A class containing specific details about examiners.
- * @version 0.1
+ * @author Group2
+ * @version 1.0
  */
 public class Examiner implements Serializable
 {
@@ -25,24 +25,36 @@ public class Examiner implements Serializable
         reservedDays = new ArrayList<>();
     }
 
+    /**
+     * Give back the reserved days for a room
+     * @return an ArrayList with integers
+     */
     public ArrayList<Integer> getReservedDays()
     {
         return reservedDays;
     }
 
+    /**
+     * Add a reservation day to an examiner
+     * @param day wanted to be reserved to an examiner
+     */
     public void addReservation(Integer day)
     {
         reservedDays.add(day);
     }
 
+    /**
+     * Remove a reservation day for an examiner
+     * @param day wanted to be removed for an examiner
+     */
     public void removeReservation(Integer day)
     {
         reservedDays.remove(day);
     }
 
     /**
-     * Gets the examiner's first name.
-     * @return the examiner's first name
+     * Gets the examiner's full name.
+     * @return the examiner's full name
      */
     public String getFullName()
     {

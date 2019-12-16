@@ -3,6 +3,8 @@ import java.util.ArrayList;
 
 /**
  * A class containing all the rooms
+ * @author Group2
+ * @version 1.0
  */
 public class RoomList implements Serializable
 {
@@ -121,6 +123,10 @@ public class RoomList implements Serializable
     return returnArray;
   }
 
+  /**
+   * Return the the ArrayList size
+   * @return an int with the size of the ArrayList
+   */
   public int getSize()
   {
     return rooms.size();
@@ -170,7 +176,11 @@ public class RoomList implements Serializable
     return resultRooms.toArray(returnArray);
   }
 
-  //TODO javadocs
+  /**
+   * Set a room with new details to the required index
+   * @param room the new room wanted to be added
+   * @param index the required index want to set the room
+   */
   public void set(Room room, int index)
   {
     rooms.set(index, room);
@@ -197,6 +207,10 @@ public class RoomList implements Serializable
     return resultRooms.toArray(returnArray);
   }
 
+  /**
+   * Returns the information about the rooms in the ArrayList
+   * @return a String with information about all rooms in the list
+   */
   public String toString(){
     String str = "";
     for (int i = 0; i < rooms.size(); i++){

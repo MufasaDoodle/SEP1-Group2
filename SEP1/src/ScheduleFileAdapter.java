@@ -3,6 +3,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * A class which operated with files
+ */
 public class ScheduleFileAdapter
 {
   private MyFileIO mfio;
@@ -11,6 +14,13 @@ public class ScheduleFileAdapter
   private String examinerFile;
   private String courseFile;
 
+  /**
+   * Four-argument constructor initializing the ScheduleFileAdapter
+   * @param examFile name of the exam holder file
+   * @param roomFile name of the room holder file
+   * @param examinerFile name of the examiner holder file
+   * @param courseFile name of the course holder file
+   */
   public ScheduleFileAdapter(String examFile, String roomFile,
       String examinerFile, String courseFile)
   {
@@ -21,6 +31,10 @@ public class ScheduleFileAdapter
     this.courseFile = courseFile;
   }
 
+  /**
+   * Gives all the examiner from the ExaminerList
+   * @return an ExaminerList with all examiner
+   */
   public ExaminerList getAllExaminers()
   {
     ExaminerList examiners = new ExaminerList();
@@ -44,6 +58,11 @@ public class ScheduleFileAdapter
     return examiners;
   }
 
+  /**
+   * Gives the examiner by ID
+   * @param Id the required examiner's ID as a String
+   * @return an Examiner
+   */
   public Examiner getExaminerById(String Id)
   {
     ExaminerList result = null;
@@ -70,6 +89,11 @@ public class ScheduleFileAdapter
     return returnExaminer;
   }
 
+  /**
+   * Gives the examiner by name
+   * @param fullName the required examiner's full name as a String
+   * @return an examiner
+   */
   public Examiner getExaminerByName(String fullName)
   {
     ExaminerList result = null;
@@ -96,6 +120,11 @@ public class ScheduleFileAdapter
     return returnExaminer;
   }
 
+  /**
+   * Gives the Examiner by course
+   * @param course the required examiner's course
+   * @return an examiner
+   */
   public Examiner getExaminerByCourse(String course)
   {
     Examiner examiner = null;
@@ -134,6 +163,10 @@ public class ScheduleFileAdapter
     return examiner;
   }
 
+  /**
+   * Gives the number of examiners from the examinerList
+   * @return an integer with the number of examiners
+   */
   public int getAmountOfExaminers()
   {
     ExaminerList result = null;
@@ -159,7 +192,12 @@ public class ScheduleFileAdapter
     return returnInt;
   }
 
-  public Examiner getExaminer(int index)
+  /**
+   * Gives an examiner by index
+   * @param index the required index from the list
+   * @return an examiner from the examinerList by index
+   */
+  public Examiner getExaminerByIndex(int index)
   {
     ExaminerList result = null;
     Examiner returnExaminer = null;
@@ -185,6 +223,11 @@ public class ScheduleFileAdapter
     return returnExaminer;
   }
 
+  /**
+   * Gives all available examiners by day
+   * @param day the required day wanted to be gotten the examiners
+   * @return an ExaminerList
+   */
   public ExaminerList getAllAvailableExaminers(int day)
   {
     ExaminerList examiners = new ExaminerList();
@@ -219,7 +262,11 @@ public class ScheduleFileAdapter
 
     return examiners;
   }
-
+  /**
+   * Gives all unavailable examiners by day
+   * @param day the required day wanted to be gotten the examiners
+   * @return an ExaminerList
+   */
   public ExaminerList getAllUnavailableExaminers(int day)
   {
     ExaminerList examiners = new ExaminerList();
@@ -250,7 +297,11 @@ public class ScheduleFileAdapter
 
     return examiners;
   }
-
+  /**
+   * Gives all available rooms by day
+   * @param day the required day wanted to be gotten the rooms
+   * @return a RoomList
+   */
   public RoomList getAllAvailableRooms(int day)
   {
     RoomList rooms = new RoomList();
@@ -285,6 +336,11 @@ public class ScheduleFileAdapter
     return rooms;
   }
 
+  /**
+   * Gives all unavailable rooms by day
+   * @param day the required day wanted to be gotten the rooms
+   * @return a RoomList
+   */
   public RoomList getAllUnavailableRooms(int day)
   {
     RoomList rooms = new RoomList();
@@ -316,6 +372,10 @@ public class ScheduleFileAdapter
     return rooms;
   }
 
+  /**
+   * Save an examiner to the examList
+   * @param examinerList the list you want to save the examiner(s)
+   */
   public void saveExaminers(ExaminerList examinerList)
   {
     try
@@ -332,6 +392,10 @@ public class ScheduleFileAdapter
     }
   }
 
+  /**
+   * Gives all the exams
+   * @return an ExamList with all exams
+   */
   public ExamList getAllExams()
   {
     ExamList exams = new ExamList();
@@ -355,110 +419,10 @@ public class ScheduleFileAdapter
     return exams;
   }
 
-  public ExamList getAllExamsOnDay(int day)
-  {
-    ExamList exams = new ExamList();
-    Exam[] tempArray;
-
-    try
-    {
-      ExamList result = (ExamList) mfio.readObjectFromFile(examFile);
-      tempArray = result.getAllExamsOnDay(day);
-      exams = (ExamList) Arrays.asList(tempArray);
-    }
-    catch (FileNotFoundException e)
-    {
-      System.out.println("File not found");
-    }
-    catch (IOException e)
-    {
-      System.out.println("IO Error reading file");
-    }
-    catch (ClassNotFoundException e)
-    {
-      System.out.println("Class Not Found");
-    }
-    return exams;
-  }
-
-  public ExamList getAllExamsByExaminer(String examinerID)
-  {
-    ExamList exams = new ExamList();
-    Exam[] tempArray;
-
-    try
-    {
-      ExamList result = (ExamList) mfio.readObjectFromFile(examFile);
-      tempArray = result.getAllExamsByExaminer(examinerID);
-      exams = (ExamList) Arrays.asList(tempArray);
-    }
-    catch (FileNotFoundException e)
-    {
-      System.out.println("File not found");
-    }
-    catch (IOException e)
-    {
-      System.out.println("IO Error reading file");
-    }
-    catch (ClassNotFoundException e)
-    {
-      System.out.println("Class Not Found");
-    }
-    return exams;
-  }
-
-  public ExamList getAllExamsByRoom(String roomNumber)
-  {
-    ExamList exams = new ExamList();
-    Exam[] tempArray;
-
-    try
-    {
-      ExamList result = (ExamList) mfio.readObjectFromFile(examFile);
-      tempArray = result.getAllExamsByRoom(roomNumber);
-      exams = (ExamList) Arrays.asList(tempArray);
-    }
-    catch (FileNotFoundException e)
-    {
-      System.out.println("File not found");
-    }
-    catch (IOException e)
-    {
-      System.out.println("IO Error reading file");
-    }
-    catch (ClassNotFoundException e)
-    {
-      System.out.println("Class Not Found");
-    }
-    return exams;
-  }
-
-  public ExamList getAllExamsByCourse(String courseName)
-  {
-    ExamList exams = new ExamList();
-    Exam[] tempArray;
-
-    try
-    {
-      ExamList result = (ExamList) mfio.readObjectFromFile(examFile);
-      tempArray = result.getAllExamsByCourse(courseName);
-      exams = (ExamList) Arrays.asList(tempArray);
-    }
-    catch (FileNotFoundException e)
-    {
-      System.out.println("File not found");
-    }
-    catch (IOException e)
-    {
-      System.out.println("IO Error reading file");
-    }
-    catch (ClassNotFoundException e)
-    {
-      System.out.println("Class Not Found");
-    }
-    return exams;
-  }
-
+  /**
+   * Save the exam to the examList
+   * @param examList the list you want to save the exam(s)
+   */
   public void saveExams(ExamList examList)
   {
     try
@@ -475,6 +439,10 @@ public class ScheduleFileAdapter
     }
   }
 
+  /**
+   * Gives all the rooms from the roomList
+   * @return a roomList with all the rooms
+   */
   public RoomList getRooms()
   {
     RoomList rooms = new RoomList();
@@ -498,56 +466,11 @@ public class ScheduleFileAdapter
     return rooms;
   }
 
-  public Room getRoomByNumber(String roomNumber)
-  {
-    RoomList result;
-    Room room = null;
-
-    try
-    {
-      result = (RoomList) mfio.readObjectFromFile(roomFile);
-      room = result.getRoomByNumber(roomNumber);
-    }
-    catch (FileNotFoundException e)
-    {
-      System.out.println("File not found");
-    }
-    catch (IOException e)
-    {
-      System.out.println("IO Error reading file");
-    }
-    catch (ClassNotFoundException e)
-    {
-      System.out.println("Class Not Found");
-    }
-    return room;
-  }
-
-  public int getAmountOfRooms(int index)
-  {
-    RoomList result;
-    int amount = 0;
-
-    try
-    {
-      result = (RoomList) mfio.readObjectFromFile(roomFile);
-      amount = result.getSize();
-    }
-    catch (FileNotFoundException e)
-    {
-      System.out.println("File not found");
-    }
-    catch (IOException e)
-    {
-      System.out.println("IO Error reading file");
-    }
-    catch (ClassNotFoundException e)
-    {
-      System.out.println("Class Not Found");
-    }
-    return amount;
-  }
-
+  /**
+   * Gives room from the roomList by index
+   * @param index an int, the required index
+   * @return a Room
+   */
   public Room getRoom(int index)
   {
     RoomList result;
@@ -573,6 +496,11 @@ public class ScheduleFileAdapter
     return room;
   }
 
+  /**
+   * Set the room reservation by day and room's ID
+   * @param day an int, you want to reserve the room
+   * @param ID a String, the room's ID you want to set
+   */
   public void setRoomReservation(Integer day, String ID)
   {
     try
@@ -608,6 +536,11 @@ public class ScheduleFileAdapter
     }
   }
 
+  /**
+   * Remove a room's reservation by day and room's ID
+   * @param day an int, you want to remove the room
+   * @param ID a String, the room's ID you want to remove
+   */
   public void removeRoomReservation(Integer day, String ID)
   {
     try
@@ -649,6 +582,11 @@ public class ScheduleFileAdapter
     }
   }
 
+  /**
+   * Set the examiner reservation by day and examiner's ID
+   * @param day an int, you want to reserve the examiner
+   * @param ID a String, the examiner's ID you want to set
+   */
   public void setExaminerReservation(Integer day, String ID)
   {
     try
@@ -684,7 +622,11 @@ public class ScheduleFileAdapter
       System.out.println("Class Not Found");
     }
   }
-
+  /**
+   * Remove an examiner's reservation by day and examiner's ID
+   * @param day an int, you want to remove the examiner
+   * @param ID a String, the examiner's ID you want to remove
+   */
   public void removeExaminerReservation(Integer day, String ID)
   {
     try
@@ -727,6 +669,11 @@ public class ScheduleFileAdapter
     }
   }
 
+  /**
+   * Gives all he rooms with bigger size than the given argument
+   * @param size an int, want a bigger room size than it
+   * @return a roomList with the required rooms
+   */
   public RoomList getAllRoomsBiggerThan(int size)
   {
 
@@ -756,6 +703,11 @@ public class ScheduleFileAdapter
     return rooms;
   }
 
+  /**
+   * Gives all he rooms with smaller size than the given argument
+   * @param size an int, want a smaller room size than it
+   * @return a roomList with the required rooms
+   */
   public RoomList getAllRoomsSmallerThan(int size)
   {
 
@@ -785,6 +737,10 @@ public class ScheduleFileAdapter
     return rooms;
   }
 
+  /**
+   * Gives all he rooms with projector
+   * @return a roomList with the required rooms
+   */
   public RoomList getAllRoomsWithProjector()
   {
 
@@ -814,6 +770,10 @@ public class ScheduleFileAdapter
     return rooms;
   }
 
+  /**
+   * Save the rooms to the roomList
+   * @param roomList the list you want to save the room(s)
+   */
   public void saveRooms(RoomList roomList)
   {
     try
@@ -830,6 +790,10 @@ public class ScheduleFileAdapter
     }
   }
 
+  /**
+   * Gives all the courses from the courseList
+   * @return a CourseList with all courses in it
+   */
   public CourseList getAllCourses()
   {
     CourseList courses = new CourseList();
@@ -853,6 +817,10 @@ public class ScheduleFileAdapter
     return courses;
   }
 
+  /**
+   * Gives the number of the courses
+   * @return an int with the number of the courses
+   */
   public int getNumberOfCourses()
   {
     int returnInt = 0;
@@ -878,6 +846,11 @@ public class ScheduleFileAdapter
     return returnInt;
   }
 
+  /**
+   * Gives a course by index
+   * @param index an int, index
+   * @return a Course by index
+   */
   public Course getCourse(int index)
   {
     CourseList courses = new CourseList();
@@ -903,6 +876,11 @@ public class ScheduleFileAdapter
     return course;
   }
 
+  /**
+   * Gives the course name by index from the courseList
+   * @param index an int, index from the list
+   * @return a String with the required course name
+   */
   public String getCourseName(int index)
   {
     CourseList courses;
@@ -928,6 +906,11 @@ public class ScheduleFileAdapter
     return returnString;
   }
 
+  /**
+   * Gives the course type by index
+   * @param index an int, an index from the list
+   * @return a String with the required course type
+   */
   public String getCourseType(int index)
   {
     CourseList courses;
@@ -953,6 +936,11 @@ public class ScheduleFileAdapter
     return returnString;
   }
 
+  /**
+   * Gives the number of students of the chosen course
+   * @param index an int, the chosen course
+   * @return an int, with the number of students of the course
+   */
   public int getNumberOfStudentsInCourse(int index)
   {
     CourseList courses;
@@ -978,6 +966,10 @@ public class ScheduleFileAdapter
     return returnInt;
   }
 
+  /**
+   * Gives all oral courses
+   * @return a courseList with all oral courses
+   */
   public CourseList getAllOralCourses()
   {
     CourseList courses = null;
@@ -1004,6 +996,10 @@ public class ScheduleFileAdapter
     return courses;
   }
 
+  /**
+   * Gives all written courses
+   * @return a courseList with all written courses
+   */
   public CourseList getAllWrittenCourses()
   {
     CourseList courses = null;
@@ -1029,7 +1025,10 @@ public class ScheduleFileAdapter
     }
     return courses;
   }
-
+  /**
+   * Gives the number of oral courses
+   * @return an int, with number of oral courses
+   */
   public int getNumberOfOralCourses()
   {
     CourseList courses;
@@ -1054,7 +1053,10 @@ public class ScheduleFileAdapter
     }
     return returnInt;
   }
-
+  /**
+   * Gives the number of written courses
+   * @return an int, with number of written courses
+   */
   public int getNumberOfWrittenCourses()
   {
     CourseList courses;
@@ -1079,7 +1081,11 @@ public class ScheduleFileAdapter
     }
     return returnInt;
   }
-
+  /**
+   * Gives a course by its name
+   * @param name a String the required course's name
+   * @return a Course
+   */
   public Course getCourseByName(String name)
   {
     Course course = null;
@@ -1112,6 +1118,10 @@ public class ScheduleFileAdapter
     return course;
   }
 
+  /**
+   * Save the course(s) to the courseList
+   * @param courseList the list you want to save the course(s)
+   */
   public void saveCourses(CourseList courseList)
   {
     try
@@ -1128,76 +1138,10 @@ public class ScheduleFileAdapter
     }
   }
 
-  public void removeExaminerById(String ID)
-  {
-    ExaminerList result = null;
-    try
-    {
-      result = (ExaminerList) mfio.readObjectFromFile(examinerFile);
-      result.removeExaminerByID(ID);
-    }
-    catch (FileNotFoundException e)
-    {
-      System.out.println("File not found");
-    }
-    catch (IOException e)
-    {
-      System.out.println("IO Error reading file");
-    }
-    catch (ClassNotFoundException e)
-    {
-      System.out.println("Class Not Found");
-    }
-
-    saveExaminers(result); //to save, right????
-  }
-
-  public void removeRoomByNumber(String roomNumber)
-  {
-    RoomList result = null;
-    try
-    {
-      result = (RoomList) mfio.readObjectFromFile(roomFile);
-      result.removeRoomByRoomNumber(roomNumber);
-    }
-    catch (FileNotFoundException e)
-    {
-      System.out.println("File not found");
-    }
-    catch (IOException e)
-    {
-      System.out.println("IO Error reading file");
-    }
-    catch (ClassNotFoundException e)
-    {
-      System.out.println("Class Not Found");
-    }
-    saveRooms(result); //to save, right????
-  }
-
-  public void removeCourseByName(String courseName)
-  {
-    CourseList result = null;
-    try
-    {
-      result = (CourseList) mfio.readObjectFromFile(courseFile);
-      result.removeCourse(courseName);
-    }
-    catch (FileNotFoundException e)
-    {
-      System.out.println("File not found");
-    }
-    catch (IOException e)
-    {
-      System.out.println("IO Error reading file");
-    }
-    catch (ClassNotFoundException e)
-    {
-      System.out.println("Class Not Found");
-    }
-    saveCourses(result); //to save, right????
-  }
-
+  /**
+   * Remove an exam from the examList by index
+   * @param index an int, as an index want to remove from the list
+   */
   public void removeExamByIndex(int index)
   {
     ExamList result = null;
@@ -1219,9 +1163,12 @@ public class ScheduleFileAdapter
       System.out.println("Class Not Found");
     }
 
-    saveExams(result); //to save, right????
+    saveExams(result);
   }
-
+  /**
+   * Remove an examiner from the examinerList by index
+   * @param index an int, as an index want to remove from the list
+   */
   public void removeExaminerByIndex(int index)
   {
     ExaminerList result = null;
@@ -1243,9 +1190,12 @@ public class ScheduleFileAdapter
       System.out.println("Class Not Found");
     }
 
-    saveExaminers(result); //to save, right????
+    saveExaminers(result);
   }
-
+  /**
+   * Remove a room from the roomList by index
+   * @param index an int, as an index want to remove from the list
+   */
   public void removeRoomByIndex(int index)
   {
     RoomList result = null;
@@ -1267,9 +1217,12 @@ public class ScheduleFileAdapter
       System.out.println("Class Not Found");
     }
 
-    saveRooms(result); //to save, right????
+    saveRooms(result);
   }
-
+  /**
+   * Remove a course from the courseList by index
+   * @param index an int, as an index want to remove from the list
+   */
   public void removeCourseByIndex(int index)
   {
     CourseList result = null;
@@ -1291,9 +1244,13 @@ public class ScheduleFileAdapter
       System.out.println("Class Not Found");
     }
 
-    saveCourses(result); //to save, right????
+    saveCourses(result);
   }
 
+  /**
+   * Add an examiner to the examinerList
+   * @param examiner an Examiner wanted to be added to the list
+   */
   public void addExaminer(Examiner examiner)
   {
     ExaminerList result = new ExaminerList();
@@ -1323,9 +1280,12 @@ public class ScheduleFileAdapter
       System.out.println("Class Not Found");
     }
 
-    saveExaminers(result); //to save, right????
+    saveExaminers(result);
   }
-
+  /**
+   * Add a room to the roomList
+   * @param room a Room wanted to be added to the list
+   */
   public void addRoom(Room room)
   {
     RoomList result = new RoomList();
@@ -1355,9 +1315,12 @@ public class ScheduleFileAdapter
     {
       System.out.println("Class Not Found");
     }
-    saveRooms(result); //to save, right????
+    saveRooms(result);
   }
-
+  /**
+   * Add an exam to the examList
+   * @param exam an exam wanted to be added to the list
+   */
   public void addExam(Exam exam)
   {
     ExamList result = new ExamList();
@@ -1387,9 +1350,12 @@ public class ScheduleFileAdapter
     {
       System.out.println("Class Not Found");
     }
-    saveExams(result); //to save, right????
+    saveExams(result);
   }
-
+  /**
+   * Add a course to the courseList
+   * @param course a Course wanted to be added to the list
+   */
   public void addCourse(Course course)
   {
     CourseList result = new CourseList();
@@ -1418,9 +1384,14 @@ public class ScheduleFileAdapter
     {
       System.out.println("Class Not Found");
     }
-    saveCourses(result); //to save, right????
+    saveCourses(result);
   }
 
+  /**
+   * Change the information about an examiner
+   * @param examiner an Examiner wanted to be changed
+   * @param index an int, the required index from list
+   */
   public void changeExaminerInfo(Examiner examiner, int index)
   {
     ExaminerList result = new ExaminerList();
@@ -1442,9 +1413,13 @@ public class ScheduleFileAdapter
       System.out.println("Class Not Found");
     }
 
-    saveExaminers(result); //to save, right????
+    saveExaminers(result);
   }
-
+  /**
+   * Change the information about a room
+   * @param room a Room wanted to be changed
+   * @param index an int, the required index from list
+   */
   public void changeRoomInfo(Room room, int index)
   {
     RoomList result = new RoomList();
@@ -1465,9 +1440,13 @@ public class ScheduleFileAdapter
     {
       System.out.println("Class Not Found");
     }
-    saveRooms(result); //to save, right????
+    saveRooms(result);
   }
-
+  /**
+   * Change the information about a course
+   * @param course a Course wanted to be changed
+   * @param index an int, the required index from list
+   */
   public void changeCourseInfo(Course course, int index)
   {
     CourseList result = new CourseList();
@@ -1488,6 +1467,6 @@ public class ScheduleFileAdapter
     {
       System.out.println("Class Not Found");
     }
-    saveCourses(result); //to save, right????
+    saveCourses(result);
   }
 }

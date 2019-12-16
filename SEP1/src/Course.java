@@ -3,7 +3,7 @@ import java.io.Serializable;
 /**
  * Class which holds information about a course
  * @author Group2
- * @version 0.5
+ * @version 1.0
  * */
 
 public class Course implements Serializable
@@ -29,6 +29,7 @@ public class Course implements Serializable
     this.courseType = courseType;
     this.numberOfStudents = numberOfStudents;
   }
+
 
   /**
    * Gets the course type

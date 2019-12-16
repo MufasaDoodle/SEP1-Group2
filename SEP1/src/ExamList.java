@@ -3,8 +3,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * @version 1.0
  * Contains an arraylist of all the exams
+ * @author Group2
+ * @version 1.0
  */
 public class ExamList implements Serializable
 {
@@ -26,7 +27,6 @@ public class ExamList implements Serializable
   public void addExam(Exam exam)
   {
     exams.add(exam);
-    //TODO check if exam already exists on same day/time/whatever
   }
 
   /**
@@ -42,12 +42,14 @@ public class ExamList implements Serializable
     }
   }
 
-  //TODO javadocs
+  /**
+   * Remove and exam by index
+   * @param index wanted to be removed
+   */
   public void removeExamByIndex(int index)
   {
     if (index < 0 || index > exams.size())
     {
-      //do nothing boi
     }
     else
     {
@@ -129,22 +131,6 @@ public class ExamList implements Serializable
   }
 
   /**
-   * get all exams in order of day
-   *
-   * @return array of exams by day
-   */
-  /*public Exam[] getAllExamsInOrder()
-  {
-    ArrayList<Exam> temp = new ArrayList<>();
-    temp.addAll(exams);
-
-    Collections.sort(temp, Exam.examDayNumber);
-
-    Exam[] returnArray = new Exam[temp.size()];
-    return temp.toArray(returnArray);
-  }
-*/
-  /**
    * gets all exams on a given day
    *
    * @param day the day of the exams
@@ -166,6 +152,11 @@ public class ExamList implements Serializable
     return temp.toArray(returnArray);
   }
 
+  /**
+   * Get an exam by index
+   * @param index wanted to be gotten
+   * @return an exam
+   */
   public Exam getExam(int index)
   {
     if (index < exams.size())
@@ -254,50 +245,14 @@ public class ExamList implements Serializable
     return temp.toArray(returnArray);
   }
 
+  /**
+   * Get the size of the ExamList
+   * @return an int with the size of the examList
+   */
   public int getSize()
   {
     return exams.size();
   }
-
-  /**
-   * gets all exams by a given examtype
-   *
-   * @param examType String of exam type
-   * @return array with all exams with given type
-   */
-  /*public Exam[] getAllExamsByType(String examType)
-  {
-    ArrayList<Exam> temp = new ArrayList<>();
-
-    for (int i = 0; i < exams.size(); i++)
-    {
-      if (exams.get(i).getExamType().equals(examType))
-      {
-        temp.add(exams.get(i));
-      }
-    }
-
-    Exam[] returnArray = new Exam[temp.size()];
-    return temp.toArray(returnArray);
-  }*/
-
-  /*public int getExamDuration(String course)
-  {
-    int returnInt = 0;
-
-    for (int i = 0; i < exams.size(); i++)
-    {
-      Course[] temp = exams.get(i).getAllCourses();
-      for (int j = 0; j < temp.length; j++)
-      {
-        if (temp[j].getCourseName().equals(course))
-        {
-          returnInt = exams.get(i).getDuration();
-        }
-      }
-    }
-    return returnInt;
-  }*/
 
   /**
    * to string method that prints all exams on separate lines

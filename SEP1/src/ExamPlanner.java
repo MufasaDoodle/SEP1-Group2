@@ -13,6 +13,7 @@ public class ExamPlanner extends Application
     loader.setLocation(getClass().getResource("ks.fxml"));
     Scene scene = new Scene(loader.load());
     window.setScene(scene);
+    window.setResizable(false);
     window.show();
   }
 }

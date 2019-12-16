@@ -2,9 +2,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * @author Christian Sejer
- * @version 1.0
  * Used to store an arrayList of courses
+ *
+ * @author Group2
+ * @version 1.0
  */
 
 public class CourseList implements Serializable
@@ -20,9 +21,9 @@ public class CourseList implements Serializable
   }
 
   /**
-   * Gets the number of courses from the courselist
+   * Gets the number of courses from the CourseList
    *
-   * @return
+   * @return an int with the size of the CourseList
    */
   public int getNumberOfCourses()
   {
@@ -98,10 +99,14 @@ public class CourseList implements Serializable
   public void removeCourse(int index)
   {
     courses.remove(index);
-    //TODO check examinerList if it has an examiner with with the name
   }
 
-  //TODO javadocs
+  /**
+   * Set a course with new details to the required index
+   *
+   * @param course the new course wanted to be added
+   * @param index  the required index want to set the course
+   */
   public void set(Course course, int index)
   {
     courses.set(index, course);
@@ -121,15 +126,16 @@ public class CourseList implements Serializable
         courses.remove(i);
       }
     }
-    //TODO check examinerList if it has an examiner with with the name
   }
 
-  //TODO javadocs
+  /**
+   * Remove a course by index from the CourseList
+   * @param index the required index want to remove
+   */
   public void removeCourseByIndex(int index)
   {
     if (index < 0 || index > courses.size())
     {
-      //do nothing boi
     }
     else
     {
@@ -169,6 +175,10 @@ public class CourseList implements Serializable
     return temp.toArray(returnArray);
   }
 
+  /**
+   * Give the size of the CourseList (ArrayList)
+   * @return an int with the size of the CourseList
+   */
   public int getSize()
   {
     return courses.size();
@@ -238,9 +248,9 @@ public class CourseList implements Serializable
   }
 
   /**
-   * a tostring method that returns every course on different lines
+   * a to string method that returns every course on different lines
    *
-   * @return
+   * @return a String with information about all courses in the list
    */
   public String toString()
   {

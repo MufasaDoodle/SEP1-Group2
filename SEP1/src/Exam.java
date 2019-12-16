@@ -2,9 +2,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * @author Christian Sejer
- * @version 1.0
  * This class stores info about an exam
+ * @author Group2
+ * @version 1.0
  */
 public class Exam implements Serializable
 {
@@ -15,8 +15,15 @@ public class Exam implements Serializable
   private ArrayList<Examiner> examiners = new ArrayList<>();
   private String coExaminer;
 
-  //TODO fix javadocs params (add examType)
-
+  /**
+   *  Six-arguments constructor initializing the exam
+   * @param date int day of the exam
+   * @param duration String the time of the exam
+   * @param course Course of the taken exam
+   * @param room Room the exam is taken in
+   * @param examiner Examiner of the exam
+   * @param coExaminer CoExaminer of the exam
+   */
   public Exam(int date, String duration, Course course, Room room,
       Examiner examiner, String coExaminer)
   {
@@ -30,6 +37,14 @@ public class Exam implements Serializable
     this.coExaminer = coExaminer;
   }
 
+  /**
+   * Five-arguments constructor initializing the exam
+   * @param date int day of the exam
+   * @param duration String the time of the exam
+   * @param course Course of the taken exam
+   * @param room Room the exam is taken in
+   * @param examiner Examiner of the exam
+   */
   public Exam(int date, String duration, Course course, Room room,
       Examiner examiner)
   {
@@ -70,12 +85,13 @@ public class Exam implements Serializable
   public void addExaminer(Examiner examiner)
   {
     examiners.add(examiner);
-
-    //TODO check if examiner already has an exam on same date
-    // one way to do this, is to have an examList, that the schedule checks
-    // through and see if two exams has the same date and same examiner
   }
 
+  /**
+   * Add an examiner to the ExaminerList by ID
+   * @param ID examiner's ID want to be added
+   * @param examinerList the list you want to add the examier
+   */
   public void addExaminerByID(String ID, ExaminerList examinerList)
   {
     Examiner[] examinerArray = examinerList.getAllExaminers();
@@ -184,8 +200,6 @@ public class Exam implements Serializable
     }
   }
 
-
-
   /**
    * a tostring method that shows all exam info
    *
@@ -212,7 +226,6 @@ public class Exam implements Serializable
             .getRoomNumber() + "                                               " + examiners.get(0)
             .getFullName() + "                      ";
       }
-
     }
     else
     {
@@ -234,7 +247,6 @@ public class Exam implements Serializable
             .getFullName() + "                                            " + coExaminer;
       }
     }
-
   }
 
   /**

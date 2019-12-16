@@ -3,8 +3,8 @@ import java.util.ArrayList;
 
 /**
  * A class containing a list of Examiner objects.
- *
- * @version 0.1;
+ * @author Group2
+ * @version 1.0
  */
 public class ExaminerList implements Serializable
 {
@@ -129,12 +129,15 @@ public class ExaminerList implements Serializable
     }
   }
 
-  //TODO javadocs
+  /**
+   * Remove an examiner by index from the list
+   * @param index examiner's index wanted to be removed
+   */
   public void removeExaminerByIndex(int index)
   {
     if (index < 0 || index > examiners.size())
     {
-      //do nothing boi
+
     }
     else
     {

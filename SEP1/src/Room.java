@@ -3,6 +3,8 @@ import java.util.ArrayList;
 
 /**
  * A class containing the specific details about a room
+ * @author Group2
+ * @version 1.0
  */
 public class Room implements Serializable
 {
@@ -14,7 +16,7 @@ public class Room implements Serializable
   private ArrayList<Integer> reservedDays;
 
   /**
-   * Two-argument constructor initializing the room with room's size and room's number.
+   * Two-argument constructor initializing the room
    *
    * @param roomSize   specify the room's size
    * @param roomNumber specify the room's number
@@ -30,7 +32,7 @@ public class Room implements Serializable
   }
 
   /**
-   * Five-argument constructor initializing the room with room's size, room's number, projector availability, HDMI availability,  VGA availability.
+   * Five-argument constructor initializing the room
    *
    * @param roomSize     specify the room's size
    * @param roomNumber   specify the room's number
@@ -99,19 +101,28 @@ public class Room implements Serializable
     return hasVGA;
   }
 
-  //todo javadocs
+  /**
+   * Give back the reserved days of a room
+   * @return an Integer ArrayList with the reserved days of a room
+   */
   public ArrayList<Integer> getReservedDays()
   {
     return reservedDays;
   }
 
-  //todo javadocs
+  /**
+   * Add a new reservation day to a room
+   * @param day wanted to be reserved to a room
+   */
   public void addReservation(Integer day)
   {
     reservedDays.add(day);
   }
 
-  //todo javadocs
+  /**
+   * Remove the reservation day for a room
+   * @param day wanted to be removed for a room
+   */
   public void removeReservation(Integer day)
   {
     reservedDays.remove(day);
