@@ -187,9 +187,20 @@ public class Controller
           Alert alert = new Alert(Alert.AlertType.ERROR);
           alert.setTitle("Error");
           alert.setHeaderText("Error");
-          alert.setContentText("You forgot to choose projector, please update the added room!");
+          alert.setContentText("You forgot to choose projector, please UPDATE the added room!");
           alert.show();
         }
+
+        if (roomProjector.isSelected() && !(roomHDMI.isSelected()) && !(roomVGA
+            .isSelected()))
+        {
+          Alert alert = new Alert(Alert.AlertType.ERROR);
+          alert.setTitle("Error");
+          alert.setHeaderText("Error");
+          alert.setContentText("You forgot to choose at least on of the cable," +  "\n" +  "Please UPDATE the added room!");
+          alert.show();
+        }
+
 
         adapter.addRoom(room);
         roomList.getItems().add(room);
@@ -567,6 +578,13 @@ public class Controller
 
       adapter.addExam(exam);
       examList.getItems().add(exam);
+
+      examDate.getSelectionModel().selectFirst();
+      examDuration.setText("");
+      examCourse.getSelectionModel().clearSelection();
+      examRoom.getSelectionModel().clearSelection();
+      examExaminer.getSelectionModel().clearSelection();
+      examCoExaminer.setText("");
     }
 
     if (e.getSource() == examRemove)
@@ -584,6 +602,13 @@ public class Controller
           .removeExamByIndex(examList.getSelectionModel().getSelectedIndex());
       examList.getItems()
           .remove(examList.getSelectionModel().getSelectedIndex());
+
+      examDate.getSelectionModel().selectFirst();
+      examDuration.setText("");
+      examCourse.getSelectionModel().clearSelection();
+      examRoom.getSelectionModel().clearSelection();
+      examExaminer.getSelectionModel().clearSelection();
+      examCoExaminer.setText("");
     }
 
     if (e.getSource() == updateListsButton)

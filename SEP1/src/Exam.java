@@ -214,7 +214,7 @@ public class Exam implements Serializable
         return "January: " + date + "     " + duration + "                   "
             + courses.get(0).getCourseName() + "(" + courses.get(0)
             .getCourseType() + ")" + "                                 "
-            + room.getRoomNumber() + "                                               " + examiners.get(0)
+            + room.getRoomNumber() + "                               " + examiners.get(0)
             .getFullName() + "                      ";
       }
       else
@@ -223,7 +223,7 @@ public class Exam implements Serializable
             + courses.get(0).getCourseName() + "(" + courses.get(0)
             .getCourseType() + ")"
             + "                                       " + room
-            .getRoomNumber() + "                                               " + examiners.get(0)
+            .getRoomNumber() + "                               " + examiners.get(0)
             .getFullName() + "                      ";
       }
     }
@@ -234,8 +234,8 @@ public class Exam implements Serializable
         return "January: " + date + "     " + duration + "                   "
             + courses.get(0).getCourseName() + "(" + courses.get(0)
             .getCourseType() + ")" + "                                 "
-            + room.getRoomNumber() + "                                               " + examiners.get(0)
-            .getFullName() + "                                            " + coExaminer;
+            + room.getRoomNumber() + "                               " + examiners.get(0)
+            .getFullName() + "                            " + coExaminer;
       }
       else
       {
@@ -243,8 +243,8 @@ public class Exam implements Serializable
             + courses.get(0).getCourseName() + "(" + courses.get(0)
             .getCourseType() + ")"
             + "                                       " + room
-            .getRoomNumber() + "                                               " + examiners.get(0)
-            .getFullName() + "                                            " + coExaminer;
+            .getRoomNumber() + "                               " + examiners.get(0)
+            .getFullName() + "                            " + coExaminer;
       }
     }
   }
