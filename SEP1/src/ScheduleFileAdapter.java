@@ -1,3 +1,6 @@
+import parser.ParserException;
+import parser.XmlJsonParser;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -29,6 +32,7 @@ public class ScheduleFileAdapter
     this.roomFile = roomFile;
     this.examinerFile = examinerFile;
     this.courseFile = courseFile;
+
   }
 
   /**
@@ -1469,4 +1473,9 @@ public class ScheduleFileAdapter
     }
     saveCourses(result);
   }
+
+    public void exportToXml(ExamList exams) throws ParserException {
+        XmlJsonParser parser = new XmlJsonParser();
+        File file = parser.toXml(exams, "website.xml");
+    }
 }
