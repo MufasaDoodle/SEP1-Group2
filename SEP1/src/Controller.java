@@ -3,6 +3,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import parser.ParserException;
 
 /**
  * Class which operates the GUI
@@ -187,7 +188,17 @@ public class Controller
           Alert alert = new Alert(Alert.AlertType.ERROR);
           alert.setTitle("Error");
           alert.setHeaderText("Error");
-          alert.setContentText("You forgot to choose projector, please update the added room!");
+          alert.setContentText("You forgot to choose projector,"+"\n"+ "please UPDATE the added room!");
+          alert.show();
+        }
+
+        if (roomProjector.isSelected() && !(roomHDMI.isSelected()) && !(roomVGA
+            .isSelected()))
+        {
+          Alert alert = new Alert(Alert.AlertType.ERROR);
+          alert.setTitle("Error");
+          alert.setHeaderText("Error");
+          alert.setContentText("You forgot to choose at least one cable," + "\n"+  "please UPDATE the added room!");
           alert.show();
         }
 
@@ -244,6 +255,26 @@ public class Controller
       }
       roomRoomSize.setText("");
       roomRoomNumber.setText("");
+
+      if (!(roomProjector.isSelected()) && (roomHDMI.isSelected() || roomVGA
+          .isSelected()))
+      {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Error");
+        alert.setContentText("You forgot to choose projector,"+"\n"+ "please UPDATE the added room!");
+        alert.show();
+      }
+
+      if (roomProjector.isSelected() && !(roomHDMI.isSelected()) && !(roomVGA
+          .isSelected()))
+      {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Error");
+        alert.setContentText("You forgot to choose at least one cable," + "\n"+  "please UPDATE the added room!");
+        alert.show();
+      }
     }
 
     if (e.getSource() == roomRemove)
@@ -541,7 +572,7 @@ public class Controller
    * This method handles with the exam tab
    * @param e an ActionEvent that can modify the details on the exam tab
    */
-  public void handleExam(ActionEvent e)
+  public void handleExam(ActionEvent e) throws ParserException
   {
     if (e.getSource() == examSave)
     {
@@ -569,10 +600,6 @@ public class Controller
       examList.getItems().add(exam);
         System.out.println("ss");
         System.out.println(adapter.getAllExams());
-
-
-
-
 
       adapter.exportToXml(adapter.getAllExams());
 
