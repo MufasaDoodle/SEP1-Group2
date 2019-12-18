@@ -1,6 +1,9 @@
 import parser.ParserException;
 import parser.XmlJsonParser;
 
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -25,7 +28,7 @@ public class ScheduleFileAdapter
    * @param courseFile name of the course holder file
    */
   public ScheduleFileAdapter(String examFile, String roomFile,
-      String examinerFile, String courseFile)
+                             String examinerFile, String courseFile)
   {
     mfio = new MyFileIO();
     this.examFile = examFile;
@@ -136,7 +139,7 @@ public class ScheduleFileAdapter
     try
     {
       ExaminerList result = (ExaminerList) mfio
-          .readObjectFromFile(examinerFile);
+              .readObjectFromFile(examinerFile);
 
       for (int i = 0; i < result.getSize(); i++)
       {
@@ -240,7 +243,7 @@ public class ScheduleFileAdapter
     try
     {
       ExaminerList result = (ExaminerList) mfio
-          .readObjectFromFile(examinerFile);
+              .readObjectFromFile(examinerFile);
       tempArray = result.getAllExaminers();
 
       for (int i = 0; i < tempArray.length; i++)
@@ -596,7 +599,7 @@ public class ScheduleFileAdapter
     try
     {
       ExaminerList result = (ExaminerList) mfio
-          .readObjectFromFile(examinerFile);
+              .readObjectFromFile(examinerFile);
       Examiner[] examiners = result.getAllExaminers();
 
       if (!(day < 1) && !(day > 31))
@@ -636,7 +639,7 @@ public class ScheduleFileAdapter
     try
     {
       ExaminerList result = (ExaminerList) mfio
-          .readObjectFromFile(examinerFile);
+              .readObjectFromFile(examinerFile);
       Examiner[] examiners = result.getAllExaminers();
 
       if (!(day < 1) && !(day > 31))
@@ -1474,8 +1477,48 @@ public class ScheduleFileAdapter
     saveCourses(result);
   }
 
-    public void exportToXml(ExamList exams) throws ParserException {
-        XmlJsonParser parser = new XmlJsonParser();
-        File file = parser.toXml(exams, "website.xml");
+  /**
+   * Create the content of the XML file
+   * @param exams an ArrayList of all exam object that have been created
+   * @return a String containing the content of the XML file
+   */
+  public String xmlContent(ExamList exams)
+  {
+    String xml="";
+    xml+= "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?> \n<planner>";
+    for (int i = 0; i < exams.getSize(); i++) {
+
+    xml+="\n\t<exam>";
+    xml+="\n\t\t<name>" + exams.getExam(i).getTheCourse().getCourseName() + "</name>";
+    xml+="\n\t\t<duration>" + exams.getExam(i).getDuration() + "</duration>";
+    xml+="\n\t\t<day>" + exams.getExam(i).getDate() + "</day>";
+    xml+="\n\t\t<room>" + exams.getExam(i).getRoom().getRoomNumber() + "</room>";
+    xml+="\n\t\t<examiner>" + exams.getExam(i).getExaminer().getExaminerID() + "</examiner>";
+    xml+="\n\t\t<coexaminer>" + exams.getExam(i).getCoExaminer() + "</coexaminer>";
+    xml+="\n\t</exam>";
+  }
+    xml+="\n</planner>";
+    return xml;
+  }
+
+  /**
+   * Create a text file with a given content
+   * @param fileName the name of the text file
+   * @param exams an ArrayList with all exam objects that have been created
+   */
+  public void writingToATextFile(String fileName, ExamList exams)
+  {
+    PrintWriter writer = null;
+    try {
+      FileOutputStream fileOut = new FileOutputStream(fileName);
+      writer = new PrintWriter(fileOut);
+      writer.write(xmlContent(exams));
     }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found, or could not be opened.");
+      System.exit(1);
+    }
+    writer.close();
+  }
 }

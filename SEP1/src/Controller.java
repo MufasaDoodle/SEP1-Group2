@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import parser.ParserException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 
 /**
  * Class which operates the GUI
@@ -67,7 +69,7 @@ public class Controller
   public void initialize()
   {
     adapter = new ScheduleFileAdapter("ExamList.bin", "RoomList.bin",
-        "ExaminerList.bin", "CourseList.bin");
+            "ExaminerList.bin", "CourseList.bin");
     roomDay.getItems().clear();
     examinerDay.getItems().clear();
     for (int i = 1; i <= 31; i++)
@@ -105,7 +107,7 @@ public class Controller
     }
 
     RoomList rooms = adapter
-        .getAllAvailableRooms(examDate.getSelectionModel().getSelectedItem());
+            .getAllAvailableRooms(examDate.getSelectionModel().getSelectedItem());
     for (int i = 0; i < rooms.getSize(); i++)
     {
       examRoom.getItems().add(rooms.getRoom(i));
@@ -118,11 +120,11 @@ public class Controller
     }
 
     courseList.getSelectionModel().selectedItemProperty()
-        .addListener((new MyListListener()));
+            .addListener((new MyListListener()));
     roomList.getSelectionModel().selectedItemProperty()
-        .addListener((new MyListListenerRoom()));
+            .addListener((new MyListListenerRoom()));
     examinerList.getSelectionModel().selectedItemProperty()
-        .addListener(new MyListListenerExaminer());
+            .addListener(new MyListListenerExaminer());
   }
 
   /**
@@ -145,7 +147,7 @@ public class Controller
     {
       roomList.getItems().clear();
       RoomList rooms = adapter
-          .getAllAvailableRooms(roomDay.getSelectionModel().getSelectedItem());
+              .getAllAvailableRooms(roomDay.getSelectionModel().getSelectedItem());
       for (int i = 0; i < rooms.getSize(); i++)
       {
         roomList.getItems().add(rooms.getRoom(i));
@@ -155,7 +157,7 @@ public class Controller
     {
       roomList.getItems().clear();
       RoomList rooms = adapter.getAllUnavailableRooms(
-          roomDay.getSelectionModel().getSelectedItem());
+              roomDay.getSelectionModel().getSelectedItem());
 
       for (int i = 0; i < rooms.getSize(); i++)
       {
@@ -166,10 +168,10 @@ public class Controller
     if (e.getSource() == roomAdd)
     {
       if (!(roomRoomSize.getText().equals("")) && !(roomRoomNumber.getText()
-          .equals("")))
+              .equals("")))
       {
         Room room = new Room(Integer.parseInt(roomRoomSize.getText()),
-            roomRoomNumber.getText());
+                roomRoomNumber.getText());
         if (roomProjector.isSelected())
         {
           room.setProjector(true);
@@ -183,7 +185,7 @@ public class Controller
           }
         }
         if (!(roomProjector.isSelected()) && (roomHDMI.isSelected() || roomVGA
-            .isSelected()))
+                .isSelected()))
         {
           Alert alert = new Alert(Alert.AlertType.ERROR);
           alert.setTitle("Error");
@@ -193,7 +195,7 @@ public class Controller
         }
 
         if (roomProjector.isSelected() && !(roomHDMI.isSelected()) && !(roomVGA
-            .isSelected()))
+                .isSelected()))
         {
           Alert alert = new Alert(Alert.AlertType.ERROR);
           alert.setTitle("Error");
@@ -241,10 +243,10 @@ public class Controller
       }
 
       Room room = new Room(Integer.parseInt(roomRoomSize.getText()),
-          roomRoomNumber.getText(), projector, HDMI, VGA);
+              roomRoomNumber.getText(), projector, HDMI, VGA);
 
       adapter.changeRoomInfo(room,
-          roomList.getSelectionModel().getSelectedIndex());
+              roomList.getSelectionModel().getSelectedIndex());
       roomList.getItems().clear();
       examRoom.getItems().clear();
       RoomList rooms = adapter.getRooms();
@@ -257,7 +259,7 @@ public class Controller
       roomRoomNumber.setText("");
 
       if (!(roomProjector.isSelected()) && (roomHDMI.isSelected() || roomVGA
-          .isSelected()))
+              .isSelected()))
       {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -267,7 +269,7 @@ public class Controller
       }
 
       if (roomProjector.isSelected() && !(roomHDMI.isSelected()) && !(roomVGA
-          .isSelected()))
+              .isSelected()))
       {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -285,7 +287,7 @@ public class Controller
       for (int i = 0; i < temp.getSize(); i++)
       {
         if (temp.getExam(i).getRoom().getRoomNumber().equals(
-            roomList.getSelectionModel().getSelectedItem().getRoomNumber()))
+                roomList.getSelectionModel().getSelectedItem().getRoomNumber()))
         {
           Alert alert = new Alert(Alert.AlertType.ERROR);
           alert.setTitle("Error");
@@ -298,9 +300,9 @@ public class Controller
       if (isSafe)
       {
         adapter
-            .removeRoomByIndex(roomList.getSelectionModel().getSelectedIndex());
+                .removeRoomByIndex(roomList.getSelectionModel().getSelectedIndex());
         roomList.getItems()
-            .remove(roomList.getSelectionModel().getSelectedIndex());
+                .remove(roomList.getSelectionModel().getSelectedIndex());
 
         examRoom.getItems().clear();
         RoomList rooms = adapter.getRooms();
@@ -330,7 +332,7 @@ public class Controller
     {
       examinerList.getItems().clear();
       ExaminerList examiners = adapter
-          .getAllAvailableExaminers(examinerDay.getSelectionModel().getSelectedItem());
+              .getAllAvailableExaminers(examinerDay.getSelectionModel().getSelectedItem());
       for (int i = 0; i < examiners.getSize(); i++)
       {
         examinerList.getItems().add(examiners.getExaminer(i));
@@ -340,7 +342,7 @@ public class Controller
     {
       examinerList.getItems().clear();
       ExaminerList examiners = adapter
-          .getAllUnavailableExaminers(examinerDay.getSelectionModel().getSelectedItem());
+              .getAllUnavailableExaminers(examinerDay.getSelectionModel().getSelectedItem());
       for (int i = 0; i < examiners.getSize(); i++)
       {
         examinerList.getItems().add(examiners.getExaminer(i));
@@ -350,12 +352,12 @@ public class Controller
     if (e.getSource() == examinerAdd)
     {
       if (!(examinerName.getText().equals("")) && !(examinerID.getText()
-          .equals("")))
+              .equals("")))
       {
         Examiner examiner = new Examiner(examinerName.getText(),
-            examinerID.getText());
+                examinerID.getText());
         examiner
-            .addCourse(examinerCourse.getSelectionModel().getSelectedItem());
+                .addCourse(examinerCourse.getSelectionModel().getSelectedItem());
 
         adapter.addExaminer(examiner);
         examinerList.getItems().add(examiner);
@@ -390,7 +392,7 @@ public class Controller
         for (int j = 0; j < temp.getExam(i).getAllExaminers().length; j++)
         {
           if (temp.getExam(i).getAllExaminers()[j].getExaminerID().equals(
-              examinerList.getSelectionModel().getSelectedItem().getExaminerID()))
+                  examinerList.getSelectionModel().getSelectedItem().getExaminerID()))
           {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -404,9 +406,9 @@ public class Controller
       if (isSafe)
       {
         adapter.removeExaminerByIndex(
-            examinerList.getSelectionModel().getSelectedIndex());
+                examinerList.getSelectionModel().getSelectedIndex());
         examinerList.getItems()
-            .remove(examinerList.getSelectionModel().getSelectedIndex());
+                .remove(examinerList.getSelectionModel().getSelectedIndex());
 
         examExaminer.getItems().clear();
         ExaminerList examiners = adapter.getAllExaminers();
@@ -420,13 +422,13 @@ public class Controller
     if (e.getSource() == examinerUpdate)
     {
       Examiner selectedExaminer = examinerList.getSelectionModel()
-          .getSelectedItem();
+              .getSelectedItem();
 
       selectedExaminer.setFullName(examinerName.getText());
       selectedExaminer.setExaminerID(examinerID.getText());
 
       adapter.changeExaminerInfo(selectedExaminer,
-          examinerList.getSelectionModel().getSelectedIndex());
+              examinerList.getSelectionModel().getSelectedIndex());
       examinerList.getItems().clear();
       examExaminer.getItems().clear();
       ExaminerList examiners = adapter.getAllExaminers();
@@ -443,12 +445,12 @@ public class Controller
     if (e.getSource() == examinerAddMoreCourse)
     {
       Examiner selectedExaminer = examinerList.getSelectionModel()
-          .getSelectedItem();
+              .getSelectedItem();
 
       selectedExaminer
-          .addCourse(examinerCourse.getSelectionModel().getSelectedItem());
+              .addCourse(examinerCourse.getSelectionModel().getSelectedItem());
       if (examinerCourse.getSelectionModel().getSelectedItem()
-          .equals(selectedExaminer))
+              .equals(selectedExaminer))
       {
 
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -459,9 +461,9 @@ public class Controller
       }
       examinerList.getItems().add(selectedExaminer);
       examinerList.getItems()
-          .remove(examinerList.getSelectionModel().getSelectedIndex());
+              .remove(examinerList.getSelectionModel().getSelectedIndex());
       adapter.removeExaminerByIndex(
-          examinerList.getSelectionModel().getSelectedIndex());
+              examinerList.getSelectionModel().getSelectedIndex());
       adapter.addExaminer(selectedExaminer);
 
       examExaminer.getItems().clear();
@@ -485,11 +487,11 @@ public class Controller
     if (e.getSource() == courseAdd)
     {
       if (!(courseName.getText().equals("")) && !(courseNumberOfStudents
-          .getText().equals("")))
+              .getText().equals("")))
       {
         Course course = new Course(courseName.getText(),
-            courseExamInfo.getSelectionModel().getSelectedItem(),
-            Integer.parseInt(courseNumberOfStudents.getText()));
+                courseExamInfo.getSelectionModel().getSelectedItem(),
+                Integer.parseInt(courseNumberOfStudents.getText()));
         adapter.addCourse(course);
         courseList.getItems().add(course);
         courseName.setText("");
@@ -517,9 +519,9 @@ public class Controller
     if (e.getSource() == courseRemove)
     {
       adapter.removeCourseByIndex(
-          courseList.getSelectionModel().getSelectedIndex());
+              courseList.getSelectionModel().getSelectedIndex());
       courseList.getItems()
-          .remove(courseList.getSelectionModel().getSelectedIndex());
+              .remove(courseList.getSelectionModel().getSelectedIndex());
 
       examinerCourse.getItems().clear();
       CourseList courses1 = adapter.getAllCourses();
@@ -543,7 +545,7 @@ public class Controller
       int index = courseList.getSelectionModel().getSelectedIndex();
       courseName.setText(adapter.getCourseName(index));
       courseNumberOfStudents.setText(
-          Integer.toString(adapter.getNumberOfStudentsInCourse(index)));
+              Integer.toString(adapter.getNumberOfStudentsInCourse(index)));
     }
 
     if (e.getSource() == courseUpdate)
@@ -552,10 +554,10 @@ public class Controller
       courseNumberOfStudents.setText(courseNumberOfStudents.getText());
       courseExamInfo.getSelectionModel().getSelectedItem();
       Course course = new Course(courseName.getText(),
-          courseExamInfo.getSelectionModel().getSelectedItem(),
-          Integer.parseInt(courseNumberOfStudents.getText()));
+              courseExamInfo.getSelectionModel().getSelectedItem(),
+              Integer.parseInt(courseNumberOfStudents.getText()));
       adapter.changeCourseInfo(course,
-          courseList.getSelectionModel().getSelectedIndex());
+              courseList.getSelectionModel().getSelectedIndex());
       courseList.getItems().clear();
       examCourse.getItems().clear();
       CourseList courses = adapter.getAllCourses();
@@ -598,10 +600,11 @@ public class Controller
 
       adapter.addExam(exam);
       examList.getItems().add(exam);
-        System.out.println("ss");
-        System.out.println(adapter.getAllExams());
+      System.out.println("ss");
+      System.out.println(adapter.getAllExams());
 
-      adapter.exportToXml(adapter.getAllExams());
+      /*adapter.exportToXml(adapter.getAllExams());*/
+      adapter.writingToATextFile("planner.xml", adapter.getAllExams());
 
       examDate.getSelectionModel().selectFirst();
       examDuration.setText("");
@@ -623,16 +626,16 @@ public class Controller
       }
 
       adapter
-          .removeExamByIndex(examList.getSelectionModel().getSelectedIndex());
+              .removeExamByIndex(examList.getSelectionModel().getSelectedIndex());
       examList.getItems()
-          .remove(examList.getSelectionModel().getSelectedIndex());
+              .remove(examList.getSelectionModel().getSelectedIndex());
     }
 
     if (e.getSource() == updateListsButton)
     {
       examRoom.getItems().clear();
       RoomList rooms = adapter
-          .getAllAvailableRooms(examDate.getSelectionModel().getSelectedItem());
+              .getAllAvailableRooms(examDate.getSelectionModel().getSelectedItem());
       for (int i = 0; i < rooms.getSize(); i++)
       {
         examRoom.getItems().add(rooms.getRoom(i));
@@ -653,7 +656,7 @@ public class Controller
   private class MyListListener implements ChangeListener<Course>
   {
     public void changed(ObservableValue<? extends Course> courses,
-        Course oldCourse, Course newCourse)
+                        Course oldCourse, Course newCourse)
     {
       Course temp = courseList.getSelectionModel().getSelectedItem();
 
@@ -671,7 +674,7 @@ public class Controller
   private class MyListListenerRoom implements ChangeListener<Room>
   {
     public void changed(ObservableValue<? extends Room> rooms, Room oldRoom,
-        Room newRoom)
+                        Room newRoom)
     {
       Room temp = roomList.getSelectionModel().getSelectedItem();
 
@@ -705,7 +708,7 @@ public class Controller
   private class MyListListenerExaminer implements ChangeListener<Examiner>
   {
     public void changed(ObservableValue<? extends Examiner> examiners,
-        Examiner oldExaminer, Examiner newExaminer)
+                        Examiner oldExaminer, Examiner newExaminer)
     {
       Examiner temp = examinerList.getSelectionModel().getSelectedItem();
 

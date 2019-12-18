@@ -78,9 +78,18 @@ public class Exam implements Serializable
   }
 
   /**
-   * add an examiner to the exam
-   *
-   * @param examiner the examiner wished to be added
+   * gets the duration of an exam
+   * @return the duration of the exam
+   */
+
+  public String getDuration()
+  {
+    return duration;
+  }
+
+  /**
+   * adds an examiner to an exam
+   * @param examiner the examiner that is to be added
    */
   public void addExaminer(Examiner examiner)
   {
@@ -173,6 +182,15 @@ public class Exam implements Serializable
     return (Course[]) courses.toArray();
   }
 
+  /**
+   * get the first course from the ArrayList of courses for an exam
+   * @return the first course of an exam
+   */
+
+  public Course getTheCourse()
+  {
+    return courses.get(0);
+  }
   /**
    * add a course to the exam
    *
@@ -271,5 +289,23 @@ public class Exam implements Serializable
     }
 
     return false;
+  }
+
+  /**
+   * get the first examiner of an exam
+   * @return the first examiner of an exam
+   */
+  public Examiner getExaminer()
+  {
+    return examiners.get(0);
+  }
+
+  /**
+   * get the co-examiner of an exam
+   * @return the co-examiner of the exam
+   */
+  public String getCoExaminer()
+  {
+    return coExaminer;
   }
 }
